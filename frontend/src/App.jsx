@@ -3,7 +3,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import DashboardPage from './pages/DashboardPage';
-import ProfilePage from './pages/ProfilePage';
+import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const App = () => (
@@ -13,10 +13,10 @@ const App = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<ProfileSettingsPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  </Router>;
+  </Router>
 );
 
 export default App;
