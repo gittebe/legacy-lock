@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../components/button';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ const SignUpPage = () => {
           placeholder='Enter your password'
           required
       />
-      <button type="submit">Sign Up</button>
+      <Button type="submit">Sign Up</Button>
     </form>
   );
 };
