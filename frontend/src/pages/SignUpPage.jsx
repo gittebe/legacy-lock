@@ -28,7 +28,8 @@ const SignUpPage = () => {
           onChange={(event) => setPassword(event.target.value)}
           placeholder='Enter your password'
           required
-        />
+      />
+      <button type="submit">Sign Up</button>
     </form>
   );
 };
