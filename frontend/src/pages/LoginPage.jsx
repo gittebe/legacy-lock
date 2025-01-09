@@ -11,6 +11,7 @@
 
 import { useState } from "react";
 import Button from "../components/button";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -48,7 +49,8 @@ const LoginPage = () => {
           />
           <Button type="submit">Login</Button> 
         </form>
-        <p>Don't have an account? <a ref="/signup">Sign up here</a>
+        <p>
+          Don't have an account? <Link to="/signup">Sign up here</Link>
         </p>
       </main>
     </div>
