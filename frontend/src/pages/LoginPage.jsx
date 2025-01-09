@@ -22,13 +22,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
-      <header className="login-header">
+    <div>
+      <header>
         <h1>Login</h1>
         <p>Welcome to the login page!</p>
       </header>
 
-      <main className="login-main">
+      <main>
         <form onSubmit={handleSubmit}>
           <label>Email:</label>
           <input
