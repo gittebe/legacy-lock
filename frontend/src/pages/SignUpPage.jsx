@@ -10,6 +10,7 @@
 
 import { useState } from 'react';
 import Button from '../components/button';
+import { Link } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -21,27 +22,32 @@ const SignUpPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Sign Up</h1>
-      <p>Welcome to the sign up page!</p>
-      <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder='Enter your email'
-          required
+    <main>
+      <form onSubmit={handleSubmit}>
+        <h1>Sign Up</h1>
+        <p>Welcome to the sign up page!</p>
+        <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder='Enter your email'
+            required
+          />
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder='Enter your password'
+            required
         />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder='Enter your password'
-          required
-      />
-      <Button type="submit">Sign Up</Button>
-    </form>
+        <Button type="submit">Sign Up</Button>
+      </form>
+      <p>
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
+    </main>
   );
 };
 
