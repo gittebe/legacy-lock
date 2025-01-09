@@ -1,3 +1,14 @@
+/**
+ * 
+ * This component is a form that allows users to login to their account.
+ * 
+ * Features:
+ * - useState to handle email and password input.
+ * - Reusable Button component for submission.
+ * - handleSubmit function to prevent default form behavior (to controll what happens on submit) and log the email.
+ * 
+ */
+
 import { useState } from "react";
 import Button from "../components/button";
 
