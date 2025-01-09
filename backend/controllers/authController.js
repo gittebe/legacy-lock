@@ -31,7 +31,7 @@ res.status(201).json({
     firstname: newUser.firstname,
     lastname: newUser.lastname,
     email: newUser.email,
-    username: newUser,username,
+    username: newUser.username,
     accessToken: newUser.accessToken
   }
 });

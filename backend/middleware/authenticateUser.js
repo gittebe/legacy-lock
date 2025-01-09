@@ -1,4 +1,4 @@
-import { User } from "../models/userSchema";
+import { User } from "../models/userSchema.js";
 
 // varifying users identity based on the users access token
 export const authenticateUser = async (req, res, next) => {
