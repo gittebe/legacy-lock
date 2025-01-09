@@ -11,7 +11,7 @@
 import { useState } from 'react';
 import Button from '../components/button';
 import { Link } from 'react-router-dom';
-import { useStore } from "../store/store";
+import useStore from "../store/store";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -20,11 +20,10 @@ const SignUpPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("Signing up using", email, "and password", password); // Output email. Replace with API call? 
+    console.log("User data stored locally when signing up", { email, password }); // Output email. Replace with API call? 
 
-    const userData = { email, password }; // Prepare user data
-    login(userData);// Save user data to the store
-    console.log("User data stored by Zustand:", userData); // Output user data.
+    login({ email, password });// Save user data to the store
+    console.log("User data stored by Zustand:", { email, password }); // Output user data.
 
     setEmail(""); // Clear the email input
     setPassword(""); // Clear the password input
