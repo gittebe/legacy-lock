@@ -12,14 +12,22 @@
 import { useState } from "react";
 import Button from "../components/button";
 import { Link } from "react-router-dom";
+import { useStore } from "../store/store";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const login = useStore((state) => state.login);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Trying to login using:", { email, password }); // Output. Replace with API call?
+
+    const userData = { email, password }; // Prepare user data
+    login(userData);// Save user data to the store
+
+    setEmail(""); // Clear the email input
+    setPassword(""); // Clear the password input
   };
 
   return (
