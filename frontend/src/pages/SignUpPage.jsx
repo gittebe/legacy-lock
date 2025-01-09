@@ -18,7 +18,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Email:', email); // Output email. Replace with API call? 
+    console.log("Signing up using", email); // Output email. Replace with API call? 
   };
 
   return (
