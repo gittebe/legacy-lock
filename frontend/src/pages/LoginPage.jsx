@@ -23,7 +23,8 @@ const LoginPage = () => {
     event.preventDefault();
     console.log("Trying to login using:", { email, password }); // Output. Replace with API call?
 
-    const userData = { email, password }; // Prepare user data
+    const userData = { email, password }; // Store user data in an object
+    
     login(userData);// Save user data to the store
 
     setEmail(""); // Clear the email input
