@@ -1,3 +1,13 @@
+/**
+ * This component is a form that allows users to sign up for an account.
+ * 
+ * Features:
+ * - Manages email and password input using useState.
+ * - Includes a reusable Button component for submission.
+ * - Prevents default form behavior (to have control of what happens on submit) and prepares for API integration.
+ * 
+ */
+
 import { useState } from 'react';
 import Button from '../components/button';
 
