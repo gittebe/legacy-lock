@@ -7,7 +7,6 @@ import DashboardPage from "../pages/DashboardPage";
 import ProfileSettingsPage from "../pages/ProfileSettingsPage";
 import CreateCapsulePage from "../pages/CreateCapsulePage";
 import CapsuleDetailsPage from "../pages/CapsuleDetailsPage";
-import NotFoundPage from "../pages/NotFoundPage";
 
 const AuthenticatedRoutes = () => {
   return (
@@ -16,7 +15,7 @@ const AuthenticatedRoutes = () => {
       <Route path="/profile" element={<ProfileSettingsPage />} />
       <Route path="/capsules/create" element={<CreateCapsulePage />} />
       <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigare to "/dashboard" />} />
     </Routes>
   );
 }
