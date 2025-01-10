@@ -25,12 +25,13 @@ const LoginPage = () => {
 
     console.log("User data stored locally when logging in:", { email, password }); // Output. Replace with API call?
 
-    const userData = { email, password }; // Store user data in an object
+    const userData = { email, password, username }; // Store user data in an object
     
     login({ email, password });// Save user data to the store
-    console.log("User data stored by Zustand:", { email, password }); // Output user data.
+    console.log("User data stored by Zustand:", { email, password, username }); // Output user data.
 
     setEmail(""); // Clear the email input
+    setUsername(""); // Clear the username input
     setPassword(""); // Clear the password input
   };
 
