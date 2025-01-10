@@ -51,6 +51,14 @@ const SignUpPage = () => {
           placeholder='Enter your email'
           required
         />
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder='Enter your username'
+          required
+        />
         <label>Password:</label>
         <input
           type="password"
