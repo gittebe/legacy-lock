@@ -63,7 +63,7 @@ export const loginUser = async (req, res) => {
       success: true,
       message: "Login successful",
       user: {
-        id: user_id,
+        id: user._id,
         email: user.email,
         username: user.username,
         accessToken: accessToken,
@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
 export const logoutUser = async (req, res)=> {
   try {
     const user = req.user;
-    user.accessToken = crypto.randomBytes(128).toString("hex");
+    user.accessToken = null;
     await user.save();
     res.status(200).json({
       success: true,
