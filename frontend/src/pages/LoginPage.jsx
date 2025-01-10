@@ -27,7 +27,7 @@ const LoginPage = () => {
 
     const userData = { email, password, username }; // Store user data in an object
     
-    login({ email, password });// Save user data to the store
+    login({ email, password, username });// Save user data to the store
     console.log("User data stored by Zustand:", { email, password, username }); // Output user data.
 
     setEmail(""); // Clear the email input
