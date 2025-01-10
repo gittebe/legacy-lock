@@ -43,27 +43,27 @@ const SignUpPage = () => {
         <h1>Sign Up</h1>
         <p>Welcome to the sign up page!</p>
         <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder='Enter your email'
-            required
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder='Enter your email'
+          required
         />
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder='Enter your password'
-            required
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder='Enter your password'
+          required
         />
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            placeholder='Confirm your password'
+        <label>Confirm Password:</label>
+        <input
+          type="password"
+          value={confirmPassword}
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          placeholder='Confirm your password'
           required
         />
         <Button type="submit">Sign Up</Button>
