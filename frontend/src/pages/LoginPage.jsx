@@ -41,7 +41,6 @@ const LoginPage = () => {
         <h1>Login</h1>
         <p>Welcome to the login page!</p>
       </header>
-
       <main>
         <form onSubmit={handleSubmit}>
           <label>Email:</label>
@@ -68,7 +67,7 @@ const LoginPage = () => {
             placeholder="Enter your password"
             required
           />
-          <Button type="submit">Login</Button> 
+          <Button type="submit">Login</Button>
         </form>
         <p>
           Don't have an account? <Link to="/signup">Sign up here</Link>
@@ -77,8 +76,8 @@ const LoginPage = () => {
           Forgot your password? <Link to="/resetpassword">Reset password</Link>
         </p>
       </main>
-    </div>
-  );
+    </div >
+  )
 };
 
 export default LoginPage;
