@@ -9,6 +9,8 @@ dotenv.config();
 export const registerUser = async (req, res) => {
   const {email, password, username } = req.body;
 
+  const {email, password, username } = req.body;
+
   try {
 //check if the email already exists in the database
 const existingUser = await User.findOne({ email });
