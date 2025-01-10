@@ -15,6 +15,7 @@ import useStore from "../store/store";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const login = useStore((state) => state.login);
