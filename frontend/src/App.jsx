@@ -4,10 +4,12 @@ import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateCapsulePage from './pages/CreateCapsulePage';
 import CapsuleDetailsPage from './pages/CapsuleDetailsPage';
+import PublicRoutes from './routes/PublicRoutes';
 
 const App = () => (
   <Router>
     <Routes>
+      <Route path="/" element={<PublicRoutes />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/profile" element={<ProfileSettingsPage />} />
       <Route path="/capsules/create" element={<CreateCapsulePage />} />
