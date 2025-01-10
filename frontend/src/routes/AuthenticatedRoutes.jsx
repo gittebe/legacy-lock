@@ -20,7 +20,7 @@ const AuthenticatedRoutes = () => {
       <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
 
        {/* Redirect to Dashboard if no matching route is found */} 
-      <Route path="*" element={<Navigate to="/dashboard" />} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 }
