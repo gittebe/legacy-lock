@@ -4,7 +4,7 @@
  * If page not found, redirect to dashboard.
  */
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import DashboardPage from "../pages/DashboardPage";
 import ProfileSettingsPage from "../pages/ProfileSettingsPage";
 import CreateCapsulePage from "../pages/CreateCapsulePage";
@@ -18,7 +18,7 @@ const AuthenticatedRoutes = () => {
       <Route path="/profile" element={<ProfileSettingsPage />} />
       <Route path="/capsules/create" element={<CreateCapsulePage />} />
       <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-      
+
        {/* Redirect to Dashboard if no matching route is found */} 
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
