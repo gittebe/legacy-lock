@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 // varifying users identity based on the users access token
 export const authenticateUser = async (req, res, next) => {
   //get the token from the authorization header
-  const token = req.header("Authorization");
+  const token = req.header("Authorization")?.replace("Bearer ", "");
   // Check if a token exists
   if(!token) {
     return res.status(401).json({message: "No token provided"});

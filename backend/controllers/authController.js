@@ -16,12 +16,8 @@ const existingUser = await User.findOne({ email });
     return res.status(400).json({ message: "Email already in use" });
   };
 
-// Hash the password before saving the user
-const salt = bcrypt.genSaltSync(20);
-const hashedPassword = bcrypt.hashSync(password, salt);
-
 // Create a new user with the hashed password
-const newUser = new User ({ email, password: hashedPassword, username });
+const newUser = new User ({ email, password, username });
 
 const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 newUser.accessToken = accessToken;
@@ -37,8 +33,8 @@ res.status(201).json({
     id: newUser._id,
     email: newUser.email,
     username: newUser.username,
-    accessToken: newUser.accessToken
-  }
+  },
+accessToken,
 });
 } catch (error) {
     res.status(500).json({ message: "Server error", error });
@@ -59,7 +55,12 @@ export const loginUser = async (req, res) => {
     }
 
     //compare the password
+    console.log('User from DB:', user);
+    console.log('Input password:', password);
+    console.log('Hashed password:', user.password);
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log('Password is valid:', isPasswordValid);
     if(!isPasswordValid) {
       return res.status(400).json({message: "Invalid password"});
     }
@@ -75,8 +76,8 @@ export const loginUser = async (req, res) => {
         id: user._id,
         email: user.email,
         username: user.username,
-        accessToken: accessToken,
       },
+      accessToken,
     });
   } catch (error) {
       res.status(500).json({message: "Server error", error});
