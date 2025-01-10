@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/userSchema.js";
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 // handles user registration logic
@@ -64,6 +65,8 @@ export const loginUser = async (req, res) => {
     }
 
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    user.accessToken = accessToken;
+    await user.save();
 
     res.status(200).json({
       success: true,
