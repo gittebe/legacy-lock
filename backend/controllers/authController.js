@@ -73,3 +73,18 @@ export const loginUser = async (req, res) => {
       res.status(500),json({message: "Server error", error});
   }
 };
+
+//Logout user 
+export const logoutUser = async (req, res)=> {
+  try {
+    const user = req.user;
+    user.accessToken = crypto.randomBytes(128).toString("hex");
+    await user.save();
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+    } catch (error) {
+      res.status(500).json({message: "Server error", error});
+  }
+};
