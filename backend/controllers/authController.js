@@ -3,9 +3,9 @@ import { User } from "../models/userSchema.js";
 
 // handles user registration logic
 export const registerUser = async (req, res) => {
-  try {
-    const {firstname, lastname, email, password, username } = req.body;
+  const {email, password, username } = req.body;
 
+  try {
 //check if the email already exists in the database
 const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -17,7 +17,7 @@ const salt = bcrypt.genSaltSync(20);
 const hashedPassword = bcrypt.hashSync(password, salt);
 
 // Create a new user with the hashed password
-const newUser = new User ({ firstname, lastname, email, password: hashedPassword, username });
+const newUser = new User ({ email, password: hashedPassword, username });
 
 // Safe the new user to the database
 await newUser.save();
@@ -28,8 +28,6 @@ res.status(201).json({
   message: "User created successfully", 
   user:{
     id: newUser._id,
-    firstname: newUser.firstname,
-    lastname: newUser.lastname,
     email: newUser.email,
     username: newUser.username,
     accessToken: newUser.accessToken
