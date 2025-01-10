@@ -5,16 +5,6 @@ import crypto from "crypto";
 const {Schema, model} = mongoose;
 
 const userSchema = new Schema({
-  firstname: {
-    type: String,
-    required: true,
-    minlength: 1
-  },
-  lastname: {
-    type: String,
-    required: true,
-    minlength:1
-  },
   email: {
     type: String,
     required: true,
