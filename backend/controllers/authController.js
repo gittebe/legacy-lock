@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { User } from "../models/userSchema.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 // handles user registration logic
 export const registerUser = async (req, res) => {
@@ -19,7 +22,10 @@ const hashedPassword = bcrypt.hashSync(password, salt);
 // Create a new user with the hashed password
 const newUser = new User ({ email, password: hashedPassword, username });
 
-// Safe the new user to the database
+const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+newUser.accessToken = accessToken;
+
+// Save the new user to the database
 await newUser.save();
 
 // Respond with a success message
@@ -57,7 +63,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({message: "Invalid password"});
     }
 
-    const accessToken = user.accessToken;
+    const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({
       success: true,
@@ -70,7 +76,7 @@ export const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-      res.status(500),json({message: "Server error", error});
+      res.status(500).json({message: "Server error", error});
   }
 };
 
