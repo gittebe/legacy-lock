@@ -16,11 +16,19 @@ import useStore from "../store/store";
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const login = useStore((state) => state.login);
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("User data stored locally when signing up", { email, password }); // Output email. Replace with API call? 
+    console.log("User data stored locally when signing up", { email, password });
+
+    /* Check the password and confirm password match */
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+      return;
+    }
 
     login({ email, password });// Save user data to the store
     console.log("User data stored by Zustand:", { email, password }); // Output user data.
@@ -41,7 +49,7 @@ const SignUpPage = () => {
             onChange={(event) => setEmail(event.target.value)}
             placeholder='Enter your email'
             required
-          />
+        />
           <label>Password:</label>
           <input
             type="password"
@@ -49,6 +57,14 @@ const SignUpPage = () => {
             onChange={(event) => setPassword(event.target.value)}
             placeholder='Enter your password'
             required
+        />
+          <label>Confirm Password:</label>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            placeholder='Confirm your password'
+          required
         />
         <Button type="submit">Sign Up</Button>
       </form>
