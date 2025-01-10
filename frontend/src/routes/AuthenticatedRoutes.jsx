@@ -1,5 +1,7 @@
 /**
  * This component contains the Authenticated routes of the application.
+ * 
+ * If page not found, redirect to dashboard.
  */
 
 import { Route, Routes } from "react-router-dom";
@@ -12,10 +14,13 @@ const AuthenticatedRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<DashboardPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/profile" element={<ProfileSettingsPage />} />
       <Route path="/capsules/create" element={<CreateCapsulePage />} />
       <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-      <Route path="*" element={<Navigare to "/dashboard" />} />
+      
+       {/* Redirect to Dashboard if no matching route is found */} 
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );
 }
