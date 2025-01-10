@@ -1,4 +1,5 @@
 import { User } from "../models/userSchema.js";
+import jwt from "jsonwebtoken";
 
 // varifying users identity based on the users access token
 export const authenticateUser = async (req, res, next) => {
