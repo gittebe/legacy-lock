@@ -1,6 +1,7 @@
 import express from "express";
 import { registerUser, loginUser, logoutUser } from "../controllers/authController.js";
 import {getUsers} from "../controllers/userController.js";
+import { authenticateUser } from "../middleware/authenticateUser.js";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 //POST request for logout
-router.post("/logout", logoutUser)
+router.post("/logout", authenticateUser, logoutUser)
 
 //GET request to retrieve all users
 router.get("/users", getUsers)
