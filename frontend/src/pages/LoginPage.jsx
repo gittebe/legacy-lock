@@ -23,69 +23,80 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("User data stored locally when logging in:", { email, username, password }); // Output. Replace with API call?
+    const fictiveDatabase = [
+      { email: "user@legacy-lock.com", username: "testuser", password: "1234" },
+    ];
 
-    const userData = { email, username, password }; // Store user data in an object
+    // Check if the email or username exists in the fictive database
+    const foundUser = fictiveDatabase.find((user) => (user.email === email || user.username === username) && user.password === password);
+
+    if (foundUser) {
+      console.log("User data stored locally when logging in:", foundUser); // Output. Replace with API call?
+
+      const userData = { email, username, password }; // Store user data in an object
     
-    login({ email, username, password });// Save user data to the store
-    console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
+      login({ email, username, password });// Save user data to the store
+      console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
 
-    setEmail(""); // Clear the email input
-    setUsername(""); // Clear the username input
-    setPassword(""); // Clear the password input
+      setEmail(""); // Clear the email input
+      setUsername(""); // Clear the username input
+      setPassword(""); // Clear the password input
+    } else {
+      alert("User not found. Please try again.");
+    }
   };
 
-  return (
-    <div>
-      <header>
-        <h1>Login</h1>
-        <p>Welcome to the login page!</p>
-      </header>
-      <main>
-        <form onSubmit={handleSubmit}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="Enter your email"
-            required
-          />
-          <label>Username:</label>
-          <input
-            type="text"
-            value={email || username}
-            onChange={(event) => {
-              if (value.includes("@")) {
-                setEmail(value);
-                setUsername("");
-              } else {
-                setUsername(value);
-                setEmail("");
-              }
-            }}
-            placeholder="Enter your email or username"
-            required
-          />
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-          <Button type="submit">Login</Button>
-        </form>
-        <p>
-          Don't have an account? <Link to="/signup">Sign up here</Link>
-        </p>
-        <p>
-          Forgot your password? <Link to="/resetpassword">Reset password</Link>
-        </p>
-      </main>
-    </div >
-  )
-};
+    return (
+      <div>
+        <header>
+          <h1>Login</h1>
+          <p>Welcome to the login page!</p>
+        </header>
+        <main>
+          <form onSubmit={handleSubmit}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+            <label>Username:</label>
+            <input
+              type="text"
+              value={email || username}
+              onChange={(event) => {
+                if (value.includes("@")) {
+                  setEmail(value);
+                  setUsername("");
+                } else {
+                  setUsername(value);
+                  setEmail("");
+                }
+              }}
+              placeholder="Enter your email or username"
+              required
+            />
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+            <Button type="submit">Login</Button>
+          </form>
+          <p>
+            Don't have an account? <Link to="/signup">Sign up here</Link>
+          </p>
+          <p>
+            Forgot your password? <Link to="/resetpassword">Reset password</Link>
+          </p>
+        </main>
+      </div >
+    )
+  };
 
 export default LoginPage;
