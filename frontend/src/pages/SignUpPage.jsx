@@ -22,7 +22,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("User data stored locally when signing up", { email, username, password });
+    console.log("User data stored locally when signing up", { email, username, password, confirmPassword });
 
     /* Check the password and confirm password match */
 
