@@ -35,6 +35,7 @@ const SignUpPage = () => {
     console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
 
     setEmail(""); // Clear the email input
+    setUsername(""); // Clear the username input
     setPassword(""); // Clear the password input
   };
 
