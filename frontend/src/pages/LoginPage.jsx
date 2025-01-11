@@ -13,6 +13,7 @@ import { useState } from "react";
 import Button from "../components/button";
 import { Link } from "react-router-dom";
 import useStore from "../store/store";
+import { set } from "mongoose";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -54,25 +55,18 @@ const LoginPage = () => {
         </header>
         <main>
           <form onSubmit={handleSubmit}>
-            <label>Email:</label>
+            <label>Email or Username</label>
             <input
               type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-            <label>Username:</label>
-            <input
-              type="text"
               value={email || username}
               onChange={(event) => {
+                const value = event.target.value; // Get the value from the input field
                 if (value.includes("@")) {
-                  setEmail(value);
-                  setUsername("");
+                  setEmail(value); // Set the email state
+                  setUsername(""); // Clear the username state
                 } else {
-                  setUsername(value);
-                  setEmail("");
+                  setUsername(value); // Set the username state
+                  setEmail(""); // Clear the email state
                 }
               }}
               placeholder="Enter your email or username"
