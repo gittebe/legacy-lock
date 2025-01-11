@@ -54,9 +54,17 @@ const LoginPage = () => {
           <label>Username:</label>
           <input
             type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            placeholder="Enter your username"
+            value={email || username}
+            onChange={(event) => {
+              if (value.includes("@")) {
+                setEmail(value);
+                setUsername("");
+              } else {
+                setUsername(value);
+                setEmail("");
+              }
+            }}
+            placeholder="Enter your email or username"
             required
           />
           <label>Password:</label>
