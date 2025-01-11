@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, loginUser, logoutUser } from "../controllers/authController.js";
+import { registerUser, loginUser, logoutUser, deleteUser } from "../controllers/authController.js";
 import {getUsers, getUserById, getCurrentUser} from "../controllers/userController.js";
 import { authenticateUser } from "../middleware/authenticateUser.js";
 
@@ -13,6 +13,9 @@ router.post("/login", loginUser);
 
 //POST request for logout
 router.post("/logout", authenticateUser, logoutUser)
+
+//DELETE user
+router.delete("/deleteUser/:userId", deleteUser)
 
 //GET request to retrieve all users
 router.get("/users", getUsers)
