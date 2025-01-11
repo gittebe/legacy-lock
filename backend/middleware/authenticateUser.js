@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const authenticateUser = async (req, res, next) => {
   try{
     //extract toke from authorization header
-    const token = req.header("Authorization")?.split("")[1];
+    const token = req.header("Authorization")?.split(" ")[1];
 
     if(!token){
       return res.status(401).json({loggedOut: true, message: "No token provided"});

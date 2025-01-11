@@ -29,3 +29,20 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+//get current user
+export const getCurrentUser = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        email: user.mail,
+        username: user.username
+      }
+    });
+  } catch (error) {
+    res.status(500).json({message: "Server error", error})
+  }
+};
