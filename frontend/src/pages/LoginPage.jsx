@@ -57,7 +57,7 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit}>
             <label>Email or Username</label>
             <input
-              type="email"
+              type="text"
               value={email || username}
               onChange={(event) => {
                 const value = event.target.value; // Get the value from the input field
