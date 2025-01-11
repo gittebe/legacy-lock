@@ -22,7 +22,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("User data stored locally when signing up", { email, password });
+    console.log("User data stored locally when signing up", { email, username, password });
 
     /* Check the password and confirm password match */
 
@@ -31,8 +31,8 @@ const SignUpPage = () => {
       return;
     }
 
-    login({ email, password });// Save user data to the store
-    console.log("User data stored by Zustand:", { email, password }); // Output user data.
+    login({ email, username, password });// Save user data to the store
+    console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
 
     setEmail(""); // Clear the email input
     setPassword(""); // Clear the password input
