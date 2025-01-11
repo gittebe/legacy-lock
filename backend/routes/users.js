@@ -17,4 +17,7 @@ router.post("/logout", authenticateUser, logoutUser)
 //GET request to retrieve all users
 router.get("/users", getUsers)
 
+//GET request to retrieve user data by ID
+router.get("/users/:id", authenticateUser, getUserById);
+
 export default router;
