@@ -7,11 +7,11 @@
 import useStore from "../store/store";
 
 const DashboardPage = () => {
-  const isLoggedIn = useStore((state) => state.isLoggedIn); // Get the user's login status from Zustand store
+  const user = useStore((state) => state.user) || { email: "user@legacy-lock.com", username: "user", password: "1234" };; // Get the user's login status from Zustand store
   
   return (
     <div>
-      <h1>Welcome, {user.email}!</h1>
+      <h1>Welcome, {user.username}!</h1>
       <p>This is your dashboard!</p>
     </div>
   );

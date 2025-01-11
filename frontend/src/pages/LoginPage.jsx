@@ -23,12 +23,12 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("User data stored locally when logging in:", { email, password }); // Output. Replace with API call?
+    console.log("User data stored locally when logging in:", { email, username, password }); // Output. Replace with API call?
 
-    const userData = { email, password, username }; // Store user data in an object
+    const userData = { email, username, password }; // Store user data in an object
     
-    login({ email, password, username });// Save user data to the store
-    console.log("User data stored by Zustand:", { email, password, username }); // Output user data.
+    login({ email, username, password });// Save user data to the store
+    console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
 
     setEmail(""); // Clear the email input
     setUsername(""); // Clear the username input
