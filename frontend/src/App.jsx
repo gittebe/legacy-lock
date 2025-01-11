@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import useStore from './store/store';
 import PublicRoutes from './routes/PublicRoutes';
 import AuthenticatedRoutes from './routes/AuthenticatedRoutes';
-import NotFoundPage from './pages/NotFoundPage';
 
 const App = () => {
   const isLoggedIn = useStore((state) => state.isLoggedIn); // Check if user is logged in
@@ -10,22 +9,16 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Authenticated routes */}
         {isLoggedIn ? (
         // If user is logged in, show authenticated routes
           < Route path="/*" element={<AuthenticatedRoutes />} />
         ) : (
-        // Redirect to login if no matching route is found
-        <Route path="/*" element={<Navigate to="/login" replace />} />
+          // If user is NOT logged in, show public routes
+          <Route path="/*" element={<PublicRoutes />} />
         )}
-        
-        {/* Public Routes */}
-        {/* If user is not logged in, show public routes */}
-        {!isLoggedIn && <Route path="/login" element={<PublicRoutes />} />}
 
-        {/* 404 page */}
-        {/* If no matching route is found, show 404 page */}
-        <Route path="*" element={<NotFoundPage />} />
+        {/* Fallback: Check login status and redirect to dashboard or login depending on status */}
+        <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />} />
       </Routes>
     </Router>
   );
