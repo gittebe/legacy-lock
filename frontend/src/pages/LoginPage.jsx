@@ -5,7 +5,7 @@
  * Features:
  * - useState to handle email and password input.
  * - Reusable Button component for submission.
- * - handleSubmit function to prevent default form behavior (to controll what happens on submit) and log the email.
+ * - handleSubmit function to prevent default form behavior (to controll what happens on submit) and log the email and username.
  * 
  */
 

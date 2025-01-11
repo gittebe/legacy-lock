@@ -9,16 +9,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {isLoggedIn ? (
-        // If user is logged in, show authenticated routes
-          < Route path="/*" element={<AuthenticatedRoutes />} />
-        ) : (
-          // If user is NOT logged in, show public routes
-          <Route path="/*" element={<PublicRoutes />} />
-        )}
-
-        {/* Fallback: Check login status and redirect to dashboard or login depending on status */}
-        <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />} />
+        < Route
+          path="/*"
+          element={isLoggedIn ? <AuthenticatedRoutes /> : <PublicRoutes />}
+        />
       </Routes>
     </Router>
   );
