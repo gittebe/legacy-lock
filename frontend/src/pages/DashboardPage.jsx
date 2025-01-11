@@ -4,10 +4,15 @@
  * It get the user's login status from Zustand store, and displays a welcome message if the user is logged in.
  * 
  */
+import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
 
 const DashboardPage = () => {
-  const user = useStore((state) => state.user) || { email: "user@legacy-lock.com", username: "user", password: "1234" };; // Get the user's login status from Zustand store
+  const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
   
   return (
     <div>
