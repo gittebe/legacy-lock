@@ -1,22 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
-import DashboardPage from './pages/DashboardPage';
-import ProfileSettingsPage from './pages/ProfileSettingsPage';
-import NotFoundPage from './pages/NotFoundPage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import useStore from './store/store';
+import PublicRoutes from './routes/PublicRoutes';
+import AuthenticatedRoutes from './routes/AuthenticatedRoutes';
 
-const App = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/profile" element={<ProfileSettingsPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  </Router>
-);
+const App = () => {
+  const isLoggedIn = useStore((state) => state.isLoggedIn); // Check if user is logged in
+  
+  return (
+    <Router>
+      <Routes>
+        < Route
+          path="/*"
+          element={isLoggedIn ? <AuthenticatedRoutes /> : <PublicRoutes />}
+        />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
