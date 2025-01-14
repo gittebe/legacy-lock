@@ -8,11 +8,16 @@ import "./config/db.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
+import mediaRoutes from "./routes/media.js";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
+
+//multer-configuration
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage});
 
 app.use(cors());
 app.use(express.json());
@@ -20,6 +25,10 @@ app.use(express.json());
 //use the imported routes
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
+app.use("/media", mediaRoutes);
+
+//POST-endpoint to upload media
+app.post("/media/upload", upload.single("media"), uploadMedia)
 
 // Start the server
 app.listen(port, () => {

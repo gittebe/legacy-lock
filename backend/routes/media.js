@@ -1,0 +1,1 @@
+import {uploadMedia} from "../controllers/mediaController.js"
