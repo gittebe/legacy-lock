@@ -2,13 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
-import cloudinary from "./config/cloudinaryConfig.js";
-import Capsule from "./models/capsuleSchema.js";
 import "./config/db.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import mediaRoutes from "./routes/media.js";
+import {uploadMedia} from "./controllers/mediaController.js";
 
 dotenv.config();
 

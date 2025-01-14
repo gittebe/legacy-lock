@@ -1,6 +1,7 @@
 import {uploadMedia, getAllMedia, getMediaById, deleteMedia} from "../controllers/mediaController.js";
+import express from "express";
 
-const router = expressListEndpoints.Router();
+const router = express.Router();
 
 //POST: Upload media (image/video)
 router.post("/upload", uploadMedia);
