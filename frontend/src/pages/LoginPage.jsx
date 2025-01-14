@@ -20,31 +20,36 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const login = useStore((state) => state.login);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const fictiveDatabase = [
-      { email: "user@legacy-lock.com", username: "testuser", password: "1234" },
-    ];
+    const loginData = {
+      emailOrUsername: email || username,
+      password,
+    };
+    try {
+      const response = await fetch("http://localhost:5000/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(loginData),
+      });
 
-    // Check if the email or username exists in the fictive database
-    const foundUser = fictiveDatabase.find((user) => (user.email === email || user.username === username) && user.password === password);
-
-    if (foundUser) {
-      console.log("User data stored locally when logging in:", foundUser); // Output. Replace with API call?
-
-      const userData = { email, username, password }; // Store user data in an object
-    
-      login({ email, username, password });// Save user data to the store
-      console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
-
-      setEmail(""); // Clear the email input
-      setUsername(""); // Clear the username input
-      setPassword(""); // Clear the password input
-    } else {
-      alert("User not found. Please try again.");
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("accessToken", data.accessToken);
+        login(data.user);
+        setEmail("");
+        setUsername("");
+        console.log("Login successful:", data);
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error to signin", error);
     }
-  };
+  }
 
     return (
       <div>
