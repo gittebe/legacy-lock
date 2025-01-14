@@ -57,7 +57,7 @@ export const getAllMedia = async (req, res) => {
     const capsule = await Capsule.find();
     res.status(200).json ({
       success: true,
-      capsules
+      capsule
     });
   } catch (error) {
     res.status(500).json({message: "Error retrieving the media"});
