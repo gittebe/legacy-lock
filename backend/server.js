@@ -1,22 +1,25 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
+import dotenv from "dotenv";
+import "./config/db.js";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/final-project";
-mongoose.connect(mongoUrl);
-mongoose.Promise = Promise;
+import documentationRoutes from "./routes/documentation.js";
+import userRoutes from "./routes/users.js";
 
-const port = process.env.PORT || 8080;
+dotenv.config();
+
 const app = express();
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
-});
+//use the importet routes
+app.use("/", documentationRoutes);
+app.use("/users", userRoutes);
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
+  console.log("Server started")
 });
