@@ -5,16 +5,6 @@ import crypto from "crypto";
 const {Schema, model} = mongoose;
 
 const userSchema = new Schema({
-  firstname: {
-    type: String,
-    required: true,
-    minlength: 1
-  },
-  lastname: {
-    type: String,
-    required: true,
-    minlength:1
-  },
   email: {
     type: String,
     required: true,
@@ -50,7 +40,7 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare password
+//Compare password
 userSchema.methods.comparePassword = async function (userPassword) {
   try {
      return await bcrypt.compare(userPassword, this.password);
