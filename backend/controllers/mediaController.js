@@ -34,8 +34,8 @@ export const uploadMedia = async (req, res) => {
       title,
       message: message || undefined,
       url: fileUrl,
-      public_id: req.file ? result.public_id : undefined,
-      recource_type: fileType || undefined,
+      public_id: req.file ? result.public_id : null,
+      recource_type: fileType || null,
     });
 
     //Save in MongoDB
