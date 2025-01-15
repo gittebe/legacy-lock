@@ -1,10 +1,11 @@
 import {uploadMedia, getAllMedia, getMediaById, deleteMedia} from "../controllers/mediaController.js";
+import { authenticateUser } from "../middleware/authenticateUser.js";
 import express from "express";
 
 const router = express.Router();
 
 //POST: Upload media (image/video)
-router.post("/upload", uploadMedia);
+router.post("/upload", authenticateUser, uploadMedia);
 
 //GET: All media
 router.get("/", getAllMedia);
