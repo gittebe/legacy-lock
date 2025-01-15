@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const capsuleSchema = new mongoose.Schema({
+  // userId: {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "User",
+  //     required: true
+  //   },
   title: {
     type: String,
     required: true
@@ -19,6 +24,10 @@ const capsuleSchema = new mongoose.Schema({
     type: String,
     required: false
     },
+  folderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Folder"
+  },
   createdAt: {
     type: Date,
     default: Date.now
