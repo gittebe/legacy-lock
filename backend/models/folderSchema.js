@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import User from "./userSchema.js"
 
 const folderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    required: false
   },
   folderName: {
     type: String,

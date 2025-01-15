@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import User from "./userSchema.js";
 
 const capsuleSchema = new mongoose.Schema({
-  // userId: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "User",
-  //     required: true
-  //   },
+  userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: false
+    },
   title: {
     type: String,
     required: true

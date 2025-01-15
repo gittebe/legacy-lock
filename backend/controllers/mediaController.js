@@ -33,12 +33,13 @@ export const uploadMedia = async (req, res) => {
 
     //New Capsule object for the database
     const newCapsule = new Capsule({
+      userId: userId,
       title,
       message: message || undefined,
       url: fileUrl,
       public_id: req.file ? result.public_id : null,
       recource_type: fileType || null,
-      folderId,
+      folderId: folderId
     });
 
     //Save in MongoDB
