@@ -1,10 +1,12 @@
 import Capsule from "../models/capsuleSchema.js";
 import cloudinary from "../config/cloudinaryConfig.js";
+import Folder from "../models/folderSchema.js";
 
 // POST: Upload of media (images or videos)
 export const uploadMedia = async (req, res) => {
   try {
-    const {title, message} = req.body;
+    const {title, message, folderId} = req.body;
+    const {userId} = req.user;
     //Check if a title exists
     if(!title) {
         return res.status(400).json({message:"A title is needed!"});
@@ -18,7 +20,7 @@ export const uploadMedia = async (req, res) => {
     //
     let fileType;
     let fileUrl = null;
-    if(req.file) {
+    if (req.file) {
       fileType = req.file.mimetype.startsWith("image") ? "image" : "video";
 
       //upload of media to cloudinary
@@ -36,10 +38,18 @@ export const uploadMedia = async (req, res) => {
       url: fileUrl,
       public_id: req.file ? result.public_id : null,
       recource_type: fileType || null,
+      folderId,
     });
 
     //Save in MongoDB
     await newCapsule.save();
+
+    //if there is a new media
+    if (folderId) {
+      await Folder.findByIdAndUpdate(folderId, {
+        $push: {media: newCapsule._id}
+      })
+    }
 
     res.status(200).json({
       message: "media has been successfully uploaded",
