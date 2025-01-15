@@ -1,13 +1,15 @@
-import express from "express";
-import {createFolder, getUserFolders} from "../controllers/folderController.js";
-import { authenticateUser } from "../middleware/authenticateUser.js";
+// import express from "express";
+// import { authenticateUser } from "../middleware/authenticateUser.js";
 
-const router = express.Router();
+// const router = express.Router();
 
-//POST to create folder
-router.post("/create", authenticateUser, createFolder);
+// //POST to create folder
+// router.post("/create", authenticateUser, createFolder);
 
-//GET to get all folders
-router.get("/", authenticateUser, getUserFolders);
+// //GET to get all folders
+// router.get("/", authenticateUser, getFolders);
 
-export default router;
+// //GET media of one folder
+// // router.get("/:folderId/media", authenticateUser, getFolderMedia);
+
+// export default router;

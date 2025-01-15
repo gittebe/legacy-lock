@@ -6,9 +6,9 @@ import "./config/db.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
-import mediaRoutes from "./routes/media.js";
-import folderRoutes from "./routes/folder.js";
-import {uploadMedia} from "./controllers/mediaController.js";
+// import mediaRoutes from "./routes/media.js";
+// import folderRoutes from "./routes/folder.js";
+// import {uploadMedia} from "./controllers/mediaController.js";
 
 dotenv.config();
 
@@ -25,11 +25,11 @@ app.use(express.json());
 //use the imported routes
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
-app.use("/media", mediaRoutes);
-app.use("/folder", folderRoutes);
+// app.use("/media", mediaRoutes);
+// app.use("/folder", folderRoutes);
 
 //POST-endpoint to upload media
-app.post("/media/upload", upload.single("media"), uploadMedia)
+// app.post("/media/upload", upload.single("media"), uploadMedia)
 
 // Start the server
 app.listen(port, () => {
