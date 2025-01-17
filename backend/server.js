@@ -8,7 +8,8 @@ import cloudinary from "./config/cloudinaryConfig.js";
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
-import {createCapsule} from "./controllers/capsuleController.js";
+import imageRoutes from "./routes/image.js";
+
 
 dotenv.config();
 
@@ -40,6 +41,8 @@ app.use(express.json());
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
 app.use("/capsule", capsuleRoutes);
+app.use("/image",imageRoutes);
+
 
 // Start the server
 app.listen(port, () => {

@@ -1,7 +1,9 @@
 import cloudinary from "../config/cloudinaryConfig.js";
-import { Capsule } from "../models/capsuleSchema.js";
+import Capsule from "../models/capsuleSchema.js";
+
 
 export const uploadToCloudinary = (file, resource_type) => {
+  
   return new Promise((resolve, reject) => {
     console.log("Initializing Cloudinary upload...");
 
