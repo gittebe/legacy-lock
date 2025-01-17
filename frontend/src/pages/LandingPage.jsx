@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './LandingPage.css'; // The styling file to implement all the visual requirements.
+import './LandingPage.css';
 
 const LandingPage = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showSignupPopup, setShowSignupPopup] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showLearnMore, setShowLearnMore] = useState(false);
 
   const toggleLoginPopup = () => setShowLoginPopup(!showLoginPopup);
   const toggleSignupPopup = () => setShowSignupPopup(!showSignupPopup);
   const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleLearnMore = () => setShowLearnMore(!showLearnMore);
   const closePopup = () => {
     setShowLoginPopup(false);
     setShowSignupPopup(false);
   };
+  const closeLearnMore = () => setShowLearnMore(false);
 
   return (
     <div className="landing-page">
@@ -32,7 +35,10 @@ const LandingPage = () => {
             <span></span>
             <span></span>
           </button>
-          <aside className={`side-menu ${showMenu ? 'open' : ''}`} onClick={() => setShowMenu(false)}>
+          <aside
+            className={`side-menu ${showMenu ? 'open' : ''}`}
+            onClick={() => setShowMenu(false)}
+          >
             <div
               className="side-menu-content"
               onClick={(e) => e.stopPropagation()}
@@ -72,6 +78,32 @@ const LandingPage = () => {
         <p className="subtext">
           Raise your memories from the archive and select the best ones.
         </p>
+        <button
+          className="learn-more-button"
+          onClick={toggleLearnMore}
+        >
+          + Learn more
+        </button>
+        {showLearnMore && (
+          <div
+            className="learn-more-overlay"
+            onClick={closeLearnMore}
+          >
+            <div
+              className="learn-more-container"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p>
+                Imagine sneaking a note into a secret vault that only opens in
+                the future—no spoilers allowed! That’s the magic of our Virtual
+                Time Capsule: lock away your photos and words of wisdom (or
+                whimsy) today, and let them emerge exactly when they’re meant to.
+                Ready to share a slice of tomorrow’s nostalgia? Dive in and start
+                time-traveling... minus any space-time paradoxes!
+              </p>
+            </div>
+          </div>
+        )}
       </main>
 
       {showLoginPopup && (
