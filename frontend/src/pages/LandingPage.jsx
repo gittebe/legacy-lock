@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useStore from "../store/store"; // Import Zustand store
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -7,6 +8,9 @@ const LandingPage = () => {
   const [showSignupPopup, setShowSignupPopup] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showLearnMore, setShowLearnMore] = useState(false);
+
+  const navigate = useNavigate();
+  const setUser = useStore((state) => state.setUser); // Zustand action to update user state
 
   const toggleLoginPopup = () => setShowLoginPopup(!showLoginPopup);
   const toggleSignupPopup = () => setShowSignupPopup(!showSignupPopup);
@@ -16,7 +20,26 @@ const LandingPage = () => {
     setShowLoginPopup(false);
     setShowSignupPopup(false);
   };
-  const closeLearnMore = () => setShowLearnMore(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const mockUser = {
+      username: "JohnDoe", // Mock data for login
+    };
+    setUser(mockUser); // Update Zustand store
+    closePopup();
+    navigate("/dashboard"); // Redirect to DashboardPage
+  };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const mockUser = {
+      username: "NewUser", // Mock data for signup
+    };
+    setUser(mockUser); // Update Zustand store
+    closePopup();
+    navigate("/dashboard"); // Redirect to DashboardPage
+  };
 
   return (
     <div className="landing-page">
@@ -78,33 +101,28 @@ const LandingPage = () => {
         <p className="subtext">
           Raise your memories from the archive and select the best ones.
         </p>
-        <button
-          className="learn-more-button"
-          onClick={toggleLearnMore}
-        >
-          + Learn more
-        </button>
-        {showLearnMore && (
-          <div
-            className="learn-more-overlay"
-            onClick={closeLearnMore}
-          >
-            <div
-              className="learn-more-container"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <p>
-                Imagine sneaking a note into a secret vault that only opens in
-                the future—no spoilers allowed! That’s the magic of our Virtual
-                Time Capsule: lock away your photos and words of wisdom (or
-                whimsy) today, and let them emerge exactly when they’re meant to.
-                Ready to share a slice of tomorrow’s nostalgia? Dive in and start
-                time-traveling... minus any space-time paradoxes!
-              </p>
-            </div>
-          </div>
-        )}
       </main>
+
+      <button className="learn-more-button" onClick={toggleLearnMore}>
+        + Learn more
+      </button>
+      {showLearnMore && (
+        <div className="learn-more-overlay" onClick={toggleLearnMore}>
+          <div
+            className="learn-more-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p>
+              Imagine sneaking a note into a secret vault that only opens in the
+              future—no spoilers allowed! That’s the magic of our Virtual Time
+              Capsule: lock away your photos and words of wisdom (or whimsy)
+              today, and let them emerge exactly when they’re meant to. Ready to
+              share a slice of tomorrow’s nostalgia? Dive in and start
+              time-traveling… minus any space-time paradoxes!
+            </p>
+          </div>
+        </div>
+      )}
 
       {showLoginPopup && (
         <div
@@ -119,7 +137,7 @@ const LandingPage = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <h3 id="login-popup-title">Login</h3>
-            <form>
+            <form onSubmit={handleLogin}>
               <label htmlFor="email">Email or username</label>
               <input
                 type="text"
@@ -138,9 +156,16 @@ const LandingPage = () => {
             </form>
             <p>
               Don’t have an account?{' '}
-              <Link to="/signup" onClick={toggleSignupPopup}>
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => {
+                  setShowLoginPopup(false);
+                  setShowSignupPopup(true);
+                }}
+              >
                 Sign up
-              </Link>
+              </button>
             </p>
           </div>
         </div>
@@ -155,11 +180,11 @@ const LandingPage = () => {
           onClick={closePopup}
         >
           <div
-            className="popup"
+            className="popup signup"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 id="signup-popup-title">Sign up</h3>
-            <form>
+            <form onSubmit={handleSignup}>
               <label htmlFor="email-signup">Email address</label>
               <input
                 type="email"
