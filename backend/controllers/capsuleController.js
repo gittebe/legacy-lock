@@ -22,6 +22,7 @@ export const uploadToCloudinary = (file, resource_type) => {
     );
 
     // Write the file buffer to Cloudinary upload stream
+    console.log(file.buffer);
     console.log("Starting upload...");
     uploadStream.end(file.buffer); // This is where the file buffer is sent to Cloudinary
     console.log("upload stream ended...")
