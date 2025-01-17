@@ -16,6 +16,7 @@ const capsuleSchema = new mongoose.Schema({
   },
   url: {
     type: String,
+    required: false
   },
   public_id: {
     type: String,
