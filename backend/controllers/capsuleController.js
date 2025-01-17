@@ -1,26 +1,20 @@
 import cloudinary from "../config/cloudinaryConfig.js";
 import { Capsule } from "../models/capsuleSchema.js";
 
-// Helper function to handle the Cloudinary upload with Promises
-// const uploadToCloudinary = (file, resource_type) => {
-//   return cloudinary.uploader.upload(file.path, {resource_type: resource_type})
-//   .then(result => {
-//     return result;
-//   })
-//   .catch(error => {
-//     console.error("Cloudinary upload error", error);
-//     throw error;
-//   })
-// }
 const uploadToCloudinary = (file, resource_type) => {
   return new Promise((resolve, reject) => {
+    console.log("Initializing Cloudinary upload...");
+
     const uploadStream = cloudinary.uploader.upload_stream(
-      { resource_type: resource_type },
+      { 
+        resource_type: resource_type, 
+      },
       (error, result) => {
         if (error) {
           console.error("Cloudinary upload error", error);
           reject(error); // Reject with error if the upload fails
         } else {
+          console.log("Upload successful:", result);
           resolve(result); // Resolve with the result (successful upload)
         }
       }
@@ -55,7 +49,9 @@ export const createCapsule = async (req, res) => {
 
     url = uploadResult.secure_url;
     public_id = uploadResult.public_id;
+
     console.log("File uploaded to Cloudinary:", uploadResult);
+    
   } catch (error) {
     console.error("Error during Cloudinary upload:", error);
     return res.status(500).json({ message: `Error uploading ${resource_type} to Cloudinary`, error });
