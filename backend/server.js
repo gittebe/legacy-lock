@@ -4,13 +4,10 @@ import dotenv from "dotenv";
 import multer from "multer";
 import "./config/db.js";
 import cloudinary from "./config/cloudinaryConfig.js";
-import { Capsule } from "./models/capsuleSchema.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
-// import folderRoutes from "./routes/folder.js";
-// import {uploadMedia} from "./controllers/mediaController.js";
 
 dotenv.config();
 
@@ -22,9 +19,9 @@ const checkConnection = async () => {
   try {
     // Eine einfache Anfrage, um den Account-Status zu überprüfen
     const result = await cloudinary.api.ping();
-    console.log("Cloudinary Verbindung erfolgreich:", result);
+    console.log("Cloudinary connection successful:", result);
   } catch (error) {
-    console.error("Fehler bei der Cloudinary-Verbindung:", error);
+    console.error("Error to connect to cloudinary:", error);
   }
 };
 
@@ -41,10 +38,6 @@ app.use(express.json());
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
 app.use("/capsule", upload.single("file"), capsuleRoutes);
-// app.use("/folder", folderRoutes);
-
-//POST-endpoint to upload media
-// app.post("/media/upload", upload.single("media"), uploadMedia)
 
 // Start the server
 app.listen(port, () => {
