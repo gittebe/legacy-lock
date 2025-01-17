@@ -1,3 +1,12 @@
+import express from "express";
+import {createCapsule} from "../controllers/capsuleController.js";
+
+const router = express.Router();
+
+router.post("/create", createCapsule);
+export default router;
+
+
 // // import {uploadMedia, getAllMedia, getMediaById, deleteMedia} from "../controllers/mediaController.js";
 // import { authenticateUser } from "../middleware/authenticateUser.js";
 // import express from "express";

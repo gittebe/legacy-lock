@@ -3,10 +3,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
 import "./config/db.js";
+import cloudinary from "./config/cloudinaryConfig.js";
+import { Capsule } from "./models/capsuleSchema.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
-// import mediaRoutes from "./routes/media.js";
+import capsuleRoutes from "./routes/capsule.js";
 // import folderRoutes from "./routes/folder.js";
 // import {uploadMedia} from "./controllers/mediaController.js";
 
@@ -14,6 +16,19 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
+
+//check connection to cloudinary
+const checkConnection = async () => {
+  try {
+    // Eine einfache Anfrage, um den Account-Status zu überprüfen
+    const result = await cloudinary.api.ping();
+    console.log("Cloudinary Verbindung erfolgreich:", result);
+  } catch (error) {
+    console.error("Fehler bei der Cloudinary-Verbindung:", error);
+  }
+};
+
+checkConnection();
 
 //multer-configuration
 const storage = multer.memoryStorage();
@@ -25,7 +40,7 @@ app.use(express.json());
 //use the imported routes
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
-// app.use("/media", mediaRoutes);
+app.use("/capsule", upload.single("file"), capsuleRoutes);
 // app.use("/folder", folderRoutes);
 
 //POST-endpoint to upload media

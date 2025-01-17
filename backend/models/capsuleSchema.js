@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 import User from "./userSchema.js";
 
 const capsuleSchema = new mongoose.Schema({
-  userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: false
-    },
+  // userId: {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "User",
+  //     required: false
+  //   },
   title: {
     type: String,
-    required: true
+    required: false
   },
   message: {
     type: String,
@@ -21,14 +21,14 @@ const capsuleSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  recource_type: {
+  resource_type: {
     type: String,
     required: false
     },
-  folderId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Folder"
-  },
+  // folderId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Folder"
+  // },
   createdAt: {
     type: Date,
     default: Date.now
@@ -36,11 +36,11 @@ const capsuleSchema = new mongoose.Schema({
 });
 
 // Validation for the minimum required: either a message, or an url for image / video
-capsuleSchema.pre("validate", function(next) {
-  if (!this.message && !this.url) {
-  return next(new Error("Either a message or an image/video (url) must be provided."))
-  }
-  next();
-})
-const Capsule = mongoose.model("Capsule", capsuleSchema);
-export default Capsule
+// capsuleSchema.pre("validate", function(next) {
+//   if (!this.message && !this.url) {
+//   return next(new Error("Either a message or an image/video (url) must be provided."))
+//   }
+//   next();
+// })
+
+export const Capsule = mongoose.model("Capsule", capsuleSchema);
