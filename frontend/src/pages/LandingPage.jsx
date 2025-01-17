@@ -18,30 +18,35 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1 className="logo">Legacy Lock</h1>
-        <button
-          className="hamburger-menu"
-          aria-label="Toggle menu"
-          onClick={toggleMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        {showMenu && (
-          <aside
-            className="side-menu"
-            onClick={() => setShowMenu(false)}
+        <div className="header">
+          <div className="logo">
+            <span>Legacy</span>
+            <span>Lock</span>
+          </div>
+          <button
+            className="hamburger-menu"
+            aria-label="Toggle menu"
+            onClick={toggleMenu}
           >
-            <div
-              className="side-menu-content"
-              onClick={(e) => e.stopPropagation()}
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          {showMenu && (
+            <aside
+              className="side-menu"
+              onClick={() => setShowMenu(false)}
             >
-              <button onClick={toggleLoginPopup}>Log in</button>
-              <button onClick={toggleSignupPopup}>Sign up</button>
-            </div>
-          </aside>
-        )}
+              <div
+                className="side-menu-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button onClick={toggleLoginPopup}>Log in</button>
+                <button onClick={toggleSignupPopup}>Sign up</button>
+              </div>
+            </aside>
+          )}
+        </div>
       </header>
       <main>
         <div className="animated-text-container">
@@ -53,7 +58,7 @@ const LandingPage = () => {
             <span className="light">MEMORIES</span>
             <span className="dark">MEMORIES</span>
           </div>
-        <div className="animated-text">
+          <div className="animated-text">
             <span className="light">MEMORIES</span>
             <span className="dark">MEMORIES</span>
             <span className="light">MEMORIES</span>

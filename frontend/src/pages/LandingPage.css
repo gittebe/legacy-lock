@@ -5,116 +5,129 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
-  }
-  
-  .landing-header {
+}
+
+.landing-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-  }
-  
-  .logo {
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     font-size: 20px;
     font-weight: bold;
-  }
-  
-  .hamburger-menu {
+    color: #000000;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.logo span {
+    display: block;
+}
+
+.hamburger-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     border: none;
     background: none;
     cursor: pointer;
-    position: relative;
     width: 25px;
     height: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  
-  .hamburger-menu span {
+}
+
+.hamburger-menu span {
     display: block;
     width: 100%;
     height: 3px;
     background: #000000;
-  }
-  
-  .animated-text-container {
+}
+
+.animated-text-container {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     width: 100%;
-    overflow: hidden; 
+    overflow: hidden;
     white-space: nowrap;
     display: flex;
-  }
-  
-  .animated-text {
-    display: inline-flex; 
-    animation: scroll-loop 80s linear infinite; 
-  }
-  
-  .animated-text span {
+}
+
+.animated-text {
+    display: inline-flex;
+    animation: scroll-loop 80s linear infinite;
+}
+
+.animated-text span {
     font-size: 120px;
     font-weight: 900;
-    margin-right: 20px; 
-  }
-  
-  .animated-text .light {
-    color: #e8e8e8; 
-  }
-  
-  .animated-text .dark {
-    color: #656565; 
-  }
-  
-  @keyframes scroll-loop {
+    margin-right: 20px;
+}
+
+.animated-text .light {
+    color: #e8e8e8;
+}
+
+.animated-text .dark {
+    color: #656565;
+}
+
+@keyframes scroll-loop {
     from {
-      transform: translateX(0);
+        transform: translateX(0);
     }
     to {
-      transform: translateX(-100%);
+        transform: translateX(-100%);
     }
-  }
-      
-  .image-container {
+}
+
+.image-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.3) rotate(45deg); 
+    transform: translate(-50%, -50%) scale(0.3) rotate(45deg);
     animation: scale-up 1.5s ease-in-out forwards;
-    z-index: 1; 
-  }
-  
-  .image-container img {
+    z-index: 1;
+}
+
+.image-container img {
     display: block;
     max-width: 100%;
     height: auto;
     z-index: -1;
-  }
-  
-  @keyframes scale-up {
+}
+
+@keyframes scale-up {
     0% {
-      transform: translate(-50%, -50%) scale(0.05) rotate(25deg);
+        transform: translate(-50%, -50%) scale(0.05) rotate(25deg);
     }
     100% {
-      transform: translate(-50%, -50%) scale(0.3) rotate(25deg);
+        transform: translate(-50%, -50%) scale(0.3) rotate(25deg);
     }
-  }
-  
-  .subtext {
+}
+
+.subtext {
     position: absolute;
-    bottom: 40px; 
-    left: 60px; 
-    font-size: 22px; 
-    color: #919191; 
-    font-family: Arial, sans-serif; 
-    line-height: 1.6; 
-    max-width: 250px; 
-    text-align: left; 
-  }
-  
-  .side-menu {
+    bottom: 40px;
+    left: 60px;
+    font-size: 22px;
+    color: #919191;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 250px;
+    text-align: left;
+}
+
+.side-menu {
     position: fixed;
     top: 0;
     right: 0;
@@ -124,18 +137,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .side-menu-content button {
+}
+
+.side-menu-content button {
     color: #ffffff;
     font-size: 18px;
     margin: 20px;
     background: none;
     border: none;
     cursor: pointer;
-  }
-  
-  .popup-overlay {
+}
+
+.popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -146,9 +159,9 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
-  }
-  
-  .popup {
+}
+
+.popup {
     background: #000000;
     color: #ffffff;
     width: 400px;
@@ -156,14 +169,14 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 11;
-  }
-  
-  .popup form label {
+}
+
+.popup form label {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  .popup form input {
+}
+
+.popup form input {
     width: 100%;
     height: 40px;
     margin-bottom: 20px;
@@ -171,9 +184,9 @@
     border: none;
     padding: 0 10px;
     font-size: 16px;
-  }
-  
-  .login-button, .signup-button {
+}
+
+.login-button, .signup-button {
     width: 100%;
     height: 50px;
     background: #e39de4;
@@ -182,13 +195,13 @@
     font-size: 18px;
     border-radius: 25px;
     cursor: pointer;
-  }
-  
-  .login-button:hover, .signup-button:hover {
+}
+
+.login-button:hover, .signup-button:hover {
     background: #d38ed3;
-  }
-  
-  .close-popup {
+}
+
+.close-popup {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -197,5 +210,4 @@
     color: #ffffff;
     font-size: 20px;
     cursor: pointer;
-  }
-  
+}
