@@ -44,8 +44,23 @@ const LandingPage = () => {
         )}
       </header>
       <main>
+        <div className="animated-text-container">
+          <div className="animated-text">
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+          </div>
         <div className="animated-text">
-          <span>MEMORIES</span>
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+            <span className="light">MEMORIES</span>
+            <span className="dark">MEMORIES</span>
+          </div>
         </div>
         <div className="image-container">
           <img
