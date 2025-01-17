@@ -14,6 +14,7 @@ export const newImage = (req, res) => {
       if (error) {
         return res.status(500).send('Error uploading to Cloudinary');
       }
+      console.log('Cloudinary upload result:', result);
 
       // Save image URL and public_id in the MongoDB
       const newImage = new Image({
