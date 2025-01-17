@@ -1,9 +1,13 @@
 import express from "express";
+import multer from "multer";
 import {createCapsule} from "../controllers/capsuleController.js";
+
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
 
 const router = express.Router();
 
-router.post("/create", createCapsule);
+router.post("/create", upload.single("file"), createCapsule);
 export default router;
 
 

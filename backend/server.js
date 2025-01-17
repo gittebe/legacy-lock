@@ -8,10 +8,12 @@ import cloudinary from "./config/cloudinaryConfig.js";
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
+import {createCapsule} from "./controllers/capsuleController.js";
 
 dotenv.config();
 
 const app = express();
+// const upload = multer();
 const port = process.env.PORT || 8080;
 
 //check connection to cloudinary
@@ -28,8 +30,8 @@ const checkConnection = async () => {
 checkConnection();
 
 //multer-configuration
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage});
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage});
 
 app.use(cors());
 app.use(express.json());
@@ -37,7 +39,7 @@ app.use(express.json());
 //use the imported routes
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
-app.use("/capsule", upload.single("file"), capsuleRoutes);
+app.use("/capsule", capsuleRoutes);
 
 // Start the server
 app.listen(port, () => {
