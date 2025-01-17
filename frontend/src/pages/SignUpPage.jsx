@@ -18,26 +18,49 @@ const SignUpPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  // Zustand store hook:
   const login = useStore((state) => state.login);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log("User data stored locally when signing up", { email, username, password, confirmPassword });
 
     /* Check the password and confirm password match */
-
     if (password !== confirmPassword) {
       alert("Passwords do not match. Please try again.");
       return;
     }
+    //Prepare data for signup
+    const signupData = {
+      email,
+      username,
+      password
+    };
 
-    login({ email, username, password });// Save user data to the store
-    console.log("User data stored by Zustand:", { email, username, password }); // Output user data.
+    try {
+      const response = await fetch("http://localhost:5000/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(signupData),
+      });
 
-    setEmail(""); // Clear the email input
-    setUsername(""); // Clear the username input
-    setPassword(""); // Clear the password input
-  };
+      const data = await response.json();
+      if (response.ok){
+        localStorage.setItem("accessToken", data.accessToken);
+        login(data.user);
+        setEmail("");
+        setUsername("");
+        setPassword("");
+        setConfirmPassword("");
+        console.log("Signup successful", data);
+      } else {
+        addListener(data.message || "Signup failed" );
+      }
+    } catch (error) {
+      console.error("Error during signup", error)
+    }
+  }
 
   return (
     <main>
