@@ -32,20 +32,15 @@ const LandingPage = () => {
             <span></span>
             <span></span>
           </button>
-          {showMenu && (
-            <aside
-              className="side-menu"
-              onClick={() => setShowMenu(false)}
+          <aside className={`side-menu ${showMenu ? 'open' : ''}`} onClick={() => setShowMenu(false)}>
+            <div
+              className="side-menu-content"
+              onClick={(e) => e.stopPropagation()}
             >
-              <div
-                className="side-menu-content"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button onClick={toggleLoginPopup}>Log in</button>
-                <button onClick={toggleSignupPopup}>Sign up</button>
-              </div>
-            </aside>
-          )}
+              <button onClick={toggleLoginPopup}>Log in</button>
+              <button onClick={toggleSignupPopup}>Sign up</button>
+            </div>
+          </aside>
         </div>
       </header>
       <main>
@@ -115,13 +110,6 @@ const LandingPage = () => {
                 Sign up
               </Link>
             </p>
-            <button
-              className="close-popup"
-              onClick={closePopup}
-              aria-label="Close popup"
-            >
-              ✖
-            </button>
           </div>
         </div>
       )}
@@ -163,13 +151,6 @@ const LandingPage = () => {
                 Sign up
               </button>
             </form>
-            <button
-              className="close-popup"
-              onClick={closePopup}
-              aria-label="Close popup"
-            >
-              ✖
-            </button>
           </div>
         </div>
       )}
