@@ -1,6 +1,6 @@
 import {Capsule} from "../models/capsuleSchema.js";
-import { Media } from "../models/mediaSchema.js";
 import { newMedia } from "./mediaController.js";
+import { authenticateUser } from "../middleware/authenticateUser.js";
 
 // create a new capsule
 export const createCapsule = async (req, res) => {
@@ -18,13 +18,15 @@ export const createCapsule = async (req, res) => {
       //add the media URL to the array
       mediaUrls.push(savedMedia.url)
     }
+    const userId = req.user.id;
     console.log("mediaUrls:", mediaUrls);
     // create new capsule
     const newCapsule = new Capsule({
-        title,
-        message,
-        createdAt,
-        mediaUrls,
+      userId,
+      title,
+      message,
+      mediaUrls,
+      createdAt,
       });
     await newCapsule.save();
 
