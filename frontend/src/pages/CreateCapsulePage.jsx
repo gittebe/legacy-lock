@@ -40,7 +40,7 @@ const CreateCapsulePage = () => {
         body: formData }); 
         
         const data = await response.json(); // Parse the JSON response
-        if {response.ok} { // If the response is ok
+        if (response.ok) { // If the response is ok
           console.log("The Capsule was successfully created", data); 
 
           //Clear the input fields
