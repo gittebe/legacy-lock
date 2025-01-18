@@ -28,10 +28,6 @@ const capsuleSchema = new Schema({
     type: String,
     required: false
     },
-  // folderId: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Folder"
-  // },
   createdAt: {
     type: Date,
     default: Date.now
