@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 const CreateCapsulePage = () => {
-  const [image, setImage] = useState("");
+  const fileInput = useRef(); // Create a reference to the Cloudinary file input  
   const [text, setText] = useState("");
   const [unlockDate, setUnlockDate] = useState("");
-  
+
+  const handleMediaUpload = (event) => {
+
   return (
     <div>
       <h1>Create a new Capsule</h1>
