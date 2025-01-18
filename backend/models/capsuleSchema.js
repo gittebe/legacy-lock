@@ -30,12 +30,18 @@ const capsuleSchema = new Schema({
     },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   openAt: {
     type: Date,
     required: false
   },
+  recipients: [{
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "User"}],
+  // password: {
+  //   type: String
+  // },
   // link: {
   //   type: String,
   //   default: () => uuidv4(),
