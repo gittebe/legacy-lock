@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from 'uuid';
 
 const {Schema, model} = mongoose;
 
@@ -34,6 +35,10 @@ const capsuleSchema = new Schema({
   openAt: {
     type: Date,
     required: false
+  },
+  link: {
+    type: String,
+    default: () => uuidv4(),
   }
 });
 
