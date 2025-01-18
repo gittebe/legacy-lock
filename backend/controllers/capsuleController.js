@@ -1,6 +1,5 @@
 import {Capsule} from "../models/capsuleSchema.js";
 import { newMedia } from "./mediaController.js";
-import { authenticateUser } from "../middleware/authenticateUser.js";
 
 // create a new capsule
 export const createCapsule = async (req, res) => {
