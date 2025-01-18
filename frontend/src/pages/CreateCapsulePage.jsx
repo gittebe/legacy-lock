@@ -40,28 +40,31 @@ const CreateCapsulePage = () => {
     formData.append("unlockDate", unlockDate); // Append the unlock date to the FormData object
 
     try { // Try to fetch the API
-      const response = await fetch("http://localhost:5000/capsules/create", 
-      { method: 'POST', 
-        body: formData }); 
-        
-        const data = await response.json(); // Parse the JSON response
-        if (response.ok) { // If the response is ok
-          console.log("The Capsule was successfully created", data); 
+      const response = await fetch("http://localhost:5000/capsules/create", {
+        method: "POST",
+        body: formData,
+      });
+    
+      const data = await response.json();
+      if (response.ok) { // If the response is ok
+        console.log("The Capsule was successfully created", data);
+    
+        // Clear the input fields
+        setText("");
+        setUnlockDate("");
+        fileInput.current.value = "";
 
-          //Clear the input fields
-          setText(""); 
-          setUnlockDate("");
-          fileInput.current.value = ""; 
+      } else { // If the response is not ok
+        console.error("The Capsule could not be created:", data);
+      }
 
-        } else { // If the response is not ok 
-          console.error("The Capsule could not be created", data); 
-        } catch (error) { // Catch any errors
-          console.error("Error during creation of Capsule", error); 
-        } finally { // Finally, set the loading state to false
-          setLoading(false); 
-        }
-      } 
-    };
+    } catch (error) { // Catch any errors
+      console.error("Error during creation of Capsule:", error);
+
+    } finally { // Finally, set the loading state to false
+      setLoading(false);
+    }
+  };
 
 return (
   <div> 
