@@ -1,5 +1,7 @@
 import {Capsule} from "../models/capsuleSchema.js";
 import { newMedia } from "./mediaController.js";
+import { authenticateUser } from "../middleware/authenticateUser.js";
+import mongoose from "mongoose";
 
 // create a new capsule
 export const createCapsule = async (req, res) => {
@@ -39,4 +41,31 @@ export const createCapsule = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Error creating Capsule", error });
     }
+}
+
+// get capsule
+export const getCapsule = async (req, res) => {
+  const capsuleId = req.params.id;
+  console.log("capsuleId:", capsuleId);
+
+
+   // Validate if the capsuleId is a valid ObjectId
+   if (!mongoose.Types.ObjectId.isValid(capsuleId)) {
+    return res.status(400).json({ message: "Invalid capsule ID format" });
+  }
+
+  try {
+    // look for the capsule in the database
+    const capsule = await Capsule.findOne({ _id: capsuleId});
+    if (!capsule) {
+      return res.status(404).json({message: "Capsule not found"});
+    }
+    res.status(200).json({
+      message: "Capsule retrieved successfully",
+      data: capsule
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "Error retrieving Capsule", error})
+  }
 }
