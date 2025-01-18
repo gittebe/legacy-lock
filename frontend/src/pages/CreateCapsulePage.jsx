@@ -1,3 +1,23 @@
+/**
+ * CreateCapsulePage Component
+ * 
+ * This component allows users to create a capsule by uploading a media file, adding a message, and setting a future unlock date.
+ * 
+ * Features:
+ * - Submits data via a POST request to the backend.
+ * - Displays a loading indicator during submission.
+ * - Clears input fields if response is ok.
+ * 
+ * useStates:
+ * - `text`: Capsule message.
+ * - `unlockDate`: Future unlock date.
+ * - `loading`: Submission status.
+ * 
+ * Documatation for Cloudinary: 
+ * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
+ * 
+ **/
+
 import { useState } from "react";
 
 const CreateCapsulePage = () => {
@@ -32,8 +52,8 @@ const CreateCapsulePage = () => {
           console.error("The Capsule could not be created", data); 
         } catch (error) { // Catch any errors
           console.error("Error during creation of Capsule", error); 
-        } finally { // Finally
-          setLoading(false); // Set loading state to false
+        } finally { // Finally, set the loading state to false
+          setLoading(false); 
         }
       } 
     };
