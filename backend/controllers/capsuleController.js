@@ -1,5 +1,6 @@
 import cloudinary from "../config/cloudinaryConfig.js";
 import Capsule from "../models/capsuleSchema.js";
+import upload from "../middleware/multer.js"
 
 
 export const uploadToCloudinary = (file, resource_type) => {
@@ -36,9 +37,9 @@ export const uploadToCloudinary = (file, resource_type) => {
 export const createCapsule = async (req, res) => {
   const {title, message, resource_type} = req.body;
   
-  if (!req.file) {
-    return res.status(400).json({message: "No file provided"});
-  }
+  // if (!req.file) {
+  //   return res.status(400).json({message: "No file provided"});
+  // }
   console.log("Received file:", req.file);
 
   const file = req.file;
@@ -50,6 +51,10 @@ export const createCapsule = async (req, res) => {
     console.log("Starting file upload to Cloudinary...");
 
     const uploadResult = await uploadToCloudinary(file, resource_type);
+
+
+
+
 
     url = uploadResult.secure_url;
     public_id = uploadResult.public_id;

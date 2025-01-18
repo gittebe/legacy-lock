@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import User from "./userSchema.js";
 
-const capsuleSchema = new mongoose.Schema({
+const {Schema, model} = mongoose;
+
+const capsuleSchema = new Schema({
   // userId: {
   //     type: mongoose.Schema.Types.ObjectId,
   //     ref: "User",
@@ -9,7 +11,7 @@ const capsuleSchema = new mongoose.Schema({
   //   },
   title: {
     type: String,
-    required: false
+    required: true
   },
   message: {
     type: String,
@@ -44,4 +46,4 @@ const capsuleSchema = new mongoose.Schema({
 //   next();
 // })
 
-export const Capsule = mongoose.model("Capsule", capsuleSchema);
+export const Capsule = model("Capsule", capsuleSchema);

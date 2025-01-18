@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import multer from "multer";
 import "./config/db.js";
 import cloudinary from "./config/cloudinaryConfig.js";
 
 import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
-import imageRoutes from "./routes/image.js";
+import mediaRoutes from "./routes/media.js";
 
 
 dotenv.config();
@@ -30,10 +29,6 @@ const checkConnection = async () => {
 
 checkConnection();
 
-//multer-configuration
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage});
-
 app.use(cors());
 app.use(express.json());
 
@@ -41,7 +36,7 @@ app.use(express.json());
 app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
 app.use("/capsule", capsuleRoutes);
-app.use("/image",imageRoutes);
+app.use("/media",mediaRoutes);
 
 
 // Start the server
