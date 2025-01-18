@@ -19,6 +19,7 @@
  **/
 
 import { useState, useRef } from "react";
+import { button } from "../components/button";
 
 const CreateCapsulePage = () => {
   // Create a reference to the Cloudinary file input:
@@ -99,9 +100,7 @@ return (
     </label>
     
     {/* Submit button */}
-    <button type="submit">
-      Submit
-    </button>
+    <Button type="submit">Create capsule</Button>
   </form>
 </div>
   );
