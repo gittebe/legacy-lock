@@ -6,7 +6,7 @@ import fs from 'fs';
 export const newMedia = async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' });
-    
+    console.log("Cloudinary upload result:", result);
     // Clean up file
     fs.unlinkSync(req.file.path);
 

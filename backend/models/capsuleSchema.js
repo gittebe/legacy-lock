@@ -16,10 +16,10 @@ const capsuleSchema = new Schema({
   message: {
     type: String,
   },
-  url: {
+  mediaUrls: [{
     type: String,
     required: false
-  },
+  }],
   public_id: {
     type: String,
     required: false

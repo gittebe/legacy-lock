@@ -9,16 +9,16 @@ export const createCapsule = async (req, res) => {
   try {
     // Array to store the media URLs if there is media uploaded
     let mediaUrls = [];
+    console.log("req.file", req.file)
     // Check if there is a file upload
     if (req.file) {
       // save media info to the database
       const savedMedia = await newMedia(req);
 
-      // const savedMedia = await newMedia.save();
-
       //add the media URL to the array
       mediaUrls.push(savedMedia.url)
     }
+    console.log("mediaUrls:", mediaUrls);
     // create new capsule
     const newCapsule = new Capsule({
         title,
