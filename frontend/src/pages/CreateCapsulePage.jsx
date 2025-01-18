@@ -37,7 +37,7 @@ const CreateCapsulePage = () => {
         }
       } 
     };
-    
+
 return (
   <div> 
     <h1>Create a Capsule</h1>
@@ -53,13 +53,21 @@ return (
       Message
       <textarea
       value={text}
-      onChange={(event) => setName(event.target.value)} />
+      required
+      onChange={(event) => setName(event.target.value)} 
+      placeholder="Write your message"
+      />
     </label>
 
     {/* Set date field */}
     <label>
       Unlock Date
-      <input type="date" value={unlockDate} onChange={(e) => setUnlockDate(event.target.value)} />
+      <input 
+        type="date" 
+        value={unlockDate} 
+        onChange={(event) => setUnlockDate(event.target.value)} 
+        required
+      />
     </label>
     
     {/* Submit button */}
