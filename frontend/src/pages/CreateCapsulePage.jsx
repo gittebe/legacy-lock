@@ -18,7 +18,7 @@
  * 
  **/
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const CreateCapsulePage = () => {
   // Create a reference to the Cloudinary file input:
@@ -69,7 +69,7 @@ const CreateCapsulePage = () => {
 return (
   <div> 
     <h1>Create a Capsule</h1>
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleSubmit}>
       {/* Media uploading field */}
     <label>
       Upload Media
