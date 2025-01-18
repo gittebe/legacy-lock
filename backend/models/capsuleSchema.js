@@ -36,10 +36,10 @@ const capsuleSchema = new Schema({
     type: Date,
     required: false
   },
-  link: {
-    type: String,
-    default: () => uuidv4(),
-  }
+  // link: {
+  //   type: String,
+  //   default: () => uuidv4(),
+  // }
 });
 
 export const Capsule = model("Capsule", capsuleSchema);

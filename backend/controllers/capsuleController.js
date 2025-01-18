@@ -60,6 +60,16 @@ export const getCapsule = async (req, res) => {
     if (!capsule) {
       return res.status(404).json({message: "Capsule not found"});
     }
+
+    // check if capsule can be opened
+    const currentDate = new Date();
+    if (currentDate < capsule.openAt) {
+      return res.status(403).json({
+        message: "This capsule is not yet available",
+        availableAt: capsule.openAt
+      })
+    }
+
     res.status(200).json({
       message: "Capsule retrieved successfully",
       data: capsule
@@ -67,5 +77,22 @@ export const getCapsule = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({message: "Error retrieving Capsule", error})
+  }
+}
+
+//get all capsules of the authentified user
+export const getUserCapsules = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const capsules = await Capsule.find({userId});
+
+    res.status(200).json({
+      message: "User´s capsules retrieved successfully",
+      data: capsules
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "Error retrieving user´s capsules", error})
   }
 }
