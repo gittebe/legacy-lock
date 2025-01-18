@@ -13,14 +13,30 @@ const CreateCapsulePage = () => {
     formData.append("text", text ); // Append the upload the message to the FormData object
     formData.append("unlockDate", unlockDate); // Append the unlock date to the FormData object
 
-    
+    fetch(API_URL, { method: 'POST', body: formData })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json)
+    })
+}
 
-  return (
-    <div>
-      <h1>Create a new Capsule</h1>
-      <p>Welcome to the CreateCapsulePage!</p>
-    </div>
-  );
-};
+return (
+  <form onSubmit={handleFormSubmit}>
+    <label>
+      Pet Image
+      <input type="file" ref={fileInput} />
+    </label>
+
+    <label>
+      Pet name
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+    </label>
+
+    <button type="submit">
+      Submit
+    </button>
+  </form>
+)
+}
 
 export default CreateCapsulePage;
