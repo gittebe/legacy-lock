@@ -21,9 +21,14 @@
 import { useState } from "react";
 
 const CreateCapsulePage = () => {
-  const fileInput = useRef(); // Create a reference to the Cloudinary file input  
-  const [text, setText] = useState(""); // Create a state variable to store the text
-  const [unlockDate, setUnlockDate] = useState(""); // Create a state variable to store the unlock date
+  // Create a reference to the Cloudinary file input:
+  const fileInput = useRef(); 
+  // Create a state variable to store the text:
+  const [text, setText] = useState(""); 
+  // Create a state variable to store the unlock date:
+  const [unlockDate, setUnlockDate] = useState(""); 
+  // Create a state variable to store the loading state:
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => { // Create a function to handle the media upload
     event.preventDefault(); // Prevent the default form behavior
