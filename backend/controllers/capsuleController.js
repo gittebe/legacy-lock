@@ -3,7 +3,7 @@ import { newMedia } from "./mediaController.js";
 
 // create a new capsule
 export const createCapsule = async (req, res) => {
-  const {title, message, createdAt} = req.body;
+  const {title, message, createdAt, openAt} = req.body;
 
   try {
     // Array to store the media URLs if there is media uploaded
@@ -26,6 +26,7 @@ export const createCapsule = async (req, res) => {
       message,
       mediaUrls,
       createdAt,
+      openAt: new Date(openAt),
       });
     await newCapsule.save();
 

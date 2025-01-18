@@ -33,7 +33,7 @@ const capsuleSchema = new Schema({
   },
   openAt: {
     type: Date,
-    required: true
+    required: false
   }
 });
 
