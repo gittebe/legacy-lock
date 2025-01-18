@@ -79,7 +79,7 @@ return (
       <textarea
       value={text}
       required
-      onChange={(event) => setName(event.target.value)} 
+      onChange={(event) => setText(event.target.value)} 
       placeholder="Write your message"
       />
     </label>
