@@ -25,16 +25,18 @@ const CreateCapsulePage = () => {
 
           //Clear the input fields
           setText(""); 
-          setUnlockDate(""); field
+          setUnlockDate("");
           fileInput.current.value = ""; 
 
-    fetch(API_URL, { method: 'POST', body: formData })
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json)
-    })
-
-
+        } else { // If the response is not ok 
+          console.error("The Capsule could not be created", data); 
+        } catch (error) { // Catch any errors
+          console.error("Error during creation of Capsule", error); 
+        } finally { // Finally
+          setLoading(false); // Set loading state to false
+        }
+      } 
+    };
 return (
   <div> 
     <h1>Create a Capsule</h1>
