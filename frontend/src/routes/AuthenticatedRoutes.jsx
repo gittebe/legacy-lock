@@ -11,6 +11,7 @@ import CreateCapsulePage from "../pages/CreateCapsulePage";
 import CapsuleDetailsPage from "../pages/CapsuleDetailsPage";
 
 const AuthenticatedRoutes = () => {
+  console.log("AuthenticatedRoutes loaded");
   return (
     <Routes>
       <Route path="/" element={<DashboardPage />} />

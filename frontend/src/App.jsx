@@ -5,6 +5,7 @@ import AuthenticatedRoutes from './routes/AuthenticatedRoutes';
 
 const App = () => {
   const isLoggedIn = useStore((state) => state.isLoggedIn); // Check if user is logged in
+  console.log("User logged in status:", isLoggedIn)
   
   return (
     <Router>

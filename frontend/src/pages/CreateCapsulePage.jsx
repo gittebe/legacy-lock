@@ -72,7 +72,7 @@ return (
     <form onSubmit={handleSubmit}>
       {/* Media uploading field */}
     <label>
-      Upload Media
+      Upload Media (optional)
       <input type="file" ref={fileInput} />
     </label>
     
