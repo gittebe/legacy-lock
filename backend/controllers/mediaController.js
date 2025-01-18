@@ -16,8 +16,8 @@ export const newMedia = async (req, res) => {
     });
     //new image document is saved to the MongoDB
     const savedMedia = await newMedia.save();
-    // response with the saved image data along with a http status
-    res.status(200).send(savedMedia);
+    // return the saved media
+    return savedMedia;
 
   } catch (error) {
     console.error('Error:', error);
