@@ -22,7 +22,7 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const CapsuleCard = ({ capsule }) => {
-  const { title, id, message, media } = capsule;
+  const { title, id, message, media, recipients, createdAt, openAt } = capsule;
   const navigateToCapsule = useNavigate();
 
   const handleViewCapsule = () => {
@@ -31,9 +31,12 @@ const CapsuleCard = ({ capsule }) => {
 
   return (
     <div>
-      <h5>{title}</h5>
-      <p>{id}</p>
-      <p>{message}</p>
+      <h5>Title: {title}</h5>
+      <p>ID: {id}</p>
+      <p>Message: {message}</p>
+      <p>Recipients: {recipients}</p>
+      <p>Created: {createdAt}</p>
+      <p>Unlock date: {openAt}</p>
       <img src={media} alt={title} />
       <Button onClick={handleViewCapsule}>View Capsule</Button>
     </div>
