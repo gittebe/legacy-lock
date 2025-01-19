@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useStore from "../store/store"; // Import Zustand store
 import './LandingPage.css';
+import LoginPage from './LoginPage';
+import SignUpPage from './SignUpPage';
 
 const LandingPage = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -9,13 +9,6 @@ const LandingPage = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showLearnMore, setShowLearnMore] = useState(false);
 
-  const navigate = useNavigate();
-  const setUser = useStore((state) => state.setUser); // Zustand action to update user state
-
-  const toggleLoginPopup = () => setShowLoginPopup(!showLoginPopup);
-  const toggleSignupPopup = () => setShowSignupPopup(!showSignupPopup);
-  const toggleMenu = () => setShowMenu(!showMenu);
-  const toggleLearnMore = () => setShowLearnMore(!showLearnMore);
   const closePopup = () => {
     setShowLoginPopup(false);
     setShowSignupPopup(false);
@@ -23,22 +16,12 @@ const LandingPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const mockUser = {
-      username: "JohnDoe", // Mock data for login
-    };
-    setUser(mockUser); // Update Zustand store
     closePopup();
-    navigate("/dashboard"); // Redirect to DashboardPage
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
-    const mockUser = {
-      username: "NewUser", // Mock data for signup
-    };
-    setUser(mockUser); // Update Zustand store
     closePopup();
-    navigate("/dashboard"); // Redirect to DashboardPage
   };
 
   return (
@@ -52,7 +35,7 @@ const LandingPage = () => {
           <button
             className="hamburger-menu"
             aria-label="Toggle menu"
-            onClick={toggleMenu}
+            onClick={() => setShowMenu(!showMenu)}
           >
             <span></span>
             <span></span>
@@ -66,12 +49,13 @@ const LandingPage = () => {
               className="side-menu-content"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={toggleLoginPopup}>Log in</button>
-              <button onClick={toggleSignupPopup}>Sign up</button>
+              <button onClick={() => setShowLoginPopup(true)}>Log in</button>
+              <button onClick={() => setShowSignupPopup(true)}>Sign up</button>
             </div>
           </aside>
         </div>
       </header>
+
       <main>
         <div className="animated-text-container">
           <div className="animated-text">
@@ -103,11 +87,11 @@ const LandingPage = () => {
         </p>
       </main>
 
-      <button className="learn-more-button" onClick={toggleLearnMore}>
+      <button className="learn-more-button" onClick={() => setShowLearnMore(!showLearnMore)}>
         + Learn more
       </button>
       {showLearnMore && (
-        <div className="learn-more-overlay" onClick={toggleLearnMore}>
+        <div className="learn-more-overlay" onClick={() => setShowLearnMore(false)}>
           <div
             className="learn-more-container"
             onClick={(e) => e.stopPropagation()}
@@ -125,91 +109,21 @@ const LandingPage = () => {
       )}
 
       {showLoginPopup && (
-        <div
-          className="popup-overlay"
-          role="dialog"
-          aria-labelledby="login-popup-title"
-          aria-describedby="login-popup-desc"
-          onClick={closePopup}
-        >
-          <div
-            className="popup"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 id="login-popup-title">Login</h3>
-            <form onSubmit={handleLogin}>
-              <label htmlFor="email">Email or username</label>
-              <input
-                type="text"
-                id="email"
-                placeholder="Email or username"
-              />
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-              />
-              <button type="submit" className="login-button">
-                Log in
-              </button>
-            </form>
-            <p>
-              Don’t have an account?{' '}
-              <button
-                type="button"
-                className="text-button"
-                onClick={() => {
-                  setShowLoginPopup(false);
-                  setShowSignupPopup(true);
-                }}
-              >
-                Sign up
-              </button>
-            </p>
-          </div>
-        </div>
+        <LoginPage
+          onClose={() => setShowLoginPopup(false)}
+          openSignup={() => {
+            setShowLoginPopup(false);
+            setShowSignupPopup(true);
+          }}
+          handleLogin={handleLogin}
+        />
       )}
 
       {showSignupPopup && (
-        <div
-          className="popup-overlay"
-          role="dialog"
-          aria-labelledby="signup-popup-title"
-          aria-describedby="signup-popup-desc"
-          onClick={closePopup}
-        >
-          <div
-            className="popup signup"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 id="signup-popup-title">Sign up</h3>
-            <form onSubmit={handleSignup}>
-              <label htmlFor="email-signup">Email address</label>
-              <input
-                type="email"
-                id="email-signup"
-                placeholder="name@domain.com"
-              />
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                placeholder="Username"
-              />
-              <label htmlFor="password-signup">Password</label>
-              <input
-                type="password"
-                id="password-signup"
-                placeholder="Password"
-              />
-              <p>Your password must contain 10 characters</p>
-              <button type="submit" className="signup-button">
-                Sign up
-              </button>
-            </form>
-          </div>
-        </div>
+        <SignUpPage
+          onClose={() => setShowSignupPopup(false)}
+          handleSignup={handleSignup}
+        />
       )}
     </div>
   );
