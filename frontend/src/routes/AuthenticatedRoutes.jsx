@@ -20,8 +20,8 @@ const AuthenticatedRoutes = () => {
       <Route path="/capsules/create" element={<CreateCapsulePage />} />
       <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
 
-       {/* Redirect to Dashboard if no matching route is found */} 
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+       {/* Redirect to 404 - Page not Found if no matching route is found */} 
+       <Route path="*" element={<div>404: Page not found</div>} />
     </Routes>
   );
 }
