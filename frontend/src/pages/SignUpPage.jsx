@@ -8,9 +8,9 @@
  * 
  */
 
-import { useState } from 'react';
-import Button from '../components/button';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import Button from "../components/button";
+import { Link } from "react-router-dom";
 import useStore from "../store/store";
 
 const SignUpPage = () => {

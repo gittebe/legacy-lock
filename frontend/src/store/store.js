@@ -12,7 +12,7 @@
  * - logout(): Resets the store to its initial state (logs out the user).
  */
 
-import { create } from 'zustand';
+import { create } from "zustand";
 
 const useStore = create((set) => ({
   // *** Initial state ***

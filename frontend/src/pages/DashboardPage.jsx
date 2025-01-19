@@ -6,7 +6,7 @@
  */
 import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
-import CapsuleList from "../components/Capsule/CapsuleList;
+import CapsuleList from "../components/Capsule/CapsuleList";
 import { useEffect } from "react";
 
 const DashboardPage = () => {
