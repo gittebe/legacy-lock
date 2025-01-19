@@ -2,7 +2,8 @@
   "name": "project-final-parent",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "npm install --prefix backend"
+    "postinstall": "npm install --prefix backend",
+    "start": "node server.js"
   },
   "dependencies": {
     "date-fns": "^4.1.0",

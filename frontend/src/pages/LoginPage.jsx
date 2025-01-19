@@ -10,7 +10,7 @@
  */
 
 import { useState } from "react";
-import Button from "../components/button";
+import Button from "../components/Button/Button";
 import { Link } from "react-router-dom";
 import useStore from "../store/store";
 
