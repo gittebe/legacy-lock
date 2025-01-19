@@ -24,18 +24,6 @@ const LandingPage = () => {
     setShowSignupPopup(false);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    closePopup();
-    console.log("User logged in");
-  };
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-    closePopup();
-    console.log("User signed up");
-  };
-
   return (
     <div className="landing-page">
       <Header toggleMenu={() => setShowMenu(!showMenu)} />
@@ -74,14 +62,14 @@ const LandingPage = () => {
         <p className="subtext">
           Raise your memories from the archive and select the best ones.
         </p>
-      </main>
 
-      {isSmallScreen && (
-        <div className="landing-buttons">
-          <LoginButton onClick={() => setShowLoginPopup(true)} />
-          <SignUpButton onClick={() => setShowSignupPopup(true)} />
-        </div>
-      )}
+        {isSmallScreen && (
+          <div className="landing-buttons">
+            <LoginButton onClick={() => setShowLoginPopup(true)} />
+            <SignUpButton onClick={() => setShowSignupPopup(true)} />
+          </div>
+        )}
+      </main>
 
       <LearnMoreButton />
 
@@ -92,14 +80,12 @@ const LandingPage = () => {
             setShowLoginPopup(false);
             setShowSignupPopup(true);
           }}
-          handleLogin={handleLogin}
         />
       )}
 
       {showSignupPopup && (
         <SignUpPage
           onClose={() => setShowSignupPopup(false)}
-          handleSignup={handleSignup}
         />
       )}
     </div>
