@@ -34,6 +34,26 @@ const useStore = create((set) => ({
     isLoggedIn: false,
     user: null,
   }),
+
+  // *** Capsules ***
+  fetchCapsules: async () => {
+    console.log("Fetching capsules...");
+    set({ loading: true });
+    try {
+      const response = await fetch("http://localhost:5000/capsules");
+      // Check if the response is ok
+      if (!response.ok) {
+        throw new Error("Failed to fetch capsules");
+      }
+      const data = await response.json();
+      console.log("Capsules fetched:", data);
+      set({ capsules: data });
+    } catch (error) {
+      console.error("Error fetching capsules:", error);
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));
 
 export default useStore;
