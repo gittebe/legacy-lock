@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './LandingPage.css';
+import Header from '../components/Header';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
+import LearnMoreButton from '../ui/LearnMore';
 
 const LandingPage = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showSignupPopup, setShowSignupPopup] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [showLearnMore, setShowLearnMore] = useState(false);
 
   const closePopup = () => {
     setShowLoginPopup(false);
@@ -17,44 +18,32 @@ const LandingPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     closePopup();
+    console.log("User logged in");
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
     closePopup();
+    console.log("User signed up");
   };
 
   return (
     <div className="landing-page">
-      <header className="landing-header">
-        <div className="header">
-          <div className="logo">
-            <span>Legacy</span>
-            <span>Lock</span>
-          </div>
-          <button
-            className="hamburger-menu"
-            aria-label="Toggle menu"
-            onClick={() => setShowMenu(!showMenu)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <aside
-            className={`side-menu ${showMenu ? 'open' : ''}`}
-            onClick={() => setShowMenu(false)}
-          >
-            <div
-              className="side-menu-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button onClick={() => setShowLoginPopup(true)}>Log in</button>
-              <button onClick={() => setShowSignupPopup(true)}>Sign up</button>
-            </div>
-          </aside>
+      {/* Header Component */}
+      <Header toggleMenu={() => setShowMenu(!showMenu)} />
+
+      <aside
+        className={`side-menu ${showMenu ? 'open' : ''}`}
+        onClick={() => setShowMenu(false)}
+      >
+        <div
+          className="side-menu-content"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={() => setShowLoginPopup(true)}>Log in</button>
+          <button onClick={() => setShowSignupPopup(true)}>Sign up</button>
         </div>
-      </header>
+      </aside>
 
       <main>
         <div className="animated-text-container">
@@ -87,26 +76,7 @@ const LandingPage = () => {
         </p>
       </main>
 
-      <button className="learn-more-button" onClick={() => setShowLearnMore(!showLearnMore)}>
-        + Learn more
-      </button>
-      {showLearnMore && (
-        <div className="learn-more-overlay" onClick={() => setShowLearnMore(false)}>
-          <div
-            className="learn-more-container"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p>
-              Imagine sneaking a note into a secret vault that only opens in the
-              future—no spoilers allowed! That’s the magic of our Virtual Time
-              Capsule: lock away your photos and words of wisdom (or whimsy)
-              today, and let them emerge exactly when they’re meant to. Ready to
-              share a slice of tomorrow’s nostalgia? Dive in and start
-              time-traveling… minus any space-time paradoxes!
-            </p>
-          </div>
-        </div>
-      )}
+      <LearnMoreButton />
 
       {showLoginPopup && (
         <LoginPage
