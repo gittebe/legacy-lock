@@ -6,10 +6,19 @@
  */
 import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
+import CapsuleList from "../components/Capsule/CapsuleList;
+import { useEffect } from "react";
 
 const DashboardPage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+  const fetchCapsules = useStore((state) => state.fetchCapsules); // Get the fetchCapsules function from Zustand store
   const loading = useStore((state) => state.loading); // Get the loading status from Zustand store
+
+  useEffect(() => {
+    if (user) {
+      fetchCapsules();
+    }
+  }, [user, fetchCapsules]); 
 
   if (loading) {
     return <p>Loading...</p>;
@@ -21,7 +30,7 @@ const DashboardPage = () => {
   return (
     <div>
       <h1>Welcome, {user.username}!</h1>
-      <p>This is your dashboard!</p>
+      <CapsuleList capsules={fetchCapsules()} />
     </div>
   );
 };
