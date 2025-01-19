@@ -10,10 +10,12 @@ const LoginPage = ({ onClose, openSignup }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+
     const loginData = {
       emailOrUsername,
       password,
     };
+
     try {
       const response = await fetch('http://localhost:5000/users/login', {
         method: 'POST',
@@ -24,6 +26,7 @@ const LoginPage = ({ onClose, openSignup }) => {
       });
 
       const data = await response.json();
+
       if (response.ok) {
         localStorage.setItem('accessToken', data.accessToken);
         login(data.user);
