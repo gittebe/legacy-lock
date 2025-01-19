@@ -1,4 +1,4 @@
-import CapsuleCard from 'components/Capsule/CapsuleCard';
+import CapsuleCard from "./CapsuleCard";
 
 const CapsuleList = ({ capsules }) => {
 if (!capsules) {
