@@ -8,6 +8,7 @@ const LoginPage = ({ onClose, openSignup }) => {
   const [password, setPassword] = useState('');
   const login = useStore((state) => state.login);
 
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -22,6 +23,7 @@ const LoginPage = ({ onClose, openSignup }) => {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(loginData),
       });
 
@@ -34,13 +36,16 @@ const LoginPage = ({ onClose, openSignup }) => {
         setPassword(""); // Clear password input
         console.log("Login successful:", data);
         onClose(); // Close the login popup
+
       } else {
         alert(data.message || "Login failed");
       }
     } catch (error) {
+
       console.error("Error logging in:", error);
+
     }
-  };
+  }
 
   return (
     <div

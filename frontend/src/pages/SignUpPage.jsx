@@ -8,20 +8,23 @@ const SignUpPage = ({ onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  // Zustand store hook:
   const login = useStore((state) => state.login);
+
 
   const handleSignup = async (event) => {
     event.preventDefault();
 
+    /* Check the password and confirm password match */
     if (password !== confirmPassword) {
       alert('Passwords do not match. Please try again.');
       return;
     }
-
+    //Prepare data for signup
     const signupData = {
       email,
       username,
-      password,
+      password
     };
 
     try {
