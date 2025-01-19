@@ -9,6 +9,10 @@ import useStore from "../store/store";
 
 const DashboardPage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+  const loading = useStore((state) => state.loading); // Get the loading status from Zustand store
+
+  if (loading) {
+    return <p>Loading...</p>;
 
   if (!user) {
     return <Navigate to="/login" replace />;
