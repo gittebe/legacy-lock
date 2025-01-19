@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
 import Header from '../components/Header';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
 import LearnMoreButton from '../ui/LearnMore';
+import LoginButton from '../ui/LoginButton';
+import SignUpButton from '../ui/SignupButton';
 
 const LandingPage = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showSignupPopup, setShowSignupPopup] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1024);
+
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const closePopup = () => {
     setShowLoginPopup(false);
@@ -29,7 +38,6 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      {/* Header Component */}
       <Header toggleMenu={() => setShowMenu(!showMenu)} />
 
       <aside
@@ -55,14 +63,6 @@ const LandingPage = () => {
             <span className="light">MEMORIES</span>
             <span className="dark">MEMORIES</span>
           </div>
-          <div className="animated-text">
-            <span className="light">MEMORIES</span>
-            <span className="dark">MEMORIES</span>
-            <span className="light">MEMORIES</span>
-            <span className="dark">MEMORIES</span>
-            <span className="light">MEMORIES</span>
-            <span className="dark">MEMORIES</span>
-          </div>
         </div>
         <div className="image-container">
           <img
@@ -75,6 +75,13 @@ const LandingPage = () => {
           Raise your memories from the archive and select the best ones.
         </p>
       </main>
+
+      {isSmallScreen && (
+        <div className="landing-buttons">
+          <LoginButton onClick={() => setShowLoginPopup(true)} />
+          <SignUpButton onClick={() => setShowSignupPopup(true)} />
+        </div>
+      )}
 
       <LearnMoreButton />
 
