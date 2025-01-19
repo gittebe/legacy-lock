@@ -1,16 +1,24 @@
 
+import Button from 'components/Button';
+import { useNavigate } from 'react-router-dom';
+
 const CapsuleCard = ({ capsule }) => {
-  const { title, message, media } = capsule;
+  const { title, message, id } = capsule;
+  const navigateToCapsule = useNavigate();
+
+  const handleViewCapsule = () => {
+    navigateToCapsule(`/capsules/${id}`);
+  };
+
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{capsule.title}</h5>
-        <p className="card-message">{capsule.message}</p>
-        <p className="card-media">{capsule.media}</p>
-        <Link to={`/capsules/${capsule.id}`} className="btn btn-primary">
-          View Capsule
-        </Link>
+    <div>
+        <h5>{title}</h5>
+        <p>{id}</p>
+        <p>{message}</p>
+        <Button onClick={handleViewCapsule}>View Capsule</Button>
       </div>
     </div>
   );
 }
+
+export default CapsuleCard;
