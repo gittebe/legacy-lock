@@ -1,4 +1,6 @@
+import React from 'react';
 import './SignUpPage.css';
+import SignUpButton from '../ui/SignupButton'; 
 
 const SignUpPage = ({ onClose, handleSignup }) => {
   return (
@@ -31,9 +33,7 @@ const SignUpPage = ({ onClose, handleSignup }) => {
             placeholder="Password"
           />
           <p>Your password must contain 10 characters</p>
-          <button type="submit" className="signup-button">
-            Sign up
-          </button>
+          <SignUpButton />
         </form>
       </div>
     </div>

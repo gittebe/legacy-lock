@@ -1,4 +1,6 @@
+import React from 'react';
 import './LoginPage.css';
+import LoginButton from '../ui/LoginButton'; // Import the reusable LoginButton component
 
 const LoginPage = ({ onClose, openSignup, handleLogin }) => {
   return (
@@ -16,9 +18,7 @@ const LoginPage = ({ onClose, openSignup, handleLogin }) => {
           <input type="text" id="email" placeholder="Email or username" />
           <label htmlFor="password">Password</label>
           <input type="password" id="password" placeholder="Password" />
-          <button type="submit" className="login-button">
-            Log in
-          </button>
+          <LoginButton />
         </form>
         <p>
           Don’t have an account?{' '}
@@ -27,7 +27,7 @@ const LoginPage = ({ onClose, openSignup, handleLogin }) => {
             className="text-button"
             onClick={() => {
               onClose();
-              openSignup(); 
+              openSignup();
             }}
           >
             Sign up
