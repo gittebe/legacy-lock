@@ -17,10 +17,10 @@ const LoginPage = ({ onClose, openSignup }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/users/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/users/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
@@ -28,17 +28,17 @@ const LoginPage = ({ onClose, openSignup }) => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem("accessToken", data.accessToken);
         login(data.user);
-        setEmailOrUsername('');
-        setPassword('');
-        console.log('Login successful:', data);
-        onClose(); // Close the popup
+        setEmailOrUsername(""); // Clear email or username input
+        setPassword(""); // Clear password input
+        console.log("Login successful:", data);
+        onClose(); // Close the login popup
       } else {
-        alert(data.message || 'Login failed');
+        alert(data.message || "Login failed");
       }
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error("Error logging in:", error);
     }
   };
 
