@@ -1,7 +1,8 @@
 /**
  * This component is the dashboard page for authenticated users.
  * 
- * It get the user's login status from Zustand store, and displays a welcome message if the user is logged in.
+ * It gets the user's login status from Zustand store, fetches capsule data, 
+ * and displays a list of capsules if the user is logged in.
  * 
  */
 import { Navigate } from "react-router-dom";
