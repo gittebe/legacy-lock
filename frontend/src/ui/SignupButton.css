@@ -1,0 +1,13 @@
+.signup-button {
+    width: 90%;
+    height: 60px;
+    background: #604f56;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+  
