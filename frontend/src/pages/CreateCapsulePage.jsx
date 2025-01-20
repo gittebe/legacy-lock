@@ -76,51 +76,50 @@ const CreateCapsule = () => {
       <h1>Create a Capsule</h1>
       <form onSubmit={handleSubmit}>
         {/* Title input field */}
-        <label htmlFor="title">Title</label>
-        <input 
-          id="title"
-          type="text"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          placeholder="Enter a descriptive title"
-          required
-        />
-  
+        <label>
+          Title
+          <input 
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            required
+          />
+        </label>
         {/* Recipient Username */}
-        <label htmlFor="recipientUsername">Recipient Username</label>
-        <input 
-          id="recipientUsername"
-          type="text"
-          value={recipientUsername}
-          onChange={(event) => setRecipientUsername(event.target.value)}
-          placeholder="Enter the recipient's username"
-          required
-        />
-  
+        <label>
+          Recipient Username
+          <input 
+            type="text"
+            value={recipientUsername}
+            onChange={(event) => setRecipientUsername(event.target.value)}
+            required
+          />
+        </label>
         {/* Message input field */}
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          value={message}
-          onChange={(event) => setMessage(event.target.value)} 
-          placeholder="Write your message"
-          required
-        />
-  
+        <label>
+          Message
+          <textarea
+            value={message}
+            onChange={(event) => setMessage(event.target.value)} 
+            placeholder="Write your message"
+            required
+          />
+        </label>
         {/* Media uploading field */}
-        <label htmlFor="file">Upload Media (optional)</label>
-        <input id="file" type="file" ref={fileInput} />
-  
+        <label>
+          Upload Media (optional)
+          <input type="file" ref={fileInput} />
+        </label>
         {/* Set date field */}
-        <label htmlFor="unlockDate">Unlock Date</label>
-        <input 
-          id="unlockDate"
-          type="date" 
-          value={unlockDate} 
-          onChange={(event) => setUnlockDate(event.target.value)} 
-          required
-        />
-  
+        <label>
+          Unlock Date
+          <input 
+            type="date" 
+            value={unlockDate} 
+            onChange={(event) => setUnlockDate(event.target.value)} 
+            required
+          />
+        </label>
         {/* Submit button */}
         <Button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Capsule"}
