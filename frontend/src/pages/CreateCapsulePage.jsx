@@ -43,7 +43,7 @@ const CreateCapsulePage = () => {
     formData.append("openAt", unlockDate); 
 
     try { // Try to fetch the API
-      const response = await fetch("http://localhost:5000/capsules/create", {
+      const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         body: formData,
       });
@@ -71,112 +71,58 @@ const CreateCapsulePage = () => {
     }
   };
 
-<<<<<<< HEAD
   return (
     <div> 
       <h1>Create a Capsule</h1>
       <form onSubmit={handleSubmit}>
         {/* Title input field */}
-        <label>
-          Title
-          <input 
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            required
-          />
-        </label>
+        <label htmlFor="title">Title</label>
+        <input 
+          id="title"
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="Enter a descriptive title"
+          required
+        />
+  
         {/* Recipient Username */}
-        <label>
-          Recipient Username
-          <input 
-            type="text"
-            value={recipientUsername}
-            onChange={(event) => setRecipientUsername(event.target.value)}
-            required
-          />
-        </label>
+        <label htmlFor="recipientUsername">Recipient Username</label>
+        <input 
+          id="recipientUsername"
+          type="text"
+          value={recipientUsername}
+          onChange={(event) => setRecipientUsername(event.target.value)}
+          placeholder="Enter the recipient's username"
+          required
+        />
+  
         {/* Message input field */}
-        <label>
-          Message
-          <textarea
-            value={message}
-            onChange={(event) => setMessage(event.target.value)} 
-            placeholder="Write your message"
-            required
-          />
-        </label>
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          value={message}
+          onChange={(event) => setMessage(event.target.value)} 
+          placeholder="Write your message"
+          required
+        />
+  
         {/* Media uploading field */}
-        <label>
-          Upload Media (optional)
-          <input type="file" ref={fileInput} />
-        </label>
+        <label htmlFor="file">Upload Media (optional)</label>
+        <input id="file" type="file" ref={fileInput} />
+  
         {/* Set date field */}
-        <label>
-          Unlock Date
-          <input 
-            type="date" 
-            value={unlockDate} 
-            onChange={(event) => setUnlockDate(event.target.value)} 
-            required
-          />
-        </label>
+        <label htmlFor="unlockDate">Unlock Date</label>
+        <input 
+          id="unlockDate"
+          type="date" 
+          value={unlockDate} 
+          onChange={(event) => setUnlockDate(event.target.value)} 
+          required
+        />
+  
         {/* Submit button */}
         <Button type="submit" disabled={loading}>
-=======
-return (
-  <div> 
-    <h1>Create a Capsule</h1>
-    <form onSubmit={handleSubmit}>
-    {/* Title input field */}
-    <label>
-      Title
-      <input 
-        type="text"
-        value={title}
-        required
-        />
-        </label>
-      {/* Recipient Username */}
-     <label>
-      Recipient Username
-      <input 
-        type="text"
-        value={recipientUsername}
-        required
-        />
-        </label>
-      {/* Message input field */}
-      <label>
-        Message
-        <textarea
-        value={message}
-        required
-        onChange={(event) => setText(event.target.value)} 
-        placeholder="Write your message"
-        />
-      </label>
-
-      {/* Media uploading field */}
-    <label>
-      Upload Media (optional)
-      <input type="file" ref={fileInput} />
-    </label>
-
-    {/* Set date field */}
-    <label>
-      Unlock Date
-      <input 
-        type="date" 
-        value={unlockDate} 
-        onChange={(event) => setUnlockDate(event.target.value)} 
-        required
-      />
-    </label>
-    
-    {/* Submit button */}
-    <Button type="submit" disabled={loading}>
->>>>>>> feature-create-capsule
           {loading ? "Creating..." : "Create Capsule"}
         </Button>
       </form>
