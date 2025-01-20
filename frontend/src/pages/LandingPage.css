@@ -1,0 +1,158 @@
+.landing-page {
+	font-family: Arial, sans-serif;
+	color: #000000;
+	background: #ffffff;
+	position: relative;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.side-menu {
+	position: fixed;
+	top: 0;
+	right: -30%;
+	width: 20%;
+	height: 100vh;
+	background: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: right 0.4s ease-in-out;
+	z-index: 30;
+}
+
+.side-menu.open {
+	right: 0;
+}
+
+.side-menu-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 20px;
+	width: 100%;
+}
+
+.side-menu-content button {
+	color: #ffffff;
+	font-size: 18px;
+	margin: 10px 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	width: 100%;
+}
+
+.animated-text-container {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	display: flex;
+}
+
+.animated-text {
+	display: inline-flex;
+	animation: scroll-loop 80s linear infinite;
+}
+
+.animated-text span {
+	font-size: 120px;
+	font-weight: 900;
+	margin-right: 20px;
+}
+
+.animated-text .light {
+	color: #e8e8e8;
+}
+
+.animated-text .dark {
+	color: #656565;
+}
+
+@keyframes scroll-loop {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+.image-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.3) rotate(45deg);
+	animation: scale-up 1.5s ease-in-out forwards;
+	z-index: 1;
+}
+
+.image-container img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	z-index: -1;
+}
+
+@keyframes scale-up {
+	0% {
+		transform: translate(-50%, -50%) scale(0.05) rotate(25deg);
+	}
+
+	100% {
+		transform: translate(-50%, -50%) scale(0.3) rotate(25deg);
+	}
+}
+
+.subtext {
+	position: absolute;
+	bottom: 40px;
+	left: 60px;
+	font-size: 22px;
+	color: #919191;
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	max-width: 250px;
+	text-align: left;
+}
+
+.landing-buttons {
+	display: none;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+	position: absolute;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 100%;
+}
+
+@media (max-width: 1024px) {
+	.landing-buttons {
+		display: flex;
+	}
+
+	.landing-buttons .login-button,
+	.landing-buttons .signup-button {
+		width: 80%;
+		max-width: 300px;
+		font-size: 16px;
+		height: 50px;
+		text-align: center;
+	}
+}
+
+@media (max-width: 1024px) {
+	.subtext {
+		display: none;
+	}
+}
