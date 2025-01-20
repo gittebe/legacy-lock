@@ -1,11 +1,11 @@
-import cloudinary from '../config/cloudinaryConfig.js';
+import cloudinary from "../config/cloudinaryConfig.js";
 import { Media } from "../models/mediaSchema.js";
-import fs from 'fs';
+import fs from "fs";
 
 //upload new media (video or image)
 export const newMedia = async (req, res) => {
   try {
-    const result = await cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' });
+    const result = await cloudinary.uploader.upload(req.file.path, { resource_type: "auto" });
     console.log("Cloudinary upload result:", result);
     // Clean up file
     fs.unlinkSync(req.file.path);
@@ -20,7 +20,7 @@ export const newMedia = async (req, res) => {
     return savedMedia;
 
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ message: 'An error occurred', error: error.message });
+    console.error("Error:", error);
+    res.status(500).json({ message: "An error occurred", error: error.message });
   }
 };

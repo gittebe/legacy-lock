@@ -1,4 +1,5 @@
-import multer from 'multer';
+import multer from "multer";
+
 // uploaded files will be stored on the local disk and saved with the file name
 const storage = multer.diskStorage({
   filename: (req, file, cb) => {
@@ -20,7 +21,7 @@ const upload = multer({
     if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only JPEG, PNG, GIF, MP4, WebM, and AVI are allowed.'));
+      cb(new Error("Invalid file type. Only JPEG, PNG, GIF, MP4, WebM, and AVI are allowed."));
     }
   },
 });

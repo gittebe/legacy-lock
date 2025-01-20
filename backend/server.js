@@ -38,9 +38,8 @@ app.use("/users", userRoutes);
 app.use("/capsule", capsuleRoutes);
 app.use("/media",mediaRoutes);
 
-
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log("Server running on http://localhost:${port}");
   console.log("Server started")
 });

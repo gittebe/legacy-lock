@@ -10,8 +10,8 @@ const mongoURI = process.env.MONGODB_URI
 mongoose.connect(mongoURI)
 
 .then(() => {
-    console.log('MongoDB succesfully connected!');
+    console.log("MongoDB succesfully connected!");
   })
   .catch((error) => {
-    console.error('Error to connect with MongoDB:', error);
+    console.error("Error to connect with MongoDB:", error);
   });
