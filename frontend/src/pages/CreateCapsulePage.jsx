@@ -8,10 +8,6 @@
  * - Displays a loading indicator during submission.
  * - Clears input fields if response is ok.
  * 
- * useStates:
- * - `text`: Capsule message.
- * - `unlockDate`: Future unlock date.
- * - `loading`: Submission status.
  * 
  * Documatation for Cloudinary: 
  * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
@@ -19,9 +15,9 @@
  **/
 
 import { useState, useRef } from "react";
-import Button from "../components/button";
+import Button from "../components/Button/Button";
 
-const CreateCapsulePage = () => {
+const CreateCapsule = () => {
   // Create a reference to the Cloudinary file input:
   const fileInput = useRef(); 
   // Create a state variable to store the title, message, recipientUsername, createdAt and unlockDate:
@@ -47,7 +43,7 @@ const CreateCapsulePage = () => {
     formData.append("openAt", unlockDate); 
 
     try { // Try to fetch the API
-      const response = await fetch("http://localhost:5000/capsules/create", {
+      const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         body: formData,
       });
@@ -75,58 +71,58 @@ const CreateCapsulePage = () => {
     }
   };
 
-return (
-  <div> 
-    <h1>Create a Capsule</h1>
-    <form onSubmit={handleSubmit}>
-    {/* Title input field */}
-    <label>
-      Title
-      <input 
-        type="text"
-        value={title}
-        required
+  return (
+    <div> 
+      <h1>Create a Capsule</h1>
+      <form onSubmit={handleSubmit}>
+        {/* Title input field */}
+        <label htmlFor="title">Title</label>
+        <input 
+          id="title"
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="Enter a descriptive title"
+          required
         />
-        </label>
-      {/* Recipient Username */}
-     <label>
-      Recipient Username
-      <input 
-        type="text"
-        value={recipientUsername}
-        required
+  
+        {/* Recipient Username */}
+        <label htmlFor="recipientUsername">Recipient Username</label>
+        <input 
+          id="recipientUsername"
+          type="text"
+          value={recipientUsername}
+          onChange={(event) => setRecipientUsername(event.target.value)}
+          placeholder="Enter the recipient's username"
+          required
         />
-        </label>
-      {/* Message input field */}
-      <label>
-        Message
+  
+        {/* Message input field */}
+        <label htmlFor="message">Message</label>
         <textarea
-        value={message}
-        required
-        onChange={(event) => setText(event.target.value)} 
-        placeholder="Write your message"
+          id="message"
+          value={message}
+          onChange={(event) => setMessage(event.target.value)} 
+          placeholder="Write your message"
+          required
         />
-      </label>
-
-      {/* Media uploading field */}
-    <label>
-      Upload Media (optional)
-      <input type="file" ref={fileInput} />
-    </label>
-
-    {/* Set date field */}
-    <label>
-      Unlock Date
-      <input 
-        type="date" 
-        value={unlockDate} 
-        onChange={(event) => setUnlockDate(event.target.value)} 
-        required
-      />
-    </label>
-    
-    {/* Submit button */}
-    <Button type="submit" disabled={loading}>
+  
+        {/* Media uploading field */}
+        <label htmlFor="file">Upload Media (optional)</label>
+        <input id="file" type="file" ref={fileInput} />
+  
+        {/* Set date field */}
+        <label htmlFor="unlockDate">Unlock Date</label>
+        <input 
+          id="unlockDate"
+          type="date" 
+          value={unlockDate} 
+          onChange={(event) => setUnlockDate(event.target.value)} 
+          required
+        />
+  
+        {/* Submit button */}
+        <Button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Capsule"}
         </Button>
       </form>
@@ -134,4 +130,4 @@ return (
   );
 };
 
-export default CreateCapsulePage;
+export default CreateCapsule;
