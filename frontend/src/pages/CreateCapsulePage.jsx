@@ -17,7 +17,7 @@
 import { useState, useRef } from "react";
 import Button from "../components/Button/Button";
 
-const CreateCapsulePage = () => {
+const CreateCapsule = () => {
   // Create a reference to the Cloudinary file input:
   const fileInput = useRef(); 
   // Create a state variable to store the title, message, recipientUsername, createdAt and unlockDate:
@@ -130,4 +130,4 @@ const CreateCapsulePage = () => {
   );
 };
 
-export default CreateCapsulePage;
+export default CreateCapsule;
