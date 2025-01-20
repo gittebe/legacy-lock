@@ -55,12 +55,12 @@ export const loginUser = async (req, res) => {
     }
 
     //compare the password
-    console.log('User from DB:', user);
-    console.log('Input password:', password);
-    console.log('Hashed password:', user.password);
+    console.log("User from DB:", user);
+    console.log("Input password:", password);
+    console.log("Hashed password:", user.password);
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    console.log('Password is valid:', isPasswordValid);
+    console.log("Password is valid:", isPasswordValid);
     if(!isPasswordValid) {
       return res.status(400).json({message: "Invalid password"});
     }

@@ -71,6 +71,7 @@ const CreateCapsulePage = () => {
     }
   };
 
+<<<<<<< HEAD
   return (
     <div> 
       <h1>Create a Capsule</h1>
@@ -122,6 +123,60 @@ const CreateCapsulePage = () => {
         </label>
         {/* Submit button */}
         <Button type="submit" disabled={loading}>
+=======
+return (
+  <div> 
+    <h1>Create a Capsule</h1>
+    <form onSubmit={handleSubmit}>
+    {/* Title input field */}
+    <label>
+      Title
+      <input 
+        type="text"
+        value={title}
+        required
+        />
+        </label>
+      {/* Recipient Username */}
+     <label>
+      Recipient Username
+      <input 
+        type="text"
+        value={recipientUsername}
+        required
+        />
+        </label>
+      {/* Message input field */}
+      <label>
+        Message
+        <textarea
+        value={message}
+        required
+        onChange={(event) => setText(event.target.value)} 
+        placeholder="Write your message"
+        />
+      </label>
+
+      {/* Media uploading field */}
+    <label>
+      Upload Media (optional)
+      <input type="file" ref={fileInput} />
+    </label>
+
+    {/* Set date field */}
+    <label>
+      Unlock Date
+      <input 
+        type="date" 
+        value={unlockDate} 
+        onChange={(event) => setUnlockDate(event.target.value)} 
+        required
+      />
+    </label>
+    
+    {/* Submit button */}
+    <Button type="submit" disabled={loading}>
+>>>>>>> feature-create-capsule
           {loading ? "Creating..." : "Create Capsule"}
         </Button>
       </form>
