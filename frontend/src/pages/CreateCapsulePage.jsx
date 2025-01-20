@@ -15,7 +15,7 @@
  **/
 
 import { useState, useRef } from "react";
-import Button from "../components/Button/Button";
+import Button from "../components/Button/Button"; 
 
 const CreateCapsule = () => {
   // Create a reference to the Cloudinary file input:
