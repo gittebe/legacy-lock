@@ -1,19 +1,9 @@
-/**
- * This component is a form that allows users to sign up for an account.
- * 
- * Features:
- * - Manages email and password input using useState.
- * - Includes a reusable Button component for submission.
- * - Prevents default form behavior (to have control of what happens on submit) and prepares for API integration.
- * 
- */
+import React, { useState } from 'react';
+import './SignUpPage.css';
+import useStore from '../store/store';
+import SignUpButton from '../ui/SignupButton';
 
-import { useState } from 'react';
-import Button from '../components/button';
-import { Link } from 'react-router-dom';
-import useStore from "../store/store";
-
-const SignUpPage = () => {
+const SignUpPage = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,12 +11,13 @@ const SignUpPage = () => {
   // Zustand store hook:
   const login = useStore((state) => state.login);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
 
     /* Check the password and confirm password match */
     if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
+      alert('Passwords do not match. Please try again.');
       return;
     }
     //Prepare data for signup
@@ -37,74 +28,85 @@ const SignUpPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/users/register", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/users/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body:JSON.stringify(signupData),
+        body: JSON.stringify(signupData),
       });
 
       const data = await response.json();
-      if (response.ok){
-        localStorage.setItem("accessToken", data.accessToken);
+
+      if (response.ok) {
+        localStorage.setItem('accessToken', data.accessToken);
         login(data.user);
-        setEmail("");
-        setUsername("");
-        setPassword("");
-        setConfirmPassword("");
-        console.log("Signup successful", data);
+        setEmail('');
+        setUsername('');
+        setPassword('');
+        setConfirmPassword('');
+        console.log('Signup successful:', data);
+        onClose(); // Close the signup popup
       } else {
-        addListener(data.message || "Signup failed" );
+        alert(data.message || 'Signup failed');
       }
     } catch (error) {
-      console.error("Error during signup", error)
+      console.error('Error during signup:', error);
     }
-  }
+  };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
-        <p>Welcome to the sign up page!</p>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder='Enter your email'
-          required
-        />
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          placeholder='Enter your username'
-          required
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder='Enter your password'
-          required
-        />
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(event) => setConfirmPassword(event.target.value)}
-          placeholder='Confirm your password'
-          required
-        />
-        <Button type="submit">Sign Up</Button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
-    </main>
+    <div
+      className="popup-overlay"
+      role="dialog"
+      aria-labelledby="signup-popup-title"
+      aria-describedby="signup-popup-desc"
+      onClick={onClose}
+    >
+      <div className="popup signup" onClick={(e) => e.stopPropagation()}>
+        <h3 id="signup-popup-title">Sign up</h3>
+        <form onSubmit={handleSignup}>
+          <label htmlFor="email-signup">Email address</label>
+          <input
+            type="email"
+            id="email-signup"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name@domain.com"
+            required
+          />
+          <label htmlFor="username-signup">Username</label>
+          <input
+            type="text"
+            id="username-signup"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <label htmlFor="password-signup">Password</label>
+          <input
+            type="password"
+            id="password-signup"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <label htmlFor="confirm-password-signup">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password-signup"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            required
+          />
+          <SignUpButton />
+        </form>
+        <p>Your password must contain 10 characters</p>
+      </div>
+    </div>
   );
 };
 
