@@ -28,9 +28,18 @@ const CreateCapsule = () => {
   // Create a state variable to store the loading state:
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => { // Create a function to handle the  upload
-    event.preventDefault(); // Prevent the default form behavior
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default behavior
     setLoading(true); // Set the loading state to true
+
+    const token = localStorage.getItem("accessToken"); // Get the token from local storage
+    console.log("Token being sent:", token);
+    
+    if (!token) { // If there is no token
+     console.error("No token found");
+     setLoading(false);
+     return;
+    }
 
     const formData = new FormData(); // Create a new FormData object
     if (fileInput.current.files[0]) { // If a file is uploaded
@@ -43,14 +52,6 @@ const CreateCapsule = () => {
     formData.append("openAt", unlockDate); 
 
     try { // Try to fetch the API
-      const token = localStorage.getItem("accessToken"); // Get the token from local storage
-
-      if (!token) { // If there is no token
-        console.error("No token found");
-        setLoading(false);
-        return;
-      }
-      
       const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         headers: {
