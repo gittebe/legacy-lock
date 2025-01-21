@@ -13,8 +13,8 @@ export const LandingPage = () => {
 
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth <= 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const closePopup = () => {

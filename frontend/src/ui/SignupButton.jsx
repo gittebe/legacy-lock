@@ -1,4 +1,4 @@
-import './SignupButton.css';
+import "./SignupButton.css";
 
 export const SignUpButton = ({ onClick }) => {
   return (

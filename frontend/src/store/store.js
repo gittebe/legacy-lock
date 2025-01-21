@@ -12,7 +12,8 @@
  * - logout(): Resets the store to its initial state (logs out the user).
  */
 
-import { create } from 'zustand';
+// export default useStore
+import { create } from "zustand";
 
 const useStore = create((set) => ({
   // *** Initial state ***
@@ -20,14 +21,21 @@ const useStore = create((set) => ({
   user: null,
 
   // *** Actions ***
-  login: (user) => set ({
+  login: (user) => set({
     isLoggedIn: true,
-    user: user
+    user: user,
   }),
+
   logout: () => set({
     isLoggedIn: false,
     user: null,
   }),
+
+  // set login
+  setIsLoggedIn: (isLoggedIn, user = null) => set({
+    isLoggedIn: isLoggedIn,
+    user: user,
+  }),
 }));
 
-export default useStore
+export default useStore;

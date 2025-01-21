@@ -1,4 +1,4 @@
-import './LoginButton.css';
+import "./LoginButton.css";
 
 export const LoginButton = ({ onClick }) => {
   return (

@@ -4,6 +4,14 @@ import { authenticateUser } from "../middleware/authenticateUser.js";
 import mongoose from "mongoose";
 import { User } from "../models/userSchema.js";
 
+export const getCreateCapsulePage = (req, res) => {
+  res.json({
+    message: "Welcome to your page to create capsules",
+    user: req.user
+  });
+};
+
+
 // create a new capsule
 export const createCapsule = async (req, res) => {
   const {title, message, createdAt, openAt, recipientUsername} = req.body;

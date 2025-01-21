@@ -1,94 +1,66 @@
-// import { Routes, Route } from 'react-router-dom';
-// import { LandingPage } from '../pages/LandingPage';
-// import { DashboardPage } from '../pages/DashboardPage';
-// import {CreateCapsulePage} from "../pages/CreateCapsulePage"
-// import { CapsuleDetailsPage } from '../pages/CapsuleDetailsPage';
-// import { NotFoundPage } from '../pages/NotFoundPage';
-
-// // checks if user has access Token
-// const isAuthenticated = () => {
-//   const token = localStorage.getItem('token');
-//   console.log("Token found:", token)
-//   return !!token; // Wenn Token vorhanden ist, ist der Benutzer authentifiziert
-// };
-
-// export const RoutesConfig = ({ isLoggedIn }) => {
-//   const { isLoggedIn } = useStore(); // hole den isLoggedIn Zustand aus dem Store
-
-//   console.log('Is user authenticated (from store):', isLoggedIn); 
-//   // const authenticated = isLoggedIn || isAuthenticated(); // Falls der State isLoggedIn von useStore wahr ist, ist der Benutzer authentifiziert
-
-//   return (
-//     <Routes>
-//       {/* Öffentliche Routen, wenn der Benutzer nicht eingeloggt ist */}
-//       {!authenticated ? (
-//         <>
-//           <Route path="/" element={<LandingPage />} />
-//         </>
-//       ) : (
-//         // Authentifizierte Routen, wenn der Benutzer eingeloggt ist
-//         <>
-//           <Route path="/dashboard" element={<DashboardPage />} />
-//           <Route path="/profile" element={<ProfileSettingsPage />} />
-//           <Route path="/capsules/create" element={<CreateCapsulePage />} />
-//           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-//         </>
-//       )}
-
-//       {/* Fallback für nicht existierende Routen */}
-//       <Route path="*" element={<NotFoundPage />} />
-//     </Routes>
-//   );
-// };
-
-import { Routes, Route } from 'react-router-dom';
-import { LandingPage } from '../pages/LandingPage';
-import { DashboardPage } from '../pages/DashboardPage';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { LandingPage } from "../pages/LandingPage";
+import { DashboardPage } from "../pages/DashboardPage";
 import { CreateCapsulePage } from "../pages/CreateCapsulePage";
-import { CapsuleDetailsPage } from '../pages/CapsuleDetailsPage';
-import { NotFoundPage } from '../pages/NotFoundPage';
-import { ProfileSettingsPage } from '../pages/ProfileSettingsPage'; // Falls vorhanden
-import useStore from '../store/store';
-
-const token = localStorage.getItem('accessToken');
-const response = await fetch('http://localhost:5000/dashboard', {
-  headers: {
-    'Authorization': `Bearer ${token}`
-  }
-});
+import { CapsuleDetailsPage } from "../pages/CapsuleDetailsPage";
+import { NotFoundPage } from "../pages/NotFoundPage";
+import { ProfileSettingsPage } from "../pages/ProfileSettingsPage";
+import useStore from "../store/store";
+import { useEffect, useState } from "react";
 
 export const RoutesConfig = () => {
-  const { isLoggedIn } = useStore(); // hole den isLoggedIn Zustand aus dem Store
+  const { isLoggedIn, setIsLoggedIn } = useStore();
+  const [loading, setLoading] = useState(true); // Track loading state for authentication check
+  const token = localStorage.getItem("accessToken"); // get Token from the local Storage
 
-  console.log('Is user authenticated (from store):', isLoggedIn); // Debugging, um zu sehen, ob der Zustand korrekt ist
+  useEffect(() => {
+    const verifyToken = async () => {
+      if (token) {
+        try {
+          const response = await fetch("http://localhost:5000/dashboard", {
+            headers: { "Authorization": `Bearer ${token}` },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setIsLoggedIn(true, data.user);
+          } else {
+            setIsLoggedIn(false);
+          }
+        } catch (error) {
+          console.error('Error verifying token:', error);
+          setIsLoggedIn(false);
+        }
+      } else {
+        setIsLoggedIn(false);
+      }
+      setLoading(false);
+    };
+
+    verifyToken();
+  }, [token, setIsLoggedIn]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Routes>
-      {/* Öffentliche Routen, wenn der Benutzer nicht eingeloggt ist */}
+      {/* publiuc routes */}
       {!isLoggedIn ? (
-        <>
-          <Route path="/" element={<LandingPage />} />
-          {console.log('Public route (LandingPage)')} {/* Debugging public route */}
-        </>
+        <Route path="/" element={<LandingPage />} />
       ) : (
-        // Authentifizierte Routen, wenn der Benutzer eingeloggt ist
         <>
-          <Route 
-          path="/dashboard" 
-          element={isLoggedIn ? <DashboardPage /> : <Navigate to="/" /> } />
-          {console.log('Authenticated route (DashboardPage)')} {/* Debugging authenticated route */}
+          {/* authenticated routes */}
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfileSettingsPage />} />
-          {console.log('Authenticated route (ProfileSettingsPage)')} {/* Debugging authenticated route */}
-          <Route path="/capsules/create" element={<CreateCapsulePage />} />
-          {console.log('Authenticated route (CreateCapsulePage)')} {/* Debugging authenticated route */}
+          <Route path="/capsules" element={<CreateCapsulePage />} />
           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-          {console.log('Authenticated route (CapsuleDetailsPage)')} {/* Debugging authenticated route */}
         </>
       )}
 
-      {/* Fallback für nicht existierende Routen */}
+      {/* Fallback-Route */}
       <Route path="*" element={<NotFoundPage />} />
-      {console.log('Fallback route (NotFoundPage)')} {/* Debugging fallback route */}
     </Routes>
   );
 };

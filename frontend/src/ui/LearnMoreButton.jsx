@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './LearnMore.css';
+import React, { useState } from "react";
+import "./LearnMore.css";
 
 export const LearnMoreButton = () => {
   const [showLearnMore, setShowLearnMore] = useState(false);

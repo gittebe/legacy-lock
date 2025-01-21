@@ -1,7 +1,6 @@
 import { SignUpForm } from "./SignUpForm";
 import { LoginForm } from "./LoginForm";
 
-
 export const PopupModals = ({ showLoginPopup, showSignupPopup, onLoginClose, onSignupClose, openSignup }) => {
   return (
     <>

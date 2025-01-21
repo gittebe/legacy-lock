@@ -1,6 +1,6 @@
-import { LoginButton } from '../ui/LoginButton';
-import { SignUpButton } from '../ui/SignupButton';
-import { LearnMoreButton } from '../ui/LearnMoreButton';
+import { LoginButton } from "../ui/LoginButton";
+import { SignUpButton } from "../ui/SignupButton";
+import { LearnMoreButton } from "../ui/LearnMoreButton";
 
 export const HeroSection = ({ isSmallScreen, onLoginClick, onSignUpClick }) => {
   return (
