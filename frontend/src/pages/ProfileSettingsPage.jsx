@@ -1,4 +1,4 @@
-const ProfileSettingsPage = () => {
+export const ProfileSettingsPage = () => {
   return (
     <div>
       <h1>Profile Setting Page</h1>
@@ -6,5 +6,3 @@ const ProfileSettingsPage = () => {
     </div>
   );
 };
-
-export default ProfileSettingsPage;

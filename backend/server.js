@@ -8,6 +8,7 @@ import documentationRoutes from "./routes/documentation.js";
 import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
 import mediaRoutes from "./routes/media.js";
+import dashboardRoutes from "./routes/dashboard.js";
 
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/", documentationRoutes);
 app.use("/users", userRoutes);
 app.use("/capsule", capsuleRoutes);
 app.use("/media",mediaRoutes);
+app.use("/dashboard", dashboardRoutes)
 
 // Start the server
 app.listen(port, () => {

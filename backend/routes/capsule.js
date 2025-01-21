@@ -1,9 +1,12 @@
 import express from "express";
-import {createCapsule, getCapsule, getUserCapsules, getReceivedCapsules} from "../controllers/capsuleController.js";
+import {createCapsule, getCapsule, getUserCapsules, getReceivedCapsules, getCreateCapsulePage} from "../controllers/capsuleController.js";
 import { authenticateUser } from "../middleware/authenticateUser.js";
 import upload from "../middleware/multer.js";
 
 const router = express.Router();
+
+// Protected CreateCapsulePage Route (only for authenticated user)
+router.get("/", authenticateUser, getCreateCapsulePage);
 
 // POST to create a new capsule
 router.post("/create", authenticateUser, upload.single("file"), createCapsule);

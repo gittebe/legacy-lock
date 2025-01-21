@@ -1,7 +1,6 @@
-import React from 'react';
-import './Header.css';
+import "./Header.css";
 
-const Header = ({ toggleMenu }) => {
+export const Header = ({ toggleMenu }) => {
   return (
     <header className="header">
       <div className="logo">
@@ -20,5 +19,3 @@ const Header = ({ toggleMenu }) => {
     </header>
   );
 };
-
-export default Header;

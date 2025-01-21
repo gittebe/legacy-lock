@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
-import './LoginPage.css';
-import LoginButton from '../ui/LoginButton';
-import useStore from '../store/store';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginForm.css";
+import useStore from "../store/store";
+import { LoginButton } from "../ui/LoginButton";
 
-const LoginPage = ({ onClose, openSignup }) => {
+export const LoginForm = ({ onClose, openSignup }) => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const login = useStore((state) => state.login);
+  const navigate = useNavigate();
 
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const handleLogin = async(e) => {
+    e.preventDefault();
 
     const loginData = {
       emailOrUsername,
       password,
     };
 
+    // API request
     try {
       const response = await fetch("http://localhost:5000/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(loginData),
       });
 
@@ -37,6 +39,8 @@ const LoginPage = ({ onClose, openSignup }) => {
         console.log("Login successful:", data);
         onClose(); // Close the login popup
 
+        navigate("/dashboard")
+
       } else {
         alert(data.message || "Login failed");
       }
@@ -45,7 +49,7 @@ const LoginPage = ({ onClose, openSignup }) => {
       console.error("Error logging in:", error);
 
     }
-  }
+  };
 
   return (
     <div
@@ -95,5 +99,3 @@ const LoginPage = ({ onClose, openSignup }) => {
     </div>
   );
 };
-
-export default LoginPage;
