@@ -45,6 +45,9 @@ const CreateCapsule = () => {
     try { // Try to fetch the API
       const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
         body: formData,
       });
     
