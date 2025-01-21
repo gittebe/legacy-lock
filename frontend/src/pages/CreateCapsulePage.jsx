@@ -44,6 +44,10 @@ const CreateCapsule = () => {
     const formData = new FormData(); // Create a new FormData object
     if (fileInput.current.files[0]) { // If a file is uploaded
       formData.append("file", fileInput.current.files[0]); // Append the file to the FormData object
+      console.log("FormData being sent:"); 
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+}
     }
     formData.append("title", title); 
     formData.append("message", message ); 

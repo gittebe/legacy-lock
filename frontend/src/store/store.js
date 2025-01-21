@@ -24,7 +24,7 @@ import { create } from "zustand";
 
 const useStore = create((set) => ({
   // *** Initial state ***
-  isLoggedIn: true,
+  isLoggedIn: false,
   user: null,
 
   // *** Actions ***
@@ -37,21 +37,46 @@ const useStore = create((set) => ({
     user: null,
   }),
 
-  // *** Capsules ***
+  // *** Fetch Capsules ***
   fetchCapsules: async () => {
     console.log("Fetching capsules...");
     set({ loading: true });
     try {
-      const response = await fetch("http://localhost:5000/capsules");
+      const token = localStorage.getItem("accessToken");
+      const [userCapsules, receivedCapsules] = await Promise.all([
+        fetch("http://localhost:5000/getUserCapsules", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        fetch("http://localhost:5000/getReceivedCapsules", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }), 
+      ]);
+  
       // Check if the response is ok
       if (!response.ok) {
         throw new Error("Failed to fetch capsules");
       }
-      const data = await response.json();
-      console.log("Capsules fetched:", data);
-      set({ capsules: data });
+
+      const userCapsules = await response.json();
+      const receivedCapsules = await response.json();
+
+      console.log("Capsules fetched:", { userCapsules, receivedCapsules });
+
+      // Update Zustand state with the fetched capsules
+
+      set({ 
+        capsules: {
+          created: userCapsules.data,
+          received: receivedCapsules.data,
+        },
+      });
     } catch (error) {
       console.error("Error fetching capsules:", error);
+      
     } finally {
       set({ loading: false });
     }
