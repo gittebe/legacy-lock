@@ -41,9 +41,12 @@ const useStore = create((set) => ({
   fetchCapsules: async () => {
     console.log("Fetching capsules...");
     set({ loading: true });
+
     try {
       const token = localStorage.getItem("accessToken");
-      const [userCapsules, receivedCapsules] = await Promise.all([
+
+      // Fetch user capsules and received capsules
+      const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
         fetch("http://localhost:5000/getUserCapsules", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,13 +59,18 @@ const useStore = create((set) => ({
         }), 
       ]);
   
-      // Check if the response is ok
-      if (!response.ok) {
-        throw new Error("Failed to fetch capsules");
+      // Check if the responses are ok
+      if (!userCapsulesResponse.ok) {
+        throw new Error("Failed to fetch user capsules");
+      }
+      if (!receivedCapsulesResponse.ok) {
+        throw new Error("Failed to fetch received capsules");
       }
 
-      const userCapsules = await response.json();
-      const receivedCapsules = await response.json();
+      // Parse the response
+
+      const userCapsules = await userCapsulesResponse.json();
+      const receivedCapsules = await receivedCapsulesResponse.json();
 
       console.log("Capsules fetched:", { userCapsules, receivedCapsules });
 
@@ -76,7 +84,7 @@ const useStore = create((set) => ({
       });
     } catch (error) {
       console.error("Error fetching capsules:", error);
-      
+
     } finally {
       set({ loading: false });
     }
