@@ -40,6 +40,7 @@ const useStore = create((set, get) => ({
 
   // Fetch Capsules
   fetchCapsules: async () => {
+    set({ loading: true });
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
@@ -48,10 +49,10 @@ const useStore = create((set, get) => ({
       }
   
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
-        fetch("http://localhost:5000/getUserCapsules", {
+        fetch("http://localhost:5000/capsule/getUserCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/getReceivedCapsules", {
+        fetch("http://localhost:5000/capsule/getReceivedCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
