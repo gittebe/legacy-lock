@@ -1,4 +1,4 @@
-const CapsuleDetailsPage = () => {
+export const CapsuleDetailsPage = () => {
   return (
     <div>
       <h1>Capsule Details Page</h1>
@@ -6,5 +6,3 @@ const CapsuleDetailsPage = () => {
     </div>
   );
 };
-
-export default CapsuleDetailsPage;

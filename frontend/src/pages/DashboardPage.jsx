@@ -7,7 +7,7 @@
 import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
 
-const DashboardPage = () => {
+export const DashboardPage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store
 
   if (!user) {
@@ -21,5 +21,3 @@ const DashboardPage = () => {
     </div>
   );
 };
-
-export default DashboardPage;

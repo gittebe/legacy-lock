@@ -1,19 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import useStore from './store/store';
-import PublicRoutes from './routes/PublicRoutes';
-import AuthenticatedRoutes from './routes/AuthenticatedRoutes';
+import { BrowserRouter as Router } from 'react-router-dom';
+import useStore from './store/store'; // Assuming you are using state management solution
+import { RoutesConfig } from './routes/RoutesConfig';
 
 const App = () => {
-  const isLoggedIn = useStore((state) => state.isLoggedIn); // Check if user is logged in
-  
+  const isLoggedIn = useStore((state) => state.isLoggedIn) ?? false; // Check if the user is logged in
+
   return (
     <Router>
-      <Routes>
-        < Route
-          path="/*"
-          element={isLoggedIn ? <AuthenticatedRoutes /> : <PublicRoutes />}
-        />
-      </Routes>
+      {/* Pass the isLoggedIn state to RoutesConfig component */}
+      <RoutesConfig isLoggedIn={isLoggedIn} />
     </Router>
   );
 };

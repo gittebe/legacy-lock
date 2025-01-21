@@ -9,7 +9,7 @@ export const LoginForm = ({ onClose, openSignup }) => {
   const login = useStore((state) => state.login);
 
 
-  const handleLogin = async(event) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
 
     const loginData = {

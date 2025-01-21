@@ -2,8 +2,6 @@ import { LoginButton } from '../ui/LoginButton';
 import { SignUpButton } from '../ui/SignupButton';
 import { LearnMoreButton } from '../ui/LearnMoreButton';
 
-// import './HeroSection.css';
-
 export const HeroSection = ({ isSmallScreen, onLoginClick, onSignUpClick }) => {
   return (
     <main>

@@ -1,4 +1,4 @@
-const CreateCapsulePage = () => {
+export const CreateCapsulePage = () => {
   return (
     <div>
       <h1>Create a new Capsule</h1>
@@ -6,5 +6,3 @@ const CreateCapsulePage = () => {
     </div>
   );
 };
-
-export default CreateCapsulePage;
