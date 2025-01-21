@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LearnMore.css';
 
-const LearnMoreButton = () => {
+export const LearnMoreButton = () => {
   const [showLearnMore, setShowLearnMore] = useState(false);
 
   const toggleLearnMore = () => {
@@ -33,5 +33,3 @@ const LearnMoreButton = () => {
     </>
   );
 };
-
-export default LearnMoreButton;

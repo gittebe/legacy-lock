@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import './SignUpPage.css';
+import { useState } from 'react';
+import { SignUpButton } from '../ui/SignupButton';
 import useStore from '../store/store';
-import SignUpButton from '../ui/SignupButton';
 
-const SignUpPage = ({ onClose }) => {
+export const SignUpForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   // Zustand store hook:
   const login = useStore((state) => state.login);
-
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -109,5 +107,3 @@ const SignUpPage = ({ onClose }) => {
     </div>
   );
 };
-
-export default SignUpPage;
