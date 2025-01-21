@@ -2,7 +2,6 @@ import express from "express";
 import {createCapsule, getCapsule, getUserCapsules, getReceivedCapsules, getCreateCapsulePage} from "../controllers/capsuleController.js";
 import { authenticateUser } from "../middleware/authenticateUser.js";
 import upload from "../middleware/multer.js";
-import { getCreateCapsulePage } from "../controllers/capsuleController.js";
 
 const router = express.Router();
 
