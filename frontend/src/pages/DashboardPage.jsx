@@ -35,11 +35,13 @@ const DashboardPage = () => {
   const loading = useStore((state) => state.loading); // Get the loading status from Zustand store
   const capsules = useStore((state) => state.capsules); // Get the capsules from Zustand store
 
+  const token = localStorage.getItem("accessToken"); // Get the token from local storage
+
   useEffect(() => {
-    if (user) {
+    if (user && token) {
       fetchCapsules(); // Fetch the capsules if the user is logged in
     }
-  }, [user, fetchCapsules]); 
+  }, [user, fetchCapsules, token]); 
 
   if (!user) {
     return <Navigate to="/login" replace />; // Redirect to login if not authenticated
