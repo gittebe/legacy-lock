@@ -18,43 +18,41 @@
  *  - loading: Loading indicator to show whether the data is being fetched. 
  */
 
+
 import { create } from "zustand";
 
-const useStore = create((set, get) => ({
-  // Initial state
+const useCapsuleStore = create((set, get) => ({
   isLoggedIn: false,
   user: null,
   capsules: { created: [], received: [] },
   loading: false,
+  error: null, // valfritt
 
-  // Actions
   login: (user) => set({
     isLoggedIn: true,
-    user: user,
+    user,
   }),
+
   logout: () => set({
     isLoggedIn: false,
     user: null,
     capsules: { created: [], received: [] },
   }),
 
-  // Fetch Capsules
   fetchCapsules: async () => {
-    const { loading } = get(); // Get the loading status
-    if (loading) {
-      return; // Stop script if fetech is already in progress
-    }
+    // Kolla om redan laddar
+    if (get().loading) return;
 
-    set({ loading: true }); // Set loading to true
+    set({ loading: true, error: null });
 
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
-        console.error("No access token found");
-        set({ loading: false });
-        return; // // Stop script if no token is found
+        console.log("No access token found");
+        set({ error: "No access token found", loading: false });
+        return;
       }
-  
+
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
         fetch("http://localhost:5000/capsule/getUserCapsules", {
           headers: { Authorization: `Bearer ${token}` },
@@ -63,30 +61,30 @@ const useStore = create((set, get) => ({
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
-  
+
       if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
-        console.error("Failed to fetch capsules");
-        set({ loading: false });
-        return; // Stop script on error
+        console.log("Failed to fetch capsules");
+        set({ loading: false, error: "Fetch failed" });
+        return;
       }
-  
+
       const userCapsules = await userCapsulesResponse.json();
       const receivedCapsules = await receivedCapsulesResponse.json();
-  
+
+      // Uppdatera capsules och stäng av loading
       set({
         capsules: {
           created: userCapsules.data || [],
           received: receivedCapsules.data || [],
         },
+        loading: false,
       });
     } catch (error) {
-      console.error("Error fetching capsules:", error);
-      set({ loading: false });
-      return; // Stop script on error
-    } finally {
-      set({ loading: false });
+      console.log("Error fetching capsules:", error);
+      set({ loading: false, error: error.message });
     }
   },
 }));
 
-export default useStore;
+export default useCapsuleStore;
+

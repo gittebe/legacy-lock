@@ -1,14 +1,6 @@
 /**
  * CreateCapsulePage Component
  * 
- * This component allows users to create a capsule by uploading a media file, adding a message, and setting a future unlock date.
- * 
- * Features:
- * - Submits data via a POST request to the backend.
- * - Displays a loading indicator during submission.
- * - Clears input fields if response is ok.
- * 
- * 
  * Documatation for Cloudinary: 
  * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
  * 
