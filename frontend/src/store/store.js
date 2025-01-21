@@ -20,34 +20,36 @@
 
 import { create } from "zustand";
 
- // *** Login ***
-
-const useStore = create((set) => ({
-  // *** Initial state ***
+const useStore = create((set, get) => ({
+  // Initial state
   isLoggedIn: false,
   user: null,
   capsules: { created: [], received: [] },
   loading: false,
 
-  // *** Actions ***
-  login: (user) => set ({
+  // Actions
+  login: (user) => set({
     isLoggedIn: true,
-    user: user
+    user: user,
   }),
   logout: () => set({
     isLoggedIn: false,
     user: null,
+    capsules: { created: [], received: [] },
   }),
 
-  // *** Fetch Capsules ***
+  // Fetch Capsules
   fetchCapsules: async () => {
-    console.log("Fetching capsules...");
+    if (get().loading) return;
+
     set({ loading: true });
 
     try {
       const token = localStorage.getItem("accessToken");
+      if (!token) {
+        throw new Error("No access token found");
+      }
 
-      // Fetch user capsules and received capsules
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
         fetch("http://localhost:5000/getUserCapsules", {
           headers: {
@@ -58,36 +60,25 @@ const useStore = create((set) => ({
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }), 
+        }),
       ]);
-  
-      // Check if the responses are ok
-      if (!userCapsulesResponse.ok) {
-        throw new Error("Failed to fetch user capsules");
-      }
-      if (!receivedCapsulesResponse.ok) {
-        throw new Error("Failed to fetch received capsules");
-      }
 
-      // Parse the response
+      if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
+        throw new Error("Failed to fetch capsules");
+      }
 
       const userCapsules = await userCapsulesResponse.json();
       const receivedCapsules = await receivedCapsulesResponse.json();
 
-      console.log("Capsules fetched:", { userCapsules, receivedCapsules });
-
-      // Update Zustand state with the fetched capsules
-
-      set({ 
+      set({
         capsules: {
-          created: userCapsules.data,
-          received: receivedCapsules.data,
+          created: userCapsules.data || [],
+          received: receivedCapsules.data || [],
         },
+        loading: false,
       });
     } catch (error) {
-      console.error("Error fetching capsules:", error);
-
-    } finally {
+      console.error(error);
       set({ loading: false });
     }
   },

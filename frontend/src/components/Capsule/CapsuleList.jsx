@@ -19,16 +19,20 @@ import CapsuleCard from "./CapsuleCard";
 const CapsuleList = () => {
   const { fetchCapsules, capsules, loading } = useStore((state) => ({
     fetchCapsules: state.fetchCapsules,
-    capsules: state.capsules,
+    capsules: state.capsules || { created: [], received: [] },
     loading: state.loading,
   }));
 
   useEffect(() => {
-    // Fetch capsules when the component mounts
-    fetchCapsules();
+    console.warn("Fetching capsules triggered...");
+    //fetchCapsules();
   }, []);
 
   if (loading) return <p>Loading capsules...</p>;
+
+  if (!capsules.created.length && !capsules.received.length) {
+    return <p>No capsules available.</p>;
+  }
 
   return (
     <div>
