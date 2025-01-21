@@ -43,6 +43,14 @@ const CreateCapsule = () => {
     formData.append("openAt", unlockDate); 
 
     try { // Try to fetch the API
+      const token = localStorage.getItem("accessToken"); // Get the token from local storage
+
+      if (!token) { // If there is no token
+        console.error("No token found");
+        setLoading(false);
+        return;
+      }
+      
       const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         headers: {
