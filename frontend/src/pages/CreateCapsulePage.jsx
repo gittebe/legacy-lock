@@ -21,28 +21,27 @@ const CreateCapsule = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default behavior
-    setLoading(true); // Set the loading state to true
+    event.preventDefault(); 
+    setLoading(true); 
 
     const token = localStorage.getItem("accessToken"); // Get the token from local storage
     console.log("Token being sent:", token);
     
-    if (!token) { // If there is no token
+    if (!token) { // If no token is found
      console.error("No token found");
      setLoading(false);
      return;
     }
 
-    const formData = new FormData(); // Create a new FormData object
-    if (fileInput.current.files[0]) { // If a file is uploaded
-      formData.append("file", fileInput.current.files[0]); // Append the file to the FormData object
-      console.log("FormData being sent:"); 
-      for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-}
+    // Create a new FormData object and append the file, title, message, recipientUsername, createdAt and unlockDate:
+
+    const formData = new FormData(); 
+    if (fileInput.current?.files?.[0]) {
+      formData.append("file", fileInput.current.files[0]);
+      console.log("File being sent:", fileInput.current.files[0].name);
     }
     formData.append("title", title); 
-    formData.append("message", message ); 
+    formData.append("message", message); 
     formData.append("recipientUsername", recipientUsername);
     formData.append("createdAt", new Date().toISOString());
     formData.append("openAt", unlockDate); 
