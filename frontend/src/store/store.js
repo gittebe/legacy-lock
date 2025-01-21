@@ -40,11 +40,18 @@ const useStore = create((set, get) => ({
 
   // Fetch Capsules
   fetchCapsules: async () => {
-    set({ loading: true });
+    const { loading } = get(); // Get the loading status
+    if (loading) {
+      return; // Stop script if fetech is already in progress
+    }
+
+    set({ loading: true }); // Set loading to true
+
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
         console.error("No access token found");
+        set({ loading: false });
         return; // // Stop script if no token is found
       }
   
@@ -59,6 +66,7 @@ const useStore = create((set, get) => ({
   
       if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
         console.error("Failed to fetch capsules");
+        set({ loading: false });
         return; // Stop script on error
       }
   
@@ -73,6 +81,7 @@ const useStore = create((set, get) => ({
       });
     } catch (error) {
       console.error("Error fetching capsules:", error);
+      set({ loading: false });
       return; // Stop script on error
     } finally {
       set({ loading: false });
