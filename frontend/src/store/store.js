@@ -40,45 +40,40 @@ const useStore = create((set, get) => ({
 
   // Fetch Capsules
   fetchCapsules: async () => {
-    if (get().loading) return;
-
-    set({ loading: true });
-
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
-        throw new Error("No access token found");
+        console.error("No access token found");
+        return; // // Stop script if no token is found
       }
-
+  
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
         fetch("http://localhost:5000/getUserCapsules", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }),
         fetch("http://localhost:5000/getReceivedCapsules", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
-
+  
       if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
-        throw new Error("Failed to fetch capsules");
+        console.error("Failed to fetch capsules");
+        return; // Stop script on error
       }
-
+  
       const userCapsules = await userCapsulesResponse.json();
       const receivedCapsules = await receivedCapsulesResponse.json();
-
+  
       set({
         capsules: {
           created: userCapsules.data || [],
           received: receivedCapsules.data || [],
         },
-        loading: false,
       });
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching capsules:", error);
+      return; // Stop script on error
+    } finally {
       set({ loading: false });
     }
   },
