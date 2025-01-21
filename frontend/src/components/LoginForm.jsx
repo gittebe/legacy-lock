@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import useStore from "../store/store";
 import { LoginButton } from "../ui/LoginButton";
@@ -7,6 +8,7 @@ export const LoginForm = ({ onClose, openSignup }) => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const login = useStore((state) => state.login);
+  const navigate = useNavigate();
 
 
   const handleLogin = async(e) => {
@@ -36,6 +38,8 @@ export const LoginForm = ({ onClose, openSignup }) => {
         setPassword(""); // Clear password input
         console.log("Login successful:", data);
         onClose(); // Close the login popup
+
+        navigate("/dashboard")
 
       } else {
         alert(data.message || "Login failed");
