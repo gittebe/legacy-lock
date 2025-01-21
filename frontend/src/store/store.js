@@ -26,6 +26,8 @@ const useStore = create((set) => ({
   // *** Initial state ***
   isLoggedIn: false,
   user: null,
+  capsules: { created: [], received: [] },
+  loading: false,
 
   // *** Actions ***
   login: (user) => set ({

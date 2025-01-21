@@ -12,20 +12,38 @@
  * 
  */
 
+import React, { useEffect } from "react";
+import useStore from "../../store/store";
 import CapsuleCard from "./CapsuleCard";
 
-const CapsuleList = ({ capsules }) => {
-if (!capsules) {
-    return <p>No capsules available</p>;
-  }
+const CapsuleList = () => {
+  const { fetchCapsules, capsules, loading } = useStore((state) => ({
+    fetchCapsules: state.fetchCapsules,
+    capsules: state.capsules,
+    loading: state.loading,
+  }));
+
+  useEffect(() => {
+    // Fetch capsules when the component mounts
+    fetchCapsules();
+  }, []);
+
+  if (loading) return <p>Loading capsules...</p>;
 
   return (
     <div>
-      {capsules.map(capsule => (
-        <CapsuleCard key={capsule.id} capsule={capsule} />
+      <h2>Created Capsules</h2>
+      {capsules.created.map((capsule) => (
+        <CapsuleCard key={capsule._id} capsule={capsule} />
+      ))}
+
+      <h2>Received Capsules</h2>
+      {capsules.received.map((capsule) => (
+        <CapsuleCard key={capsule._id} capsule={capsule} />
       ))}
     </div>
   );
 };
 
 export default CapsuleList;
+
