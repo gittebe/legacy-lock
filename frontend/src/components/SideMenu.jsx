@@ -1,5 +1,5 @@
 import "./SideMenu.css";
-import { handleLogout } from "./Logout";
+import useStore from "../store/store";
 import { useNavigate } from "react-router-dom";
 
 export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, onLogoutClick, isLoggedIn }) => {
