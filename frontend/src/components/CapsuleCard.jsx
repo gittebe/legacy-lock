@@ -3,10 +3,10 @@
  * 
 **/
 
-import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 
-const CapsuleCard = ({ capsule }) => {
+export const CapsuleCard = ({ capsule }) => {
   const { title, id, message, media, recipients, createdAt, openAt } = capsule;
   const navigateToCapsule = useNavigate();
 
@@ -24,9 +24,7 @@ const CapsuleCard = ({ capsule }) => {
       <p>Unlock date: {openAt}</p>
       {/* Media-URL */}
       {media && <img src={media} alt={title} />}
-      <Button onClick={handleViewCapsule}>View Capsule</Button>
+      <CreateCapsuleButton onClick={handleViewCapsule}>View Capsule</CreateCapsuleButton>
     </div>
   );
 }
-
-export default CapsuleCard;

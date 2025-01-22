@@ -5,7 +5,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
-import CapsuleList from "../components/Capsule/CapsuleList";
+import { CapsuleList } from "../components/CapsuleList";
 
 export const DashboardPage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store

@@ -3,10 +3,10 @@
  * 
 **/
 import React, { useEffect } from "react";
-import useStore from "../../store/store";
-import CapsuleCard from "./CapsuleCard";
+import useStore from "../store/store";
+import { CapsuleCard } from "./CapsuleCard";
 
-const CapsuleList = () => {
+export const CapsuleList = () => {
   const capsules = useStore((state) => state.capsules);
   const loading = useStore((state) => state.loading);
   const error = useStore((state) => state.error);
@@ -50,5 +50,3 @@ const CapsuleList = () => {
     </div>
   );
 };
-
-export default CapsuleList;

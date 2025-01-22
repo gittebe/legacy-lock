@@ -7,9 +7,9 @@
  **/
 
 import { useState, useRef } from "react";
-import Button from "../components/Button/Button";
+import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 
-const CreateCapsule = () => {
+export const CreateCapsulePage = () => {
   // Create a reference to the Cloudinary file input:
   const fileInput = useRef();
 
@@ -137,5 +137,3 @@ const CreateCapsule = () => {
     </div>
   );
 };
-
-export default CreateCapsule;
