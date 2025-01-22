@@ -20,7 +20,6 @@ export const DashboardPage = () => {
     return <Navigate to="/login" replace />;
   }
 
-   //
     const handleLogout = () => {
       console.log("Logout button clicked");
       logout(); // Call the logout method from your store
