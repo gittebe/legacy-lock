@@ -1,11 +1,15 @@
 import "./SideMenu.css";
+import { handleLogout } from "./Logout";
+import { useNavigate } from "react-router-dom";
 
-export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, onSignOutClick, isLoggedIn }) => {
+export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, onLogoutClick, isLoggedIn }) => {
+  const navigate = useNavigate();
+
   return (
     <aside className={`side-menu ${showMenu ? 'open' : ""}`} onClick={toggleMenu}>
       <div className="side-menu-content" onClick={(e) => e.stopPropagation()}>
         {isLoggedIn ? (
-          <button onClick = {onSignOutClick}>Sign out</button>
+          <button onClick = {onLogoutClick}>Sign out</button>
         ) : (
           <>
           <button onClick={onLoginClick}>Log in</button>
