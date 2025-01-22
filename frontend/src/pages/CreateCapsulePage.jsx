@@ -8,8 +8,17 @@
 
 import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
+import useStore from "../store/store";
+import { Navigate } from "react-router-dom";
 
 export const CreateCapsulePage = () => {
+  const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+
+  // If not logged in, redirect to login page
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
   // Create a reference to the Cloudinary file input:
   const fileInput = useRef();
 
@@ -130,9 +139,9 @@ export const CreateCapsulePage = () => {
         </label>
 
         {/* Submit button */}
-        <Button type="submit" disabled={loading}>
+        <CreateCapsuleButton type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Capsule"}
-        </Button>
+        </CreateCapsuleButton>
       </form>
     </div>
   );
