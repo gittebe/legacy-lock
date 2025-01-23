@@ -14,8 +14,8 @@ export const CapsuleCard = ({ capsule }) => {
   const handleViewCapsule = () => {
     navigateToCapsule(`/capsules/${id}`);
   };
-  const formattedCreatedAt = format(new Date(createdAt), "yyyy-MM-dd HH:mm");
-  const formattedOpenAt = format(new Date(openAt), "yyyy-MM-dd HH:mm");
+  export const formattedCreatedAt = format(new Date(createdAt), "yyyy-MM-dd HH:mm");
+  export const formattedOpenAt = format(new Date(openAt), "yyyy-MM-dd HH:mm");
 
   return (
     <div>
