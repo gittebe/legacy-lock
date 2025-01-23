@@ -23,8 +23,8 @@ export const CapsuleCard = ({ capsule }) => {
       <p>ID: {id}</p>
       <p>Message: {message}</p>
       <p>Recipients: {recipients}</p>
-      <p>Created: {createdAt}</p>
-      <p>Unlock date: {openAt}</p>
+      <p>Created: {formattedCreatedAt}</p>
+      <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}
       {media && <img src={media} alt={title} />}
       <CreateCapsuleButton onClick={handleViewCapsule}>View Capsule</CreateCapsuleButton>
