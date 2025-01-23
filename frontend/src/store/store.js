@@ -18,7 +18,7 @@
  *  - loading: Loading indicator to show whether the data is being fetched. 
  */
 
-
+// export default useStore;
 import { create } from "zustand";
 
 const useStore = create((set, get) => ({
@@ -37,11 +37,44 @@ const useStore = create((set, get) => ({
     user: user,
   }),
 
-  logout: () => set({
-    isLoggedIn: false,
-    user: null,
-    capsules: { created: [], received: [] },
-  }),
+  logout: async () => {
+    set({ loading: true });
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      console.log("Access Token:", accessToken);
+      if (!accessToken) {
+        console.error("No token found for logout.");
+        set({ loading: false, error: "No token found for logout." });
+        return;
+      }
+
+      // API-request to logout
+      const response = await fetch("http://localhost:5000/users/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ accessToken }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Logout failed");
+      }
+
+      localStorage.removeItem("accessToken");
+      set({
+        isLoggedIn: false,
+        user: null,
+        capsules: { created: [], received: [] },
+        loading: false,
+      });
+    } catch (error) {
+      console.error("Error logging out:", error);
+      set({ loading: false, error: error.message });
+    }
+  },
 
   setIsLoggedIn: (isLoggedIn, user = null) => set({
     isLoggedIn: isLoggedIn,
