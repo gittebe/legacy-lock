@@ -9,7 +9,7 @@
 import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
 
@@ -103,7 +103,7 @@ export const CreateCapsulePage = () => {
           toggleMenu={() => setShowMenu(false)}
           isLoggedIn={!!user}
           onLogoutClick={handleLogout}
-      />
+    />
     <div>
       <h1>Create a Capsule</h1>
       <form onSubmit={handleSubmit}>
