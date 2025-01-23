@@ -20,6 +20,7 @@ export const CapsuleCard = ({ capsule }) => {
       <p>ID: {id}</p>
       <p>Message: {message}</p>
       <p>Recipients: {recipients}</p>
+      
       <p>Created: {createdAt}</p>
       <p>Unlock date: {openAt}</p>
       {/* Media-URL */}
