@@ -5,6 +5,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
+import format from "date-fns";
 
 export const CapsuleCard = ({ capsule }) => {
   const { title, id, message, media, recipients, createdAt, openAt } = capsule;
@@ -13,6 +14,8 @@ export const CapsuleCard = ({ capsule }) => {
   const handleViewCapsule = () => {
     navigateToCapsule(`/capsules/${id}`);
   };
+  const formattedCreatedAt = format(new Date(createdAt), "yyyy-MM-dd HH:mm");
+  const formattedOpenAt = format(new Date(openAt), "yyyy-MM-dd HH:mm");
 
   return (
     <div>
