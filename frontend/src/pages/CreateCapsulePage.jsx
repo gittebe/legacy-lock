@@ -9,18 +9,26 @@
 import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
 
 export const CreateCapsulePage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+  const logout = useStore((state) => state.logout);
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
   // If not logged in, redirect to login page
   if (!user) {
     return <Navigate to="/login" replace />;
   }
+
+  const handleLogout = () => {
+    console.log("Logout button clicked");
+    logout(); // Call the logout method from your store
+    navigate("/"); // Redirect to home or login page
+  };
 
   // Create a reference to the Cloudinary file input:
   const fileInput = useRef();
@@ -93,7 +101,8 @@ export const CreateCapsulePage = () => {
     <SideMenu
           showMenu={showMenu}
           toggleMenu={() => setShowMenu(false)}
-          isLoggedIn={!!user} 
+          isLoggedIn={!!user}
+          onLogoutClick={handleLogout}
       />
     <div>
       <h1>Create a Capsule</h1>
