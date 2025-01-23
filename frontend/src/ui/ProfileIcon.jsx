@@ -1,3 +1,4 @@
+import "./ProfileIcon.css";
 
 export const ProfileIcon = () => {
     <div className="profile-icon-container">
