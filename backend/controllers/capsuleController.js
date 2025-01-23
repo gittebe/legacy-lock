@@ -79,7 +79,7 @@ export const getCapsule = async (req, res) => {
     // look for the capsule in the database
     const capsule = await Capsule.findById(capsuleId)
       .populate("recipients", "username")
-      .populate("userId", "username");
+    
     if (!capsule) {
       return res.status(404).json({message: "Capsule not found"});
     }
@@ -110,8 +110,7 @@ export const getUserCapsules = async (req, res) => {
   try {
     // get the capsules the user has created ordered according to the time of creations
     const capsules = await Capsule.find({ userId }).sort({ createdAt: -1 })
-      .populate("recipients", "username")
-      .populate("userId", "username");
+      .populate("recipients", "username");
 
     res.status(200).json({
       message: "User´s capsules retrieved successfully",
@@ -131,8 +130,7 @@ export const getReceivedCapsules = async (req, res) => {
     // get the capsules the user has received ordered according to the set time the capsule opens
     console.log("User ID from request:", userId);
     const receivedCapsules = await Capsule.find({ recipients: new mongoose.Types.ObjectId(userId) })
-      .populate("recipients", "username")
-      .populate("userId", "username");
+      .populate("recipients", "username");
 
     res.status(200).json({
       message: "User´s capsules retrieved successfully",

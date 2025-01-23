@@ -21,14 +21,9 @@ export const CapsuleCard = ({ capsule }) => {
   return (
     <div>
       <h5>Title: {title}</h5>
-      <p>ID: {id}</p> {/* Capsule ID */}
+      <p>Capsule ID: {id}</p> {/* Capsule ID */}
       <p>Message: {message}</p>
-      <p> Recipients:{" "}
-        {Array.isArray(capsule.recipients)
-          ? capsule.recipients.map((recipient) => recipient.username).join(", ")
-          : "No recipients available"}
-      </p>
-      <p>Sender: {capsule.userId}</p>
+      <p>Recipient: {capsule.recipients?.[0]?.username || "No recipient available"}</p>
       <p>Created: {createdAt}</p>
       <p>Unlock date: {openAt}</p>
       {/* Media-URL */}
