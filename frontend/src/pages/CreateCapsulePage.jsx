@@ -10,9 +10,12 @@ import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 import { Navigate } from "react-router-dom";
+import { SideMenu } from "../components/SideMenu";
+import { Header } from "../components/Header";
 
 export const CreateCapsulePage = () => {
   const user = useStore((state) => state.user)// Get the user's login status from Zustand store
+  const [showMenu, setShowMenu] = useState(false);
 
   // If not logged in, redirect to login page
   if (!user) {
@@ -85,6 +88,13 @@ export const CreateCapsulePage = () => {
   };
 
   return (
+    <>
+    <Header toggleMenu={() => setShowMenu(!showMenu)}/>
+    <SideMenu
+          showMenu={showMenu}
+          toggleMenu={() => setShowMenu(false)}
+          isLoggedIn={!!user} 
+      />
     <div>
       <h1>Create a Capsule</h1>
       <form onSubmit={handleSubmit}>
@@ -144,5 +154,6 @@ export const CreateCapsulePage = () => {
         </CreateCapsuleButton>
       </form>
     </div>
+    </>
   );
 };
