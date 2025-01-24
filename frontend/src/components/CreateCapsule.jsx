@@ -11,8 +11,6 @@ import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; // Do not render the component if the modal is closed
-
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [recipientUsername, setRecipientUsername] = useState("");
@@ -21,9 +19,22 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   const fileInput = useRef();
   const addCapsuleToStore = useStore((state) => state.addCapsule);
 
+  if (!isOpen) return null; // Return null if the popup is not open
+
   const handleCreateCapsule = async (event) => {
     event.preventDefault();
     setLoading(true);
+
+    //Get token from local storage
+    const token = localStorage.getItem("accessToken");
+    console.log("Token being sent:", token);
+
+    if (!token) {
+      console.error("No token found for creating Capsule.");
+      alert("You need to be logged in to create a Capsule.");
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData();
     if (fileInput.current?.files?.[0]) {
@@ -39,7 +50,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`, // Lägg till token i headern
         },
         body: formData,
       });
