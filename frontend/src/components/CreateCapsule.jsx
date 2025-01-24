@@ -66,73 +66,65 @@ export const CreateCapsulePage = ({ onClose }) => {
   };
 
   return (
-    <>
-    <Header toggleMenu={() => setShowMenu(!showMenu)}/>
-    <SideMenu
-          showMenu={showMenu}
-          toggleMenu={() => setShowMenu(false)}
-          isLoggedIn={!!user}
-          onLogoutClick={handleLogout}
-    />
-    <div>
-      <h1>Create a Capsule</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Title input field */}
-        <label>
-          Title
+    <div
+      class name="popup-overlay"
+      role="dialog"
+      aria-labelledby="create-capsule-popup-title"
+      aria-describedby="create-capsule-popup-desc"
+      onClick={onClose}
+    >
+      <div class name="popup" onClick={(event) => event.stopPropagation()}>
+        <h2 id="create-capsule-popup-title">Create a Capsule</h2>
+        <form onSubmit={handleCreateCapsule}>
+
+          {/* Capsule title */}
+          <label htmlFor="capsule-title">Title</label>
           <input
             type="text"
+            id="capsule-title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             required
           />
-        </label>
-
-        {/* Recipient Username */}
-        <label>
-          Recipient Username
+          {/* Recipient Username */}
+          <label htmlFor="recipient-username">Recipient Username</label>
           <input
             type="text"
+            id="recipient-username"
             value={recipientUsername}
             onChange={(event) => setRecipientUsername(event.target.value)}
+            placeholder="Enter the recipient's username"
             required
           />
-        </label>
-
-        {/* Message input field */}
-        <label>
-          Message
+          {/* Message input field */}
+          <label htmlFor="capsule-message">Message</label>
           <textarea
+            id="capsule-message"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
             placeholder="Write your message"
             required
           />
-        </label>
 
-        {/* Media uploading field */}
-        <label>
-          Upload Media (optional)
+          {/* Media uploading field */}
+          <label htmlFor="capsule-media">Upload Media (optional)</label>
           <input type="file" ref={fileInput} />
-        </label>
 
-        {/* Set date field */}
-        <label>
-          Unlock Date adn Time
+          {/* Set date field */}
+          <label htmlFor="capsule-unlock-date">Unlock Date and Time</label>
           <input
             type="datetime-local"
+            id="capsule-unlock-date"
             value={unlockDate}
             onChange={(event) => setUnlockDate(event.target.value)}
             required
           />
-        </label>
-
-        {/* Submit button */}
-        <CreateCapsuleButton type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create Capsule"}
-        </CreateCapsuleButton>
-      </form>
+           {/* Submit button */}
+          <CreateCapsuleButton disabled={loading}>
+            {loading ? "Creating..." : "Create Capsule"}
+          </CreateCapsuleButton>
+        </form>
+      </div>
     </div>
-    </>
   );
 };
