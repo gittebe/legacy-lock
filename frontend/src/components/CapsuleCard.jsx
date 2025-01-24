@@ -5,7 +5,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { CapsuleCardButton } from "../ui/CapsuleCardButton";
-import { formatDateTime }  from "/utils/date";
+import { formatDateTime }  from "../utils/date";
 
 export const CapsuleCard = ({ capsule }) => {
   const { title, id, message, media, recipients, createdAt, openAt } = capsule;

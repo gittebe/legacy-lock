@@ -9,6 +9,8 @@
 import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
+import "./CreateCapsule.css";
+import { useValidation } from "../utils/useValidation";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");
@@ -17,13 +19,20 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   const [unlockDate, setUnlockDate] = useState("");
   const [loading, setLoading] = useState(false);
   const fileInput = useRef();
-  const addCapsuleToStore = useStore((state) => state.addCapsule);
+  const addCapsule = useStore((state) => state.addCapsule);
+  const { errors, validateFields, setErrors } = useValidation();
 
   if (!isOpen) return null; // Return null if the popup is not open
 
   const handleCreateCapsule = async (event) => {
     event.preventDefault();
     setLoading(true);
+
+    // Validate the input fields before sending the request to the server
+    if (!validateFields({ title, message, recipientUsername, unlockDate })) {
+      setLoading(false);
+      return;
+    }
 
     //Get token from local storage
     const token = localStorage.getItem("accessToken");
@@ -50,7 +59,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       const response = await fetch("http://localhost:5000/capsule/create", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`, // Lägg till token i headern
+          "Authorization": `Bearer ${token}`, 
         },
         body: formData,
       });
@@ -58,7 +67,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       const data = await response.json();
       if (response.ok) {  
         alert("The Capsule was successfully created!");
-        addCapsuleToStore(data.capsule);
+        addCapsule(data.capsule);
 
         // Clear the input fields
         setTitle("");
@@ -68,7 +77,12 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
         fileInput.current.value = "";
         onClose(); // Close popup
       } else {
+        // Handle error response from the server
+        if (data.message === "Recipient not found") {
+          setErrors({ recipientUsername: "Recipient not found." });
+        } else {
         alert(data.message || "The Capsule could not be created:");
+        }
       }
     } catch (error) {
       console.error("Error during creation of Capsule:", error);
@@ -99,8 +113,11 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
             id="capsule-title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
+            className={errors.title ? "error-input" : ""}
             required
           />
+          {errors.title && <p className="error-message">{errors.title}</p>}
+
           {/* Recipient Username */}
           <label htmlFor="recipient-username">Recipient Username</label>
           <input
@@ -108,18 +125,23 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
             id="recipient-username"
             value={recipientUsername}
             onChange={(event) => setRecipientUsername(event.target.value)}
+            className={errors.recipientUsername ? "error-input" : ""}
             placeholder="Enter the recipient's username"
             required
           />
+          {errors.recipientUsername && <p className="error-message">{errors.recipientUsername}</p>}
+
           {/* Message input field */}
           <label htmlFor="capsule-message">Message</label>
           <textarea
             id="capsule-message"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
+            className={errors.message ? "error-input" : ""}
             placeholder="Write your message"
             required
           />
+          {errors.message && <p className="error-message">{errors.message}</p>}
 
           {/* Media uploading field */}
           <label htmlFor="capsule-media">Upload Media (optional)</label>
@@ -132,8 +154,11 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
             id="capsule-unlock-date"
             value={unlockDate}
             onChange={(event) => setUnlockDate(event.target.value)}
+            className={errors.unlockDate ? "error-input" : ""}
             required
           />
+          {errors.openAt && <p className="error-message">{errors.openAt}</p>}
+
            {/* Submit button */}
           <CreateCapsuleButton disabled={loading}>
             {loading ? "Creating..." : "Create Capsule"}
