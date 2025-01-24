@@ -148,9 +148,9 @@ export const CreateCapsulePage = () => {
 
         {/* Set date field */}
         <label>
-          Unlock Date
+          Unlock Date adn Time
           <input
-            type="date"
+            type="datetime-local"
             value={unlockDate}
             onChange={(event) => setUnlockDate(event.target.value)}
             required
