@@ -11,6 +11,7 @@ import { SideMenu } from "../components/SideMenu";
 import { CreateCapsule } from "../components/CreateCapsule";
 
 export const DashboardPage = () => {
+  console.log("DashboardPage rendered");
   const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
   const navigate = useNavigate();

@@ -4,7 +4,7 @@
 **/
 
 import { useNavigate } from "react-router-dom";
-import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
+import { CapsuleCardButton } from "../ui/CapsuleCardButton";
 import { formatDateTime }  from "/utils/date";
 
 export const CapsuleCard = ({ capsule }) => {
@@ -28,7 +28,7 @@ export const CapsuleCard = ({ capsule }) => {
       <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}
       {media && <img src={media} alt={title} />}
-      <CreateCapsuleButton onClick={handleViewCapsule}>View Capsule</CreateCapsuleButton>
+      <CapsuleCardButton onClick={handleViewCapsule}>View Capsule</CapsuleCardButton>
     </div>
   );
 }
