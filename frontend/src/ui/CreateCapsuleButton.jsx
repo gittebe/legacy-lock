@@ -7,7 +7,7 @@
 export const CreateCapsuleButton = ({ onClick }) => {
   return (
     <button type="submit" className="create-capsule-button" onClick={onClick}>
-      Create capsule 1
+      Create capsule
     </button>
   );
 };
