@@ -10,7 +10,9 @@ import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 
-export const CreateCapsulePage = ({ onClose }) => {
+export const CreateCapsule = ({ isOpen, onClose }) => {
+  if (!isOpen) return null; // Do not render the component if the modal is closed
+
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [recipientUsername, setRecipientUsername] = useState("");
@@ -73,7 +75,9 @@ export const CreateCapsulePage = ({ onClose }) => {
       aria-describedby="create-capsule-popup-desc"
       onClick={onClose}
     >
-      <div class name="popup" onClick={(event) => event.stopPropagation()}>
+      {/* Prevent closing the popup when clicking inside: */}
+      <div class name="popup" onClick={(event) => event.stopPropagation()}> 
+
         <h2 id="create-capsule-popup-title">Create a Capsule</h2>
         <form onSubmit={handleCreateCapsule}>
 
@@ -124,6 +128,7 @@ export const CreateCapsulePage = ({ onClose }) => {
             {loading ? "Creating..." : "Create Capsule"}
           </CreateCapsuleButton>
         </form>
+        <button className="close-button" onClick={onClose}>Cancel</button>
       </div>
     </div>
   );
