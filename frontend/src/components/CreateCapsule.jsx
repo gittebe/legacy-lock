@@ -1,5 +1,5 @@
 /**
- * CreateCapsulePage Component
+ * CreateCapsule Component
  * 
  * Documatation for Cloudinary: 
  * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
@@ -9,60 +9,27 @@
 import { useState, useRef } from "react";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
-import { Navigate, useNavigate } from "react-router-dom";
-import { SideMenu } from "../components/SideMenu";
-import { Header } from "../components/Header";
 
-export const CreateCapsulePage = () => {
-  const user = useStore((state) => state.user)// Get the user's login status from Zustand store
-  const logout = useStore((state) => state.logout);
-  const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
-
-  // If not logged in, redirect to login page
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  const handleLogout = () => {
-    console.log("Logout button clicked");
-    logout(); // Call the logout method from your store
-    navigate("/"); // Redirect to home or login page
-  };
-
-  // Create a reference to the Cloudinary file input:
-  const fileInput = useRef();
-
-  // Create state variables:
+export const CreateCapsulePage = ({ onClose }) => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [recipientUsername, setRecipientUsername] = useState("");
   const [unlockDate, setUnlockDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const fileInput = useRef();
+  const addCapsuleToStore = useStore((state) => state.addCapsule);
 
-  const handleSubmit = async (event) => {
+  const handleCreateCapsule = async (event) => {
     event.preventDefault();
     setLoading(true);
 
-    const token = localStorage.getItem("accessToken"); // Get the token from local storage
-    console.log("Token being sent:", token);
-
-    if (!token) {
-      console.error("No token found");
-      setLoading(false);
-      return;
-    }
-
-    // Create a new FormData object:
     const formData = new FormData();
     if (fileInput.current?.files?.[0]) {
       formData.append("file", fileInput.current.files[0]);
-      console.log("File being sent:", fileInput.current.files[0].name);
     }
     formData.append("title", title);
     formData.append("message", message);
     formData.append("recipientUsername", recipientUsername);
-    formData.append("createdAt", new Date().toISOString());
     formData.append("openAt", unlockDate);
 
     try {
@@ -76,8 +43,9 @@ export const CreateCapsulePage = () => {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        console.log("The Capsule was successfully created", data);
+      if (response.ok) {  
+        alert("The Capsule was successfully created!");
+        addCapsuleToStore(data.capsule);
 
         // Clear the input fields
         setTitle("");
@@ -85,11 +53,13 @@ export const CreateCapsulePage = () => {
         setRecipientUsername("");
         setUnlockDate("");
         fileInput.current.value = "";
+        onClose(); // Close popup
       } else {
-        console.error("The Capsule could not be created:", data);
+        alert(data.message || "The Capsule could not be created:");
       }
     } catch (error) {
       console.error("Error during creation of Capsule:", error);
+      alert("An error occurred. Please try again later");
     } finally {
       setLoading(false);
     }
