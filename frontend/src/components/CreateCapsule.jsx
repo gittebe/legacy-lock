@@ -69,14 +69,14 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
 
   return (
     <div
-      class name="popup-overlay"
+      className="popup-overlay"
       role="dialog"
       aria-labelledby="create-capsule-popup-title"
       aria-describedby="create-capsule-popup-desc"
       onClick={onClose}
     >
       {/* Prevent closing the popup when clicking inside: */}
-      <div class name="popup" onClick={(event) => event.stopPropagation()}> 
+      <div className="popup" onClick={(event) => event.stopPropagation()}> 
 
         <h2 id="create-capsule-popup-title">Create a Capsule</h2>
         <form onSubmit={handleCreateCapsule}>
