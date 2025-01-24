@@ -1,9 +1,9 @@
 .profile-icon-container {
+    display: flex;
     width: 30px;
     height: 30px;
 }
 
 .profile-icon {
-    background-color: white;
-    border: none;
+    object-fit: cover;
 }

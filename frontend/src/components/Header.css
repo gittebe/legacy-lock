@@ -36,8 +36,17 @@
   background: #000000;
 }
 
-@media (max-width: 1024px) {
+.icon {
+  background: none;
+  border: none;
+  display: none;
+}
+
+@media (max-width: 667px) {
   .hamburger-menu {
     display: none; 
+  }
+  .icon {
+    display: block;
   }
 }
