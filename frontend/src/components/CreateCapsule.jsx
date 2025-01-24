@@ -112,7 +112,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       {/* Prevent closing the popup when clicking inside: */}
       <div className="popup" onClick={(event) => event.stopPropagation()}> 
 
-        <h2 id="create-capsule-popup-title">Create a Capsule</h2>
+        <h3 id="create-capsule-popup-title">Create a Capsule</h3>
         <form onSubmit={handleCreateCapsule}>
 
           {/* Capsule title */}
@@ -169,7 +169,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           {errors.openAt && <p className="error-message">{errors.openAt}</p>}
 
            {/* Submit button */}
-          <CreateCapsuleButton disabled={loading}>
+          <CreateCapsuleButton disabled={loading} className="create-capsule-button">
             {loading ? "Creating..." : "Create Capsule"}
           </CreateCapsuleButton>
         </form>
