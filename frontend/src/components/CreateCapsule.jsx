@@ -65,6 +65,8 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       });
 
       const data = await response.json();
+      console.log("Created capsule response:", data);
+      
       if (response.ok) {  
         alert("The Capsule was successfully created!");
         addCapsule(data.capsule);
