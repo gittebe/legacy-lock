@@ -1,0 +1,4 @@
+/**
+ * 
+ * Capsules page
+ */
