@@ -19,7 +19,9 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   const [unlockDate, setUnlockDate] = useState("");
   const [loading, setLoading] = useState(false);
   const fileInput = useRef();
+
   const addCapsule = useStore((state) => state.addCapsule);
+  const fetchCapsules = useStore((state) => state.fetchCapsules);
   const { errors, validateFields, setErrors } = useValidation();
 
   if (!isOpen) return null; // Return null if the popup is not open
@@ -66,10 +68,13 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
 
       const data = await response.json();
       console.log("Created capsule response:", data);
-      
+
       if (response.ok) {  
         alert("The Capsule was successfully created!");
         addCapsule(data.capsule);
+
+        // Fetch capsules from server to update the list
+        await fetchCapsules();
 
         // Clear the input fields
         setTitle("");
@@ -78,10 +83,12 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
         setUnlockDate("");
         fileInput.current.value = "";
         onClose(); // Close popup
+
       } else {
         // Handle error response from the server
         if (data.message === "Recipient not found") {
           setErrors({ recipientUsername: "Recipient not found." });
+
         } else {
         alert(data.message || "The Capsule could not be created:");
         }
