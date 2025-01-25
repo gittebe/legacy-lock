@@ -139,7 +139,7 @@ const useStore = create((set, get) => ({
     })),
   
   // Get a single capsule by ID
-  getCapsuleById: async (capsuleId) => {
+  getCapsuleById: async (id) => {
     const { capsules, fetchCapsules } = get();
 
     try {
@@ -156,7 +156,7 @@ const useStore = create((set, get) => ({
         return null;
       }
 
-      const response = await fetch(`http://localhost:5000/capsule/${capsuleId}`, {
+      const response = await fetch(`http://localhost:5000/capsule/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
