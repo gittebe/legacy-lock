@@ -66,39 +66,47 @@ export const createCapsule = async (req, res) => {
 
 // get capsule
 export const getCapsule = async (req, res) => {
-  const capsuleId = req.params.id;
-  console.log("Backend: capsuleId:", capsuleId); 
-
+  const capsuleId = req.params.id; 
+  console.log("Backend: Received capsule ID:", capsuleId);
 
    // Validate if the capsuleId is a valid ObjectId
-   if (!mongoose.Types.ObjectId.isValid(capsuleId)) {
+  if (!mongoose.Types.ObjectId.isValid(capsuleId)) {
+    console.error("Backend: Invalid capsule ID format:", capsuleId);
     return res.status(400).json({ message: "Invalid capsule ID format" });
   }
 
   try {
     // look for the capsule in the database
+    console.log("Backend: Looking for capsule in database...");
     const capsule = await Capsule.findById(capsuleId)
       .populate("recipients", "username")
     
     if (!capsule) {
+      console.error("Backend: Capsule not found for ID:", capsuleId);
       return res.status(404).json({message: "Capsule not found"});
     }
 
+    console.log("Backend: Capsule found:", capsule);
+
     // check if capsule can be opened
-    const currentDate = new Date();
+    /* const currentDate = new Date();
+    console.log("Backend: Current date:", currentDate);
+    console.log("Backend: Capsule openAt:", capsule.openAt);
+
     if (currentDate < capsule.openAt) {
+      console.log("Backend: Capsule is not yet available.");
       return res.status(403).json({
         message: "This capsule is not yet available",
         availableAt: capsule.openAt
       })
-    }
+    }*/
 
     res.status(200).json({
       message: "Capsule retrieved successfully",
       data: capsule
     })
   } catch (error) {
-    console.error(error);
+    console.error("Backend: Error retrieving capsule:", error);
     res.status(500).json({message: "Error retrieving Capsule", error})
   }
 }

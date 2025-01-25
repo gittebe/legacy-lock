@@ -12,7 +12,7 @@ router.get("/", authenticateUser, getCreateCapsulePage);
 router.post("/create", authenticateUser, upload.single("file"), createCapsule);
 
 // GET to get one capsule with capsule id
-router.get("/capsule/:id", getCapsule)
+router.get("/:id", getCapsule);
 
 // GET to receive all the capsules the user has created
 router.get("/getUserCapsules", authenticateUser, getUserCapsules)
