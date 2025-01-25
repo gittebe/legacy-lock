@@ -11,6 +11,10 @@ export const CapsuleCard = ({ capsule }) => {
   const { title, id, message, media, recipients, createdAt, openAt } = capsule;
   const navigateToCapsule = useNavigate();
 
+  capsule.recipients.forEach((recipient) =>
+    console.log("Recipient:", recipient)
+  );
+
   const handleViewCapsule = () => {
     navigateToCapsule(`/capsules/${id}`);
   };
@@ -21,9 +25,9 @@ export const CapsuleCard = ({ capsule }) => {
   return (
     <div>
       <h5>Title: {title}</h5>
-      <p>ID: {id}</p>
+      <p>Capsule ID: {id}</p> {/* Capsule ID */}
       <p>Message: {message}</p>
-      <p>Recipients: {recipients}</p>
+      <p>Recipient: {capsule.recipients?.[0]?.username || "No recipient available"}</p>
       <p>Created: {formattedCreatedAt}</p>
       <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}
