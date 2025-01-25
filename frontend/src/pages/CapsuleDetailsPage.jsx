@@ -7,8 +7,11 @@ import { useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
+import { formatDateTime } from "../utils/date";
+
 
 export const CapsuleDetailsPage = () => {
+  const { id } = useParams(); // Get the capsule ID from the URL
   const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
   const navigate = useNavigate();
