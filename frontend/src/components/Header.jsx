@@ -1,4 +1,6 @@
 import "./Header.css";
+import "../ui/ProfileIcon";
+import { ProfileIcon } from "../ui/ProfileIcon"; 
 
 export const Header = ({ toggleMenu }) => {
   return (
@@ -15,6 +17,13 @@ export const Header = ({ toggleMenu }) => {
         <span></span>
         <span></span>
         <span></span>
+      </button>
+      <button
+     className="icon" 
+     aria-label="toggle menu"
+     onClick={toggleMenu}
+      >
+        <ProfileIcon/>
       </button>
     </header>
   );

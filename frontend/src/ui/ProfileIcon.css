@@ -1,0 +1,9 @@
+.profile-icon-container {
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
+.profile-icon {
+    object-fit: cover;
+}
