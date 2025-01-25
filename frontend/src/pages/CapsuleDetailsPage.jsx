@@ -17,6 +17,7 @@ export const CapsuleDetailsPage = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const { id } = useParams(); // Get the capsule ID from the URL
+  console.log("Capsule ID from URL:", id);
   const getCapsuleById = useStore((state) => state.getCapsuleById); // Get the method to fetch a capsule by ID
   const [capsuleDetails, setCapsuleDetails] = useState(null); // Store the capsule in the local state
   const [loading, setLoading] = useState(true); // Track loading state

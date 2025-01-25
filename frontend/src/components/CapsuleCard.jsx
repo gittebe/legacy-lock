@@ -16,7 +16,11 @@ export const CapsuleCard = ({ capsule }) => {
   );
 
   const handleViewCapsule = () => {
-    navigateToCapsule(`/capsules/${id}`);
+    if (capsule._id) {
+      navigateToCapsule(`/capsules/${capsule._id}`);
+    } else {
+      console.error("Invalid capsule data:", capsule);
+    }
   };
 
   const formattedCreatedAt = formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm");
