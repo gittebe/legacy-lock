@@ -6,9 +6,12 @@
 import { useNavigate } from "react-router-dom";
 import { ViewCapsuleButton } from "../ui/ViewCapsuleButton";
 import { formatDateTime }  from "../utils/date";
+import "./CapsuleCard.css";
+import { CapsuleCardText } from "../ui/CapsuleCardText";
+import { CapsuleCardImage } from "../ui/CapsuleCardImage";
 
 export const CapsuleCard = ({ capsule }) => {
-  const { title, id, message, media, recipients, createdAt, openAt } = capsule;
+  const { title, id, openAt } = capsule;
   const navigateToCapsule = useNavigate();
 
   capsule.recipients.forEach((recipient) =>
@@ -19,20 +22,14 @@ export const CapsuleCard = ({ capsule }) => {
     navigateToCapsule(`/capsules/${id}`);
   };
 
-  const formattedCreatedAt = formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm");
-  const formattedOpenAt = formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm");
+  const formattedOpenAt = openAt
+    ? formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm")
+    : "Invalid date";
 
   return (
-    <div>
-      <h5>Title: {title}</h5>
-      <p>Capsule ID: {id}</p> {/* Capsule ID */}
-      <p>Message: {message}</p>
-      <p>Recipient: {capsule.recipients?.[0]?.username || "No recipient available"}</p>
-      <p>Created: {formattedCreatedAt}</p>
-      <p>Unlocks on: {formattedOpenAt}</p>
-      {/* Media-URL */}
-      {media && <img src={media} alt={title} />}
-      <ViewCapsuleButton onClick={handleViewCapsule}>View Capsule</ViewCapsuleButton>
+    <div className="capsule-card" onClick={handleViewCapsule}>
+      <CapsuleCardImage/>
+      <CapsuleCardText title={title} openAt={formattedOpenAt}/>
     </div>
   );
 }
