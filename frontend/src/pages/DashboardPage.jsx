@@ -8,6 +8,7 @@ import useStore from "../store/store";
 import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
+import { FooterMobile } from "../components/FooterMobile";
 
 export const DashboardPage = () => {
   const user = useStore((state) => state.user);
@@ -40,6 +41,7 @@ export const DashboardPage = () => {
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
         <CapsuleList />
+        <FooterMobile/>
       </div>
     </>
   );

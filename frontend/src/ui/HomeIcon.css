@@ -1,0 +1,11 @@
+.home-icon {
+  background-color: #88677b;
+  object-fit: cover;
+}
+
+.home-icon-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+}
