@@ -1,6 +1,10 @@
+/**
+ * This page is for view an individual capsule.
+ */
+
 import useStore from "../store/store";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
 
