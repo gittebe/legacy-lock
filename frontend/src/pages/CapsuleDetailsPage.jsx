@@ -24,12 +24,13 @@ export const CapsuleDetailsPage = () => {
 
   useEffect(() => {
     // Fetch the capsule details when the component mounts
+    console.log("Frontend: Fetching capsule for ID:", id);
     const fetchCapsule = async () => {
       try {
         const capsule = await getCapsuleById(id);
         setCapsuleDetails(capsule);
       } catch (error) {
-        console.error("Error fetching capsule details:", error);
+        console.error("Frontend: Error fetching capsule details:", error);
       } finally {
         setLoading(false);
       }

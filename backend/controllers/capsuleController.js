@@ -67,7 +67,7 @@ export const createCapsule = async (req, res) => {
 // get capsule
 export const getCapsule = async (req, res) => {
   const capsuleId = req.params.id;
-  console.log("capsuleId:", capsuleId);
+  console.log("Backend: capsuleId:", capsuleId); 
 
 
    // Validate if the capsuleId is a valid ObjectId

@@ -143,7 +143,14 @@ const useStore = create((set, get) => ({
     const { capsules, fetchCapsules } = get();
 
     try {
+      if (!id) {
+        throw new Error("No ID provided");
+      }
       const token = localStorage.getItem("accessToken");
+      console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
+      const url = `http://localhost:5000/capsule/${id}`;
+      console.log("URL being fetched:", url);
+      
       if (!token) {
         console.error("No access token found");
         return null;
@@ -161,7 +168,7 @@ const useStore = create((set, get) => ({
       const capsule = await response.json();
       return capsule;
     } catch (error) {
-      console.error("Error fetching capsule:", error);
+      console.error("Store: Error fetching capsule:", error);
       return null;
     }
   },
