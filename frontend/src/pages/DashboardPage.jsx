@@ -9,12 +9,18 @@ import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
+import { CreateCapsule } from "../components/CreateCapsule";
 
 export const DashboardPage = () => {
+  console.log("DashboardPage rendered");
   const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => setIsPopupOpen(true); 
+  const closePopup = () => setIsPopupOpen(false); 
 
   // If user is not logedin
   if (!user) {
@@ -41,7 +47,10 @@ export const DashboardPage = () => {
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
         <CapsuleList />
-        <FooterMobile/>
+      </div>
+      <div>
+        <button onClick={openPopup}>Create Capsule</button>
+        <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
       </div>
     </>
   );

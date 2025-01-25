@@ -125,6 +125,14 @@ const useStore = create((set, get) => ({
       set({ loading: false, error: error.message });
     }
   },
+
+  addCapsule: (newCapsule) =>
+    set((state) => ({
+      capsules: {
+        ...state.capsules,
+        created: [...state.capsules.created, newCapsule],
+      },
+    })),
 }));
 
 export default useStore;
