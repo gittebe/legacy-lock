@@ -59,7 +59,7 @@ export const CapsuleDetailsPage = () => {
   }
 
   // Check if the capsule is locked
-  const isLocked = new Date() < new Date(capsule.openAt);
+  const isLocked = new Date() < new Date(capsuleDetails.openAt);
 
   return (
     <>
@@ -73,7 +73,10 @@ export const CapsuleDetailsPage = () => {
       <div>
         <h1>Capsule Details Page</h1>
         {isLocked ? (
-          <p>This capsule is locked until {formatDateTime(capsuleDetails.openAt)}.</p>
+          <p>
+           This capsule is locked until{" "}
+           {formatDateTime(new Date(capsuleDetails.openAt))}.
+          </p>
         ) : (
           <CapsuleCard capsule={capsuleDetails} />
           )}
