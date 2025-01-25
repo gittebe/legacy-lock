@@ -13,7 +13,7 @@ export const CapsuleListItem = ({ capsule }) => {
   console.log("Capsule data in CapsuleListItem:", capsule);
 
   const handleViewCapsule = () => {
-    navigateToCapsule(`/capsules/${id}`);
+    navigateToCapsule(`/capsule/${id}`);
   };
 
   const formattedCreatedAt = createdAt

@@ -4,7 +4,6 @@
 **/
 
 import { useNavigate } from "react-router-dom";
-import { ViewCapsuleButton } from "../ui/ViewCapsuleButton";
 import { formatDateTime }  from "../utils/date";
 
 export const CapsuleCard = ({ capsule }) => {
@@ -24,7 +23,7 @@ export const CapsuleCard = ({ capsule }) => {
 
   const handleViewCapsule = () => {
     if (capsule.id) {
-      navigateToCapsule(`/capsules/${capsule._id}`);
+      navigateToCapsule(`/capsule/${capsule._id}`);
     } else {
       console.error("Invalid capsule data:", capsule);
     }
@@ -46,7 +45,6 @@ export const CapsuleCard = ({ capsule }) => {
       <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}
       {mediaUrls.length > 0 && <img src={mediaUrls[0]} alt={title} />}
-      <ViewCapsuleButton onClick={handleViewCapsule}>View Capsule</ViewCapsuleButton>
     </div>
   );
 }
