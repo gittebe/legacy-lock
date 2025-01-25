@@ -52,6 +52,7 @@ export const DashboardPage = () => {
         <button onClick={openPopup}>Create Capsule</button>
         <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
       </div>
+      <FooterMobile/>
     </>
   );
 };
