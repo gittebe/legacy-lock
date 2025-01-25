@@ -1,0 +1,10 @@
+.settings-icon {
+    background-color: #88677b;
+    object-fit: cover;
+  }
+  
+  .settings-icon-container {
+    width: 30px;
+    height: 30px;
+    display: flex;
+  }

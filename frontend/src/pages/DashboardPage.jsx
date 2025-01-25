@@ -8,6 +8,7 @@ import useStore from "../store/store";
 import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
+import { FooterMobile } from "../components/FooterMobile";
 import { CreateCapsule } from "../components/CreateCapsule";
 
 export const DashboardPage = () => {
@@ -51,6 +52,7 @@ export const DashboardPage = () => {
         <button onClick={openPopup}>Create Capsule</button>
         <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
       </div>
+      <FooterMobile/>
     </>
   );
 };
