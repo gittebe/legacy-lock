@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { LandingPage } from "../pages/LandingPage";
 import { DashboardPage } from "../pages/DashboardPage";
-import { CreateCapsulePage } from "../pages/CreateCapsulePage";
+import { CapsulesPage } from "../pages/CapsulesPage";
 import { CapsuleDetailsPage } from "../pages/CapsuleDetailsPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import { ProfileSettingsPage } from "../pages/ProfileSettingsPage";
@@ -54,7 +54,7 @@ export const RoutesConfig = () => {
           {/* authenticated routes */}
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfileSettingsPage />} />
-          <Route path="/capsules" element={<CreateCapsulePage />} />
+          <Route path="/capsules" element={<CapsulesPage />} />
           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
         </>
       )}
