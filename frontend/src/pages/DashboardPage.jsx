@@ -3,7 +3,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import useStore from "../store/store";
 import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
@@ -52,6 +52,7 @@ export const DashboardPage = () => {
 
         <h2>Collections</h2>
         <CapsuleList filter="recent" />
+        <Link to="/capsules">See all</Link>
       </div>
       <div>
         <button onClick={openPopup}>Create Capsule</button>
