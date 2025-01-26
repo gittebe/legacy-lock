@@ -40,6 +40,11 @@ app.use("/capsule", capsuleRoutes);
 app.use("/media",mediaRoutes);
 app.use("/dashboard", dashboardRoutes)
 
+app.use((req, res) => {
+  console.log(`Fallback: Route not found for ${req.method} ${req.url}`);
+  res.status(404).json({ message: "Backend: Route not found" });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log("Server running on http://localhost:${port}");

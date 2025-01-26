@@ -4,7 +4,7 @@
 **/
 import React, { useEffect } from "react";
 import useStore from "../store/store";
-import { CapsuleCard } from "./CapsuleCard";
+import { CapsuleListItem } from "./CapsuleListItem";
 
 export const CapsuleList = () => {
   const capsules = useStore((state) => state.capsules);
@@ -43,7 +43,7 @@ export const CapsuleList = () => {
           console.error("Invalid capsule data:", capsule);
           return null;
         }
-        return <CapsuleCard key={capsule._id} capsule={capsule} />;
+        return <CapsuleListItem key={capsule._id} capsule={capsule} />;
       })}
 
       {/* Received Capsules */}
@@ -53,7 +53,7 @@ export const CapsuleList = () => {
           console.warn("Capsule missing _id:", capsule);
           return null;
         }
-        return <CapsuleCard key={capsule._id} capsule={capsule} />;
+        return <CapsuleListItem key={capsule._id} capsule={capsule} />;
       })}
     </div>
   );

@@ -82,6 +82,8 @@ const useStore = create((set, get) => ({
   }),
 
   // *** Capsules actions ***
+
+  // Fetch the user's capsules from the server
   fetchCapsules: async () => {
     if (get().loading) return; // Prevent multiple requests
 
@@ -126,6 +128,8 @@ const useStore = create((set, get) => ({
     }
   },
 
+  // Add a new capsule to the store
+
   addCapsule: (newCapsule) =>
     set((state) => ({
       capsules: {
@@ -133,6 +137,41 @@ const useStore = create((set, get) => ({
         created: [...state.capsules.created, newCapsule],
       },
     })),
+  
+  // Get a single capsule by ID
+  getCapsuleById: async (id) => {
+    const { capsules, fetchCapsules } = get();
+
+    try {
+      if (!id) {
+        throw new Error("No ID provided");
+      }
+      const token = localStorage.getItem("accessToken");
+      console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
+      const url = `http://localhost:5000/capsule/getCapsule/${id}`;
+      console.log("URL being fetched:", url);
+      
+      if (!token) {
+        console.error("No access token found");
+        return null;
+      }
+
+      const response = await fetch(`http://localhost:5000/capsule/getCapsule/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Failed to fetch capsule");
+      }
+
+      const capsule = await response.json();
+      return capsule;
+    } catch (error) {
+      console.error("Store: Error fetching capsule:", error);
+      return null;
+    }
+  },
 }));
 
 export default useStore;

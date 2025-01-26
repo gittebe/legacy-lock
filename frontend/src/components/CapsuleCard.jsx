@@ -3,36 +3,44 @@
  * 
 **/
 
-import { useNavigate } from "react-router-dom";
-import { ViewCapsuleButton } from "../ui/ViewCapsuleButton";
 import { formatDateTime }  from "../utils/date";
 
 export const CapsuleCard = ({ capsule }) => {
-  const { title, id, message, media, recipients, createdAt, openAt } = capsule;
-  const navigateToCapsule = useNavigate();
+  const {
+    id,
+    title,
+    message,
+    mediaUrls = [],
+    createdAt = null,
+    openAt = null,
+    recipients = [],
+  } = capsule.data || {}; 
 
-  capsule.recipients.forEach((recipient) =>
-    console.log("Recipient:", recipient)
-  );
+  console.log("Recipients data:", recipients);
 
-  const handleViewCapsule = () => {
-    navigateToCapsule(`/capsules/${id}`);
-  };
-
+  console.log("Created At:", createdAt);
+  console.log("Open At:", openAt);
   const formattedCreatedAt = formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm");
   const formattedOpenAt = formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm");
 
   return (
     <div>
       <h5>Title: {title}</h5>
-      <p>Capsule ID: {id}</p> {/* Capsule ID */}
       <p>Message: {message}</p>
-      <p>Recipient: {capsule.recipients?.[0]?.username || "No recipient available"}</p>
+      <p>Recipients:</p>
+      <ul>
+        {Array.isArray(recipients) && recipients.length > 0 ? (
+          recipients.map((recipient) => (
+            <li key={recipient._id}>{recipient.username}</li>
+          ))
+        ) : (
+          <li>No recipients available</li>
+        )}
+      </ul>
       <p>Created: {formattedCreatedAt}</p>
       <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}
-      {media && <img src={media} alt={title} />}
-      <ViewCapsuleButton onClick={handleViewCapsule}>View Capsule</ViewCapsuleButton>
+      {mediaUrls.length > 0 && <img src={mediaUrls[0]} alt={title} />}
     </div>
   );
 }
