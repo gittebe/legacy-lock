@@ -54,11 +54,5 @@ if (!filteredCapsules.length) {
 }
 
   // Render capsules
-  return (
-    <div>
-      {filteredCapsules.map((capsule) => (
-        <CapsuleCard key={capsule._id} capsule={capsule} />
-      ))}
-    </div>
-  );
+
 };
