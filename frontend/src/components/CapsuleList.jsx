@@ -6,8 +6,9 @@ import React, { useEffect } from "react";
 import useStore from "../store/store";
 import { CapsuleCard } from "./CapsuleCard";
 
-export const CapsuleList = () => {
-  console.log("CapsuleList rendered");
+export const CapsuleList = ({ filter }) => {
+  console.log("CapsuleList rendered with filter:", filter);
+
   const capsules = useStore((state) => state.capsules);
   const loading = useStore((state) => state.loading);
   const error = useStore((state) => state.error);
@@ -26,6 +27,20 @@ export const CapsuleList = () => {
     return <p style={{ color: "red" }}>Error: {error}</p>;
   }
 
+  // Filter capsules
+
+  let filteredCapsules = [];
+  if (!filter) {
+    filteredCapsules = [
+      ...(capsules?.created || []),
+      ...(capsules?.received || []),
+    ];
+  } else if (filter === "created") {
+    filteredCapsules = capsules?.created || [];
+  } else if (filter === "received") {
+    filteredCapsules = capsules?.received || [];
+  }
+
   // No capsules available
   if (
     (!capsules?.created?.length) &&
@@ -37,25 +52,9 @@ export const CapsuleList = () => {
   // Render capsules
   return (
     <div>
-      {/* Created Capsules */}
-      <h2>Created by You</h2>
-      {capsules.created.map((capsule) => {
-        if (!capsule || !capsule._id) {
-          console.error("Invalid capsule data:", capsule);
-          return null;
-        }
-        return <CapsuleCard key={capsule._id} capsule={capsule} />;
-      })}
-
-      {/* Received Capsules */}
-      <h2>Received by You</h2>
-      {capsules.received.map((capsule) => {
-        if (!capsule || !capsule._id) {
-          console.warn("Capsule missing _id:", capsule);
-          return null;
-        }
-        return <CapsuleCard key={capsule._id} capsule={capsule} />;
-      })}
+      {filteredCapsules.map((capsule) => (
+        <CapsuleCard key={capsule._id} capsule={capsule} />
+      ))}
     </div>
   );
 };

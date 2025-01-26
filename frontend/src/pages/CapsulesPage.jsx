@@ -42,8 +42,10 @@ export const CapsulesPage = () => {
       <div>
         <h1>All Capsules</h1>
 
+        <h2>Created by You:</h2>
         <CapsuleList filter="created" /> 
 
+        <h2>Received by You</h2>
         <CapsuleList filter="received" />
       </div>
 
