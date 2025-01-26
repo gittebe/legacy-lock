@@ -1,9 +1,11 @@
 /**
- * CapsuleCard Component
- * 
-**/
+ * CapsuleDetailsCard Component
+ * Combines media and CapsuleCardImage functionality from CapsuleCard.
+ */
 
-import { formatDateTime }  from "../utils/date";
+import { useNavigate } from "react-router-dom";
+import { formatDateTime } from "../utils/date";
+import { CapsuleCardImage } from "../ui/CapsuleCardImage";
 
 export const CapsuleDetailCard = ({ capsule }) => {
   const {
@@ -14,17 +16,29 @@ export const CapsuleDetailCard = ({ capsule }) => {
     createdAt = null,
     openAt = null,
     recipients = [],
-  } = capsule.data || {}; 
+  } = capsule.data || {};
 
   console.log("Recipients data:", recipients);
-
   console.log("Created At:", createdAt);
   console.log("Open At:", openAt);
-  const formattedCreatedAt = formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm");
-  const formattedOpenAt = formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm");
+
+  const navigateToCapsule = useNavigate();
+
+  const handleViewCapsule = () => {
+    navigateToCapsule(`/capsules/${id}`);
+  };
+
+  const isCapsuleOpen = openAt ? new Date() >= new Date(openAt) : false;
+  const formattedCreatedAt = createdAt
+    ? formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm")
+    : "Invalid date";
+  const formattedOpenAt = openAt
+    ? formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm")
+    : "Invalid date";
 
   return (
-    <div>
+    <div className="capsule-detail-card" onClick={handleViewCapsule}>
+      <CapsuleCardImage mediaUrls={mediaUrls} isBlurred={!isCapsuleOpen} />
       <h5>Title: {title}</h5>
       <p>Message: {message}</p>
       <p>Recipients:</p>
@@ -39,8 +53,6 @@ export const CapsuleDetailCard = ({ capsule }) => {
       </ul>
       <p>Created: {formattedCreatedAt}</p>
       <p>Unlocks on: {formattedOpenAt}</p>
-      {/* Media-URL */}
-      {mediaUrls.length > 0 && <img src={mediaUrls[0]} alt={title} />}
     </div>
   );
-}
+};
