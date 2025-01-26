@@ -39,6 +39,7 @@ export const CapsuleList = () => {
       {/* Created Capsules */}
       <h2>Created Capsules</h2>
       {capsules.created.map((capsule) => {
+        console.log("Capsule data:", capsule)
         if (!capsule || !capsule._id) {
           console.error("Invalid capsule data:", capsule);
           return null;
