@@ -5,7 +5,7 @@
 
 import { formatDateTime }  from "../utils/date";
 
-export const CapsuleCard = ({ capsule }) => {
+export const CapsuleDetailCard = ({ capsule }) => {
   const {
     id,
     title,

@@ -8,7 +8,7 @@ import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
 import { formatDateTime } from "../utils/date";
-import { CapsuleCard } from "../components/CapsuleCard";
+import { CapsuleDetailCard } from "../components/CapsuleDetailCard";
 
 
 export const CapsuleDetailsPage = () => {
@@ -86,7 +86,7 @@ export const CapsuleDetailsPage = () => {
            {formatDateTime(new Date(capsuleDetails.openAt))}.
           </p>
         ) : (
-          <CapsuleCard capsule={capsuleDetails} />
+          <CapsuleDetailCard capsule={capsuleDetails} />
           )}
       </div>
     </>
