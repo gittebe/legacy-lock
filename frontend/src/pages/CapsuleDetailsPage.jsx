@@ -1,7 +1,6 @@
 /**
  * This page is for view an individual capsule.
  */
-
 import useStore from "../store/store";
 import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ import { SideMenu } from "../components/SideMenu";
 import { Header } from "../components/Header";
 import { formatDateTime } from "../utils/date";
 import { CapsuleDetailCard } from "../components/CapsuleDetailCard";
-
 
 export const CapsuleDetailsPage = () => {
   const user = useStore((state) => state.user);
