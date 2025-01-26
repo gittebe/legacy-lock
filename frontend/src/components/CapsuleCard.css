@@ -1,0 +1,5 @@
+.capsule-card{
+    display: flex;
+    min-width: 200px;
+    cursor: pointer;
+}
