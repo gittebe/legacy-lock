@@ -11,16 +11,13 @@ import { CapsuleCardText } from "../ui/CapsuleCardText";
 import { CapsuleCardImage } from "../ui/CapsuleCardImage";
 
 export const CapsuleCard = ({ capsule }) => {
-  const { title, id, openAt } = capsule;
+  const { title, id, openAt, mediaUrls } = capsule;
   const navigateToCapsule = useNavigate();
-
-  capsule.recipients.forEach((recipient) =>
-    console.log("Recipient:", recipient)
-  );
 
   const handleViewCapsule = () => {
     navigateToCapsule(`/capsules/${id}`);
   };
+   const isCapsuleOpen = openAt ? new Date() >= new Date(openAt) : false
 
   const formattedOpenAt = openAt
     ? formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm")
@@ -28,8 +25,9 @@ export const CapsuleCard = ({ capsule }) => {
 
   return (
     <div className="capsule-card" onClick={handleViewCapsule}>
-      <CapsuleCardImage/>
-      <CapsuleCardText title={title} openAt={formattedOpenAt}/>
+      {/* Übergabe des Arrays an das Medien-Rendering */}
+      <CapsuleCardImage mediaUrls={mediaUrls} isBlurred={!isCapsuleOpen}/>
+      <CapsuleCardText title={title} openAt={formattedOpenAt} />
     </div>
   );
-}
+};
