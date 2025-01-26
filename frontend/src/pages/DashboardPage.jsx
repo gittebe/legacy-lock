@@ -52,11 +52,18 @@ export const DashboardPage = () => {
 
         <h2>Collections</h2>
         <CapsuleList filter="recent" />
-        <Link to="/capsules">See all</Link>
+        <div style={{ marginTop: "1rem" }}>
+          <h3>
+            <Link to="/capsules">See all</Link>
+          </h3>
+        </div>
       </div>
       <div>
+        <div>
+        <h2>Create a new Capsule</h2>
         <button onClick={openPopup}>Create Capsule</button>
-        <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
+          <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
+        </div>
       </div>
       <FooterMobile/>
     </>
