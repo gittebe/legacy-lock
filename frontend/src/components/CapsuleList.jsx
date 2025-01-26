@@ -4,7 +4,7 @@
 **/
 import React, { useEffect } from "react";
 import useStore from "../store/store";
-import { CapsuleListItem } from "./CapsuleListItem";
+import { CapsuleCard } from "./CapsuleCard";
 
 export const CapsuleList = () => {
   const capsules = useStore((state) => state.capsules);
@@ -33,5 +33,28 @@ export const CapsuleList = () => {
     return <p>No capsules available.</p>;
   }
 
-  
+  // Render capsules
+  return (
+    <div>
+      {/* Created Capsules */}
+      <h2>Created Capsules</h2>
+      {capsules.created.map((capsule) => {
+        if (!capsule || !capsule._id) {
+          console.error("Invalid capsule data:", capsule);
+          return null;
+        }
+        return <CapsuleCard key={capsule._id} capsule={capsule} />;
+      })}
+
+      {/* Received Capsules */}
+      <h2>Received Capsules</h2>
+      {capsules.received.map((capsule) => {
+        if (!capsule || !capsule._id) {
+          console.warn("Capsule missing _id:", capsule);
+          return null;
+        }
+        return <CapsuleCard key={capsule._id} capsule={capsule} />;
+      })}
+    </div>
+  );
 };
