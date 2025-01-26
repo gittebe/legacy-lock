@@ -52,7 +52,4 @@ export const CapsuleList = ({ filter }) => {
 if (!filteredCapsules.length) {
   return <p>No capsules available.</p>;
 }
-
-  // Render capsules
-
 };
