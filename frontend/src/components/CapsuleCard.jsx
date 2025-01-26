@@ -1,46 +1,29 @@
-/**
- * CapsuleCard Component
- * 
-**/
-
-import { formatDateTime }  from "../utils/date";
+import { useNavigate } from "react-router-dom";
+import { CapsuleCardText } from "../ui/CapsuleCardText";
+import { CapsuleCardImage } from "../ui/CapsuleCardImage";
+import { formatDateTime } from "../utils/date";
+import "./CapsuleCard.css";
 
 export const CapsuleCard = ({ capsule }) => {
-  const {
-    id,
-    title,
-    message,
-    mediaUrls = [],
-    createdAt = null,
-    openAt = null,
-    recipients = [],
-  } = capsule.data || {}; 
+  const { title, _id:id, openAt, mediaUrls } = capsule;
+  console.log("Capsule ID:", capsule._id || capsule.id);
 
-  console.log("Recipients data:", recipients);
+  const navigateToCapsule = useNavigate();
 
-  console.log("Created At:", createdAt);
-  console.log("Open At:", openAt);
-  const formattedCreatedAt = formatDateTime(new Date(createdAt), "yyyy-MM-dd HH:mm");
-  const formattedOpenAt = formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm");
+  const handleViewCapsule = () => {
+    // navigate to the specific capsule with it id
+    navigateToCapsule(`/capsules/${id}`);
+  };
+
+  const isCapsuleOpen = openAt ? new Date() >= new Date(openAt) : false;
+  const formattedOpenAt = openAt
+    ? formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm")
+    : "Invalid date";
 
   return (
-    <div>
-      <h5>Title: {title}</h5>
-      <p>Message: {message}</p>
-      <p>Recipients:</p>
-      <ul>
-        {Array.isArray(recipients) && recipients.length > 0 ? (
-          recipients.map((recipient) => (
-            <li key={recipient._id}>{recipient.username}</li>
-          ))
-        ) : (
-          <li>No recipients available</li>
-        )}
-      </ul>
-      <p>Created: {formattedCreatedAt}</p>
-      <p>Unlocks on: {formattedOpenAt}</p>
-      {/* Media-URL */}
-      {mediaUrls.length > 0 && <img src={mediaUrls[0]} alt={title} />}
+    <div className="capsule-card" onClick={handleViewCapsule}>
+      <CapsuleCardImage mediaUrls={mediaUrls} isBlurred={!isCapsuleOpen} />
+      <CapsuleCardText title={title} openAt={formattedOpenAt} />
     </div>
   );
-}
+};
