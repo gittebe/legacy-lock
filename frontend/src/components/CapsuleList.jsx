@@ -7,6 +7,7 @@ import useStore from "../store/store";
 import { CapsuleCard } from "./CapsuleCard";
 
 export const CapsuleList = () => {
+  console.log("CapsuleList rendered");
   const capsules = useStore((state) => state.capsules);
   const loading = useStore((state) => state.loading);
   const error = useStore((state) => state.error);
@@ -37,7 +38,7 @@ export const CapsuleList = () => {
   return (
     <div>
       {/* Created Capsules */}
-      <h2>Created Capsules</h2>
+      <h2>Created by You</h2>
       {capsules.created.map((capsule) => {
         if (!capsule || !capsule._id) {
           console.error("Invalid capsule data:", capsule);
@@ -47,7 +48,7 @@ export const CapsuleList = () => {
       })}
 
       {/* Received Capsules */}
-      <h2>Received Capsules</h2>
+      <h2>Received by You</h2>
       {capsules.received.map((capsule) => {
         if (!capsule || !capsule._id) {
           console.warn("Capsule missing _id:", capsule);
