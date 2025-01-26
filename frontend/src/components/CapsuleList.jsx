@@ -39,15 +39,19 @@ export const CapsuleList = ({ filter }) => {
     filteredCapsules = capsules?.created || [];
   } else if (filter === "received") {
     filteredCapsules = capsules?.received || [];
-  }
+  } else if (filter === "recent") {
+    const allCapsules = [
+      ...(capsules?.created || []),
+      ...(capsules?.received || []),
+    ];
+    filteredCapsules = allCapsules
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 3);
+}
 
-  // No capsules available
-  if (
-    (!capsules?.created?.length) &&
-    (!capsules?.received?.length)
-  ) {
-    return <p>No capsules available.</p>;
-  }
+if (!filteredCapsules.length) {
+  return <p>No capsules available.</p>;
+}
 
   // Render capsules
   return (

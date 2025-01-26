@@ -46,7 +46,12 @@ export const DashboardPage = () => {
       <div>
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
-        <CapsuleList />
+
+        <h2>Your latest lockets:</h2>
+        <CapsuleList filter="recent" /> 
+
+        <h2>Collections</h2>
+        <CapsuleList filter="recent" />
       </div>
       <div>
         <button onClick={openPopup}>Create Capsule</button>
