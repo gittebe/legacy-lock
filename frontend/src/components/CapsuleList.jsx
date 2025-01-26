@@ -49,7 +49,5 @@ export const CapsuleList = ({ filter }) => {
       .slice(0, 3);
 }
 
-if (!filteredCapsules.length) {
-  return <p>No capsules available.</p>;
-}
+
 };
