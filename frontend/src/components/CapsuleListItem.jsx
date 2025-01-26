@@ -8,12 +8,17 @@ import { formatDateTime } from "../utils/date";
 
 export const CapsuleListItem = ({ capsule }) => {
   const { title, id, message, media, recipients = [], createdAt, openAt } = capsule; // Destructure the capsule data
-  const navigateToCapsule = useNavigate();
+  const navigate = useNavigate();
 
   console.log("Capsule data in CapsuleListItem:", capsule);
 
   const handleViewCapsule = () => {
-    navigateToCapsule(`/capsule/${id}`);
+    if (capsule._id) {
+      console.log("Navigating to:", `/capsules/${capsule._id}`);
+      navigate(`/capsules/${capsule._id}`);
+    } else {
+      console.error("Capsule ID is undefined:", capsule);
+    }
   };
 
   const formattedCreatedAt = createdAt

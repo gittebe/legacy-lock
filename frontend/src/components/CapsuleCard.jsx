@@ -3,7 +3,6 @@
  * 
 **/
 
-import { useNavigate } from "react-router-dom";
 import { formatDateTime }  from "../utils/date";
 
 export const CapsuleCard = ({ capsule }) => {
@@ -14,20 +13,10 @@ export const CapsuleCard = ({ capsule }) => {
     mediaUrls = [],
     createdAt = null,
     openAt = null,
-    recipients = "No recipient available",
+    recipients = [],
   } = capsule.data || {}; 
 
   console.log("Recipients data:", recipients);
-
-  const navigateToCapsule = useNavigate();
-
-  const handleViewCapsule = () => {
-    if (capsule.id) {
-      navigateToCapsule(`/capsule/${capsule._id}`);
-    } else {
-      console.error("Invalid capsule data:", capsule);
-    }
-  };
 
   console.log("Created At:", createdAt);
   console.log("Open At:", openAt);
@@ -38,9 +27,16 @@ export const CapsuleCard = ({ capsule }) => {
     <div>
       <h5>Title: {title}</h5>
       <p>Message: {message}</p>
-      <p>Recipients:</p>{recipients.map((recipient) => (
-        <li key={recipient._id}>{recipient.username}</li>
-      ))}
+      <p>Recipients:</p>
+      <ul>
+        {Array.isArray(recipients) && recipients.length > 0 ? (
+          recipients.map((recipient) => (
+            <li key={recipient._id}>{recipient.username}</li>
+          ))
+        ) : (
+          <li>No recipients available</li>
+        )}
+      </ul>
       <p>Created: {formattedCreatedAt}</p>
       <p>Unlocks on: {formattedOpenAt}</p>
       {/* Media-URL */}

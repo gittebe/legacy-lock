@@ -18,6 +18,7 @@ export const CapsuleDetailsPage = () => {
   const [showMenu, setShowMenu] = useState(false);
   const { id } = useParams(); // Get the capsule ID from the URL
   console.log("Capsule ID from URL:", id);
+
   const getCapsuleById = useStore((state) => state.getCapsuleById); // Get the method to fetch a capsule by ID
   const [capsuleDetails, setCapsuleDetails] = useState(null); // Store the capsule in the local state
   const [loading, setLoading] = useState(true); // Track loading state
@@ -25,9 +26,11 @@ export const CapsuleDetailsPage = () => {
   useEffect(() => {
     // Fetch the capsule details when the component mounts
     console.log("Frontend: Fetching capsule for ID:", id);
+
     const fetchCapsule = async () => {
       try {
         const capsule = await getCapsuleById(id);
+        console.log("Frontend: Fetched capsule:", capsule);
         setCapsuleDetails(capsule);
       } catch (error) {
         console.error("Frontend: Error fetching capsule details:", error);
@@ -36,7 +39,12 @@ export const CapsuleDetailsPage = () => {
       }
     };
 
-    fetchCapsule();
+    if (id) {
+      fetchCapsule();
+    } else {
+      console.log("Frontend: No ID provided for fetching capsule.");
+      setLoading(false);
+    }
   }, [id, getCapsuleById]);
 
   if (!user) {

@@ -55,7 +55,7 @@ export const RoutesConfig = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfileSettingsPage />} />
           <Route path="/capsules" element={<CapsulesPage />} />
-          <Route path="/capsule/:id" element={<CapsuleDetailsPage />} />
+          <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
         </>
       )}
 

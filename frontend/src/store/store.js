@@ -148,7 +148,7 @@ const useStore = create((set, get) => ({
       }
       const token = localStorage.getItem("accessToken");
       console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
-      const url = `http://localhost:5000/capsule/${id}`;
+      const url = `http://localhost:5000/capsule/getCapsule/${id}`;
       console.log("URL being fetched:", url);
       
       if (!token) {
@@ -156,7 +156,7 @@ const useStore = create((set, get) => ({
         return null;
       }
 
-      const response = await fetch(`http://localhost:5000/capsule/${id}`, {
+      const response = await fetch(`http://localhost:5000/capsule/getCapsule/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
