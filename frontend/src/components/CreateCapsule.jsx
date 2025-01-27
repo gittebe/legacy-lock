@@ -11,6 +11,7 @@ import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 import "./CreateCapsule.css";
 import { useValidation } from "../utils/useValidation";
+import clip from "../assets/clip.svg";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");
@@ -130,7 +131,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           {errors.title && <p className="error-message">{errors.title}</p>}
 
           {/* Set date field */}
-          <label htmlFor="capsule-unlock-date">Unlock Date and Time</label>
+          <label htmlFor="capsule-unlock-date">Choose the release date and time</label>
           <input
             type="datetime-local"
             id="capsule-unlock-date"
@@ -156,22 +157,22 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           {errors.recipientUsername && <p className="error-message">{errors.recipientUsername}</p>}
 
           {/* Message input field */}
-          <label htmlFor="capsule-message">Message</label>
-          <textarea
-            id="capsule-message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            className={errors.message ? "error-input" : ""}
-            placeholder="Write your message"
-            required
-          />
-          {errors.message && <p className="error-message">{errors.message}</p>}
+          <label htmlFor="capsule-message">Content of the locket</label>
+          <div className="text-input-container"></div>
+            <textarea
+              id="capsule-message"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              className={errors.message ? "error-input" : ""}
+              required
+            />
+            {errors.message && <p className="error-message">{errors.message}</p>}
 
           {/* Media uploading field 
           <label htmlFor="capsule-media">Upload Media (optional)</label>
           <input type="file" ref={fileInput} />
           */}
-          
+
 {/* Text field with media icon and save button */}
           <div className="text-input-container">
             <textarea
@@ -179,7 +180,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               className={errors.message ? "error-input" : ""}
-              placeholder="Write your message"
               required
             />
             <img
