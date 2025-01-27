@@ -81,17 +81,17 @@ const CapsuleForm = ({
           <label htmlFor="capsule-message">Content of the locket</label>
           <div className="text-input-container">
             <textarea
-              id="capsule-message"
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              className={errors.message ? "error-input" : ""}
-              required
+            id="capsule-message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            className={errors.message ? "error-input" : ""}
+            required
             />
+            </div>
             {errors.message && <p className="error-message">{errors.message}</p>}
 
             {/* Media uploading field */}
             <ClipIcon fileInputRef={fileInput} />
-          </div>
 
           {/* Submit button */}
           <CreateCapsuleButton

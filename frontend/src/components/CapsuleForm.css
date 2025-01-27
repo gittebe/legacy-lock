@@ -1,0 +1,50 @@
+h3 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  width: 90%;
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+label {
+  width: 90%;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+input,
+textarea { 
+  width: 90%;
+  margin-bottom: 30px;
+  background: #c4c4c4; 
+  border: none;
+  padding: 0 15px;
+  font-size: 18px;
+  color: #000000; 
+  border-radius: 6px; 
+}
+
+textarea {
+  height: 100px; 
+  resize: none; 
+}
+
+textarea::placeholder,
+input::placeholder { 
+  color: #666666;
+}
+
+.text-input-container {
+  width: 100%; 
+  display: flex; 
+  flex-direction: column;
+}

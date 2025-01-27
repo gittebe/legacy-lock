@@ -32,60 +32,6 @@
   text-align: left;
 }
 
-.popup form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.popup form label {
-  width: 90%;
-  margin-bottom: 10px;
-  text-align: left;
-  font-size: 18px;
-  color: #ffffff;
-}
-
-.popup form input,
-.popup form textarea {
-  width: 90%;
-  margin-bottom: 30px;
-  background: #c4c4c4;
-  border: none;
-  padding: 0 15px;
-  font-size: 18px;
-  color: #000000; 
-  border-radius: 6px;
-}
-
-.popup form textarea {
-  height: 100px; 
-  resize: none; 
-}
-
-.popup form input::placeholder,
-.popup form textarea::placeholder {
-  color: #666666; 
-}
-
-.create-capsule-button {
-  width: 90%;
-  height: 60px;
-  background: #e39de4;
-  border: none;
-  color: #000000; 
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 30px; 
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.create-capsule-button:hover {
-  opacity: 0.9; 
-}
-
 .close-button {
   background: none;
   border: none;
