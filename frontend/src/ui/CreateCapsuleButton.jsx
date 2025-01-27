@@ -6,11 +6,11 @@
 
 import "./CreateCapsuleButton.css";
 
-export const CreateCapsuleButton = ({ onClick }) => {
+export const CreateCapsuleButton = ({ onClick, children }) => {
   return (
     <div className="create-capsule-button-container">
       <button type="submit" className="create-capsule-button" onClick={onClick}>
-        Create capsule
+        {children}
       </button>
     </div>
   );
