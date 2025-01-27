@@ -11,7 +11,7 @@ import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 import "./CreateCapsule.css";
 import { useValidation } from "../utils/useValidation";
-import clip from "../assets/clip.svg";
+import { ClipIcon } from "../ui/ClipIcon";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");
@@ -182,12 +182,8 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
               className={errors.message ? "error-input" : ""}
               required
             />
-            <img
-              src="/assets/icons/clip.svg"
-              alt="Attach media"
-              className="media-icon"
-              input type="file" ref={fileInput}
-            />
+            <ClipIcon fileInputRef={fileInput} />
+            /Users/johanna.eriksson@schibsted.com/Desktop/legacy-lock/frontend/src/ui/UploadMediaIcon.jsx
             {/* Submit button */}
             <CreateCapsuleButton disabled={loading} className="create-capsule-button">
               {loading ? "Creating..." : "Create Capsule"}
