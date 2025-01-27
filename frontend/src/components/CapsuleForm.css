@@ -1,4 +1,5 @@
 h3 {
+  font-family: Arial, sans-serif;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 40px;
@@ -13,43 +14,13 @@ form {
   width: 100%;
 }
 
-label {
+form label {
+  font-family: Arial, sans-serif;
   width: 90%;
   margin-bottom: 10px;
   text-align: left;
   font-size: 18px;
+  font-weight: normal;
   color: #ffffff;
 }
 
-input,
-.capsule-textarea { 
-  width: 90%;
-  margin-bottom: 30px;
-  background: #c4c4c4; 
-  border: none;
-  padding: 0 15px;
-  font-size: 18px;
-  color: #000000; 
-  border-radius: 6px; 
-}
-
-.capsule-textarea {
-  width: 90% !important;
-  height: 100px; 
-  resize: none; 
-  background: #c4c4c4; 
-}
-
-.error-input {
-  border: 2px solid red; /* Markerar fel */
-}
-
-input::placeholder { 
-  color: #666666;
-}
-
-.text-input-container {
-  width: 100%; 
-  display: flex; 
-  flex-direction: column;
-}
