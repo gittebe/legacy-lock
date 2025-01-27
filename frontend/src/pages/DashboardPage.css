@@ -1,0 +1,4 @@
+.gallery-swiper {
+    display: flex;
+    flex-direction: row;
+}

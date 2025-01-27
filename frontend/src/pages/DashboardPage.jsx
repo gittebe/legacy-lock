@@ -9,6 +9,7 @@ import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
 import { CreateCapsule } from "../components/CreateCapsule";
+import "./DashboardPage.css"
 
 export const DashboardPage = () => {
   console.log("DashboardPage rendered");
@@ -46,7 +47,9 @@ export const DashboardPage = () => {
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
       </div>
+      <div className="gallery-swiper">
       <GallerySwiper/>
+      </div>
       <div>
         <button onClick={openPopup}>Create Capsule</button>
         <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />

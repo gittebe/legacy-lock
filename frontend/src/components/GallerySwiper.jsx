@@ -35,9 +35,10 @@ export const GallerySwiper = () => {
 
   // Render capsules
   return (
-    <div>
-      <h2>Created Capsules Collection</h2>
-      {capsules.created.map((capsule) => {
+    <div className="gallery">
+    <h2>Created Capsules Collection</h2>
+    <div className="gallery-container">
+      {capsules.created.slice(0, 3).map((capsule) => {
         console.log("Capsule data:", capsule);
         if (!capsule || !capsule._id) {
           console.error("Invalid capsule data:", capsule);
@@ -54,15 +55,16 @@ export const GallerySwiper = () => {
         return (
           <div
             key={capsule._id}
-            className="gallery-container"
           >
-            <GalleryImage mediaUrls={capsule.mediaUrls} isBlurred={!isCapsuleOpen} />
+            <GalleryImage  mediaUrls={capsule.mediaUrls} isBlurred={!isCapsuleOpen} />
           </div>
         );
       })}
-
+    </div>
+    <div>
       <h2>Received Capsules Collection</h2>
-      {capsules.received.map((capsule) => {
+      <div className="gallery-container">
+      {capsules.received.slice(0, 3).map((capsule) => {
         if (!capsule || !capsule._id) {
           console.warn("Capsule missing _id:", capsule);
           return null;
@@ -77,12 +79,13 @@ export const GallerySwiper = () => {
         return (
           <div
             key={capsule._id}
-            className="gallery-container"
           >
             <GalleryImage mediaUrls={capsule.mediaUrls} isBlurred={!isCapsuleOpen} />
           </div>
         );
       })}
+    </div>
+    </div>
     </div>
   );
 };
