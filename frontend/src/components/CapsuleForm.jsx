@@ -21,7 +21,7 @@ const CapsuleForm = ({
   errors,
   loading,
   onClose,
-  
+
 }) => {
   return (
     <div
