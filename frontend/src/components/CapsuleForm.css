@@ -22,7 +22,7 @@ label {
 }
 
 input,
-textarea { 
+.capsule-textarea { 
   width: 90%;
   margin-bottom: 30px;
   background: #c4c4c4; 
@@ -33,12 +33,17 @@ textarea {
   border-radius: 6px; 
 }
 
-textarea {
+.capsule-textarea {
+  width: 90% !important;
   height: 100px; 
   resize: none; 
+  background: #c4c4c4; 
 }
 
-textarea::placeholder,
+.error-input {
+  border: 2px solid red; /* Markerar fel */
+}
+
 input::placeholder { 
   color: #666666;
 }

@@ -4,8 +4,8 @@
  * 
  */
 
-import { ClipIcon } from "../ui/ClipIcon";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
+import { MessageInput } from "../ui/MessageInput";
 
 const CapsuleForm = ({
   handleSubmit,
@@ -79,27 +79,13 @@ const CapsuleForm = ({
 
           {/* Message input field */}
           <label htmlFor="capsule-message">Content of the locket</label>
-          <div className="text-input-container">
-            <textarea
-            id="capsule-message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            className={errors.message ? "error-input" : ""}
-            required
-            />
-            </div>
-            {errors.message && <p className="error-message">{errors.message}</p>}
-
-            {/* Media uploading field */}
-            <ClipIcon fileInputRef={fileInput} />
-
-          {/* Submit button */}
-          <CreateCapsuleButton
-            disabled={loading}
-            className="create-capsule-button"
-          >
-            {loading ? "Creating..." : "Create Capsule"}
-          </CreateCapsuleButton>
+          <MessageInput
+            message={message}
+            setMessage={setMessage}
+            fileInput={fileInput}
+            handleSubmit={handleSubmit}
+            loading={loading}
+          />
         </form>
         <button className="close-button" onClick={onClose}>
           Cancel
