@@ -36,7 +36,7 @@ export const GallerySwiper = () => {
   // Render capsules
   return (
     <div className="gallery">
-    <h2>Created Capsules Collection</h2>
+    <h2>Created Collection</h2>
     <div className="gallery-container">
       {capsules.created.slice(0, 3).map((capsule) => {
         console.log("Capsule data:", capsule);
@@ -62,7 +62,7 @@ export const GallerySwiper = () => {
       })}
     </div>
     <div>
-      <h2>Received Capsules Collection</h2>
+      <h2>Received Collection</h2>
       <div className="gallery-container">
       {capsules.received.slice(0, 3).map((capsule) => {
         if (!capsule || !capsule._id) {
