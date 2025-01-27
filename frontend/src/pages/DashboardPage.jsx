@@ -1,11 +1,10 @@
 /**
  * DashboardPage Component
  */
-
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import useStore from "../store/store";
-import { CapsuleList } from "../components/CapsuleList";
+import { GallerySwiper } from "../components/GallerySwiper";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
@@ -47,6 +46,7 @@ export const DashboardPage = () => {
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
       </div>
+      <GallerySwiper/>
       <div>
         <button onClick={openPopup}>Create Capsule</button>
         <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />

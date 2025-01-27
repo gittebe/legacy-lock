@@ -1,0 +1,7 @@
+.gallery-container {
+    display: flex;
+    padding: 10px 0;
+    gap: 10px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
