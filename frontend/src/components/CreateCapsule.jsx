@@ -183,7 +183,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
               required
             />
             <ClipIcon fileInputRef={fileInput} />
-            /Users/johanna.eriksson@schibsted.com/Desktop/legacy-lock/frontend/src/ui/UploadMediaIcon.jsx
             {/* Submit button */}
             <CreateCapsuleButton disabled={loading} className="create-capsule-button">
               {loading ? "Creating..." : "Create Capsule"}
