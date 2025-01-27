@@ -45,7 +45,6 @@ const CapsuleForm = ({
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             className={`capsule-title ${errors.title ? "error-input" : ""}`}
-            placeholder={errors.title || "Enter the title"} 
             required 
           />
           {errors.title && <p className="error-message">{errors.title}</p>}
@@ -71,7 +70,6 @@ const CapsuleForm = ({
             value={recipientUsername}
             onChange={(event) => setRecipientUsername(event.target.value)}
             className={`recipient-username ${errors.recipientUsername ? "error-input" : ""}`}
-            placeholder={errors.recipientUsername || "Enter the reciever's username"} 
             required
           />
           {errors.recipientUsername && (

@@ -27,7 +27,16 @@ export const MessageInput = ({
       />
       {/* ClipIcon and CreateCapsuleButton placed inside the textarea */}
       <div className="textarea-actions">
-        <ClipIcon fileInputRef={fileInput} />
+        <div className="media-upload">
+          <input type="file"
+            ref={fileInput}
+            style={{ display: "none" }} //Hide the input field
+            onChange={(event) => {
+              console.log("Selected file:", event.target.files[0]);
+            }}
+          />
+          <ClipIcon fileInputRef={fileInput} />
+        </div>
         <CreateCapsuleButton
           onClick={handleSubmit}
           disabled={loading}

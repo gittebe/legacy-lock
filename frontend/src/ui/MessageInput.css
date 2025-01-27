@@ -10,7 +10,7 @@
   height: 150px; 
   background: #ffffff; 
   color: #000000; 
-  border: 1px solid #E3E3E3;
+  border: 4px solid #E3E3E3;
   border-radius: 6px; 
   padding: 20px; 
   font-size: 18px;
@@ -63,15 +63,13 @@
   font-size: 18px; 
 }
 
-.error-input {
-  border: 2px solid #e39de4; 
-  background: #fff0f6; 
-  height: 10px;
-}
-
 .error-message {
   color: #e39de4; 
   font-size: 14px;
   margin-top: 5px;
   height: 10px;
+}
+
+input.error-input::placeholder {
+  color: #e39de4; 
 }
