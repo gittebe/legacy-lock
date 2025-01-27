@@ -32,6 +32,18 @@
   text-align: left;
 }
 
+.popup form input {
+  width: 90%;  
+	height: auto;
+  margin-bottom: 10px; 
+  padding: 10px; 
+  font-size: 16px; 
+  border-radius: 6px; 
+  background: #ffffff; 
+  color: #000000; 
+  border: 1px solid #E3E3E3;
+}
+
 .close-button {
   background: none;
   border: none;

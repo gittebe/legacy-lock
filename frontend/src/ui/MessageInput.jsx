@@ -23,7 +23,6 @@ export const MessageInput = ({
         value={message}
         onChange={(event) => setMessage(event.target.value)}
         className="message-textarea"
-        placeholder="Write your message here"
         required
       />
       {/* ClipIcon and CreateCapsuleButton placed inside the textarea */}

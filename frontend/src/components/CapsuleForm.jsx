@@ -44,8 +44,9 @@ const CapsuleForm = ({
             id="capsule-title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            className={errors.title ? "error-input" : ""}
-            required
+            className={`capsule-title ${errors.title ? "error-input" : ""}`}
+            placeholder={errors.title || "Enter the title"} 
+            required 
           />
           {errors.title && <p className="error-message">{errors.title}</p>}
 
@@ -56,7 +57,7 @@ const CapsuleForm = ({
             id="capsule-unlock-date"
             value={unlockDate}
             onChange={(event) => setUnlockDate(event.target.value)}
-            className={errors.unlockDate ? "error-input" : ""}
+            className={`capsule-date ${errors.unlockDate ? "error-input" : ""}`}
             placeholder="yyyy-mm-dd, hh:mm"
             required
           />
@@ -69,8 +70,8 @@ const CapsuleForm = ({
             id="recipient-username"
             value={recipientUsername}
             onChange={(event) => setRecipientUsername(event.target.value)}
-            className={errors.recipientUsername ? "error-input" : ""}
-            placeholder="Enter the recipient's username"
+            className={`recipient-username ${errors.recipientUsername ? "error-input" : ""}`}
+            placeholder={errors.recipientUsername || "Enter the reciever's username"} 
             required
           />
           {errors.recipientUsername && (
