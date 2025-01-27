@@ -110,13 +110,15 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       {/* Prevent closing the popup when clicking inside: */}
-      <div className="popup" onClick={(event) => event.stopPropagation()}> 
-
-        <h3 id="create-capsule-popup-title">Create a Capsule</h3>
+      <div className="popup" onClick={(event) => event.stopPropagation()}>
+        <h3 id="create-capsule-popup-title">
+          Start creating <strong>your locket</strong>
+        </h3>
+        
         <form onSubmit={handleCreateCapsule}>
 
           {/* Capsule title */}
-          <label htmlFor="capsule-title">Title</label>
+          <label htmlFor="capsule-title">Title of the locket</label>
           <input
             type="text"
             id="capsule-title"
@@ -126,6 +128,18 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
             required
           />
           {errors.title && <p className="error-message">{errors.title}</p>}
+
+          {/* Set date field */}
+          <label htmlFor="capsule-unlock-date">Unlock Date and Time</label>
+          <input
+            type="datetime-local"
+            id="capsule-unlock-date"
+            value={unlockDate}
+            onChange={(event) => setUnlockDate(event.target.value)}
+            className={errors.unlockDate ? "error-input" : ""}
+            required
+          />
+          {errors.openAt && <p className="error-message">{errors.openAt}</p>}
 
           {/* Recipient Username */}
           <label htmlFor="recipient-username">Recipient Username</label>
@@ -155,18 +169,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           {/* Media uploading field */}
           <label htmlFor="capsule-media">Upload Media (optional)</label>
           <input type="file" ref={fileInput} />
-
-          {/* Set date field */}
-          <label htmlFor="capsule-unlock-date">Unlock Date and Time</label>
-          <input
-            type="datetime-local"
-            id="capsule-unlock-date"
-            value={unlockDate}
-            onChange={(event) => setUnlockDate(event.target.value)}
-            className={errors.unlockDate ? "error-input" : ""}
-            required
-          />
-          {errors.openAt && <p className="error-message">{errors.openAt}</p>}
 
            {/* Submit button */}
           <CreateCapsuleButton disabled={loading} className="create-capsule-button">
