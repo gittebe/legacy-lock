@@ -1,10 +1,10 @@
-/**
- * CreateCapsule Component
- * 
- * Documatation for Cloudinary: 
- * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
- * 
- **/
+//**************************************************************************
+// CreateCapsule Component
+//
+// Documatation for Cloudinary: 
+// https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
+//  
+//**************************************************************************
 
 import { useState, useRef } from "react";
 import useStore from "../store/store";

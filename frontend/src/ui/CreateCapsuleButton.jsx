@@ -1,9 +1,8 @@
-/**
- * Button component 
- * 
- * Customizable button component that can be used in any component. It takes in children, onClick, type, and className as props. 
- */
-
+//**************************************************************************
+// 
+// Component used for the create capsule button in the CapsuleForm component
+//  
+//**************************************************************************
 import "./CreateCapsuleButton.css";
 
 export const CreateCapsuleButton = ({ onClick, children }) => {

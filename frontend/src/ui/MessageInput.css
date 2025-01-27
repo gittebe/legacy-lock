@@ -1,31 +1,54 @@
 .message-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
   width: 100%;
+  max-width: 600px; 
+  margin: 0 auto; 
 }
 
 .message-textarea {
-  width: 100%;
-  height: 100px;
-  background: #c4c4c4;
-  color: #000000;
-  border: none;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
+  width: 90%;
+  height: 150px; 
+  background: #c4c4c4; 
+  color: #000000; 
+  border: none; 
+  border-radius: 6px; 
+  padding: 20px; 
+  font-size: 18px;
   resize: none;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
-.actions-container {
-  display: flex;
-  justify-content: space-between;
+.textarea-actions {
+  position: absolute;
+  bottom: 10px; 
+  right: 20px; 
+  display: flex; 
   align-items: center;
-  width: 100%;
+  gap: 10px;
 }
 
+.clip-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
 .create-capsule-button {
-  flex: 1;
-  margin-left: 10px; 
+  width: auto;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  background: #e39de4; 
+  border: none; 
+  color: #000000; 
+  border-radius: 30px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+}
+
+.create-capsule-button:hover {
+  background: #d08ec0; 
+}
+
+.create-capsule-button:disabled {
+  cursor: not-allowed; 
+  opacity: 0.7; 
 }

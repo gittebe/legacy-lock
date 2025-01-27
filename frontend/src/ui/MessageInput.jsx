@@ -1,4 +1,9 @@
-import React from "react";
+//**************************************************************************
+// 
+// Component used for the message input field in the CapsuleForm component
+//  
+//**************************************************************************
+
 import "./MessageInput.css"; 
 import { ClipIcon } from "../ui/ClipIcon";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
@@ -12,7 +17,7 @@ export const MessageInput = ({
 }) => {
   return (
     <div className="message-input-container">
-      {/* Textruta */}
+      {/* Textarea */}
       <textarea
         id="capsule-message"
         value={message}
@@ -21,11 +26,14 @@ export const MessageInput = ({
         placeholder="Write your message here"
         required
       />
-      {/* ClipIcon och CreateCapsuleButton */}
-      <div className="actions-container">
+      {/* ClipIcon and CreateCapsuleButton placed inside the textarea */}
+      <div className="textarea-actions">
         <ClipIcon fileInputRef={fileInput} />
-        <CreateCapsuleButton onClick={handleSubmit} disabled={loading}>
-          {loading ? "Creating..." : "Create Capsule"}
+        <CreateCapsuleButton
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save"}
         </CreateCapsuleButton>
       </div>
     </div>
