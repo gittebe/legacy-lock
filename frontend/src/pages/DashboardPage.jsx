@@ -1,15 +1,15 @@
 /**
  * DashboardPage Component
  */
-
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import useStore from "../store/store";
-import { CapsuleList } from "../components/CapsuleList";
+import { GallerySwiper } from "../components/GallerySwiper";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
 import { CreateCapsule } from "../components/CreateCapsule";
+import "./DashboardPage.css"
 
 export const DashboardPage = () => {
   console.log("DashboardPage rendered");
@@ -46,6 +46,9 @@ export const DashboardPage = () => {
       <div>
         <h1>Welcome, {user.username}!</h1>
         <h2>Your Capsules</h2>
+      </div>
+      <div className="gallery-swiper">
+      <GallerySwiper/>
       </div>
       <div>
         <button onClick={openPopup}>Create Capsule</button>
