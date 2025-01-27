@@ -114,7 +114,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
         <h3 id="create-capsule-popup-title">
           Start creating <strong>your locket</strong>
         </h3>
-        
+
         <form onSubmit={handleCreateCapsule}>
 
           {/* Capsule title */}
@@ -137,6 +137,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
             value={unlockDate}
             onChange={(event) => setUnlockDate(event.target.value)}
             className={errors.unlockDate ? "error-input" : ""}
+            placeholder="yyyy-mm-dd, hh:mm"
             required
           />
           {errors.openAt && <p className="error-message">{errors.openAt}</p>}
@@ -166,14 +167,32 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           />
           {errors.message && <p className="error-message">{errors.message}</p>}
 
-          {/* Media uploading field */}
+          {/* Media uploading field 
           <label htmlFor="capsule-media">Upload Media (optional)</label>
           <input type="file" ref={fileInput} />
-
-           {/* Submit button */}
-          <CreateCapsuleButton disabled={loading} className="create-capsule-button">
-            {loading ? "Creating..." : "Create Capsule"}
-          </CreateCapsuleButton>
+          */}
+          
+{/* Text field with media icon and save button */}
+          <div className="text-input-container">
+            <textarea
+              id="capsule-message"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              className={errors.message ? "error-input" : ""}
+              placeholder="Write your message"
+              required
+            />
+            <img
+              src="/assets/icons/clip.svg"
+              alt="Attach media"
+              className="media-icon"
+              input type="file" ref={fileInput}
+            />
+            {/* Submit button */}
+            <CreateCapsuleButton disabled={loading} className="create-capsule-button">
+              {loading ? "Creating..." : "Create Capsule"}
+            </CreateCapsuleButton>
+          </div>
         </form>
         <button className="close-button" onClick={onClose}>Cancel</button>
       </div>
