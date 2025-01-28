@@ -10,6 +10,7 @@ import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
 import { CreateCapsule } from "../components/CreateCapsule";
 import "./DashboardPage.css"
+import { CountdownContainer } from "../ui/CountdownContainer";
 
 export const DashboardPage = () => {
   console.log("DashboardPage rendered");
@@ -46,6 +47,7 @@ export const DashboardPage = () => {
       <div>
         <h1>Welcome, {user.username}!</h1>
       </div>
+      <CountdownContainer/>
       <div className="gallery-swiper">
       <GallerySwiper/>
       </div>
