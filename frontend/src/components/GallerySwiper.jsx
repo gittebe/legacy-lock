@@ -36,8 +36,13 @@ export const GallerySwiper = () => {
   // Render capsules
   return (
     <div className="gallery">
-      <div className="collection-header">
-        <h2>Created Collection</h2>
+      <div className="collection-text">
+        <h2>Created Collections</h2>
+        <p
+        className="see-all"
+        onClick={() => navigate("/capsules")}
+        >
+          See all</p>
       </div>
     <div className="gallery-container">
       {capsules.created.slice(0, 3).map((capsule) => {
@@ -64,7 +69,14 @@ export const GallerySwiper = () => {
       })}
     </div>
     <div>
-      <h2>Received Collection</h2>
+    <div className="collection-text">
+        <h2>Received Collections</h2>
+        <p
+        className="see-all"
+        onClick={() => navigate("/capsules")}
+        >
+          See all</p>
+      </div>
       <div className="gallery-container">
       {capsules.received.slice(0, 3).map((capsule) => {
         if (!capsule || !capsule._id) {
