@@ -36,7 +36,9 @@ export const GallerySwiper = () => {
   // Render capsules
   return (
     <div className="gallery">
-    <h2>Created Collection</h2>
+      <div className="collection-header">
+        <h2>Created Collection</h2>
+      </div>
     <div className="gallery-container">
       {capsules.created.slice(0, 3).map((capsule) => {
         console.log("Capsule data:", capsule);

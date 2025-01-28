@@ -45,7 +45,6 @@ export const DashboardPage = () => {
       
       <div>
         <h1>Welcome, {user.username}!</h1>
-        <h2>Your Capsules</h2>
       </div>
       <div className="gallery-swiper">
       <GallerySwiper/>
