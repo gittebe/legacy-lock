@@ -1,16 +1,16 @@
-/**
- * CreateCapsule Component
- * 
- * Documatation for Cloudinary: 
- * https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
- * 
- **/
+//**************************************************************************
+// CreateCapsule Component
+//
+// Documatation for Cloudinary: 
+// https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
+//  
+//**************************************************************************
 
 import { useState, useRef } from "react";
-import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import useStore from "../store/store";
 import "./CreateCapsule.css";
 import { useValidation } from "../utils/useValidation";
+import CapsuleForm from "./CapsuleForm";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");
@@ -102,79 +102,20 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div
-      className="popup-overlay"
-      role="dialog"
-      aria-labelledby="create-capsule-popup-title"
-      aria-describedby="create-capsule-popup-desc"
-      onClick={onClose}
-    >
-      {/* Prevent closing the popup when clicking inside: */}
-      <div className="popup" onClick={(event) => event.stopPropagation()}> 
-
-        <h3 id="create-capsule-popup-title">Create a Capsule</h3>
-        <form onSubmit={handleCreateCapsule}>
-
-          {/* Capsule title */}
-          <label htmlFor="capsule-title">Title</label>
-          <input
-            type="text"
-            id="capsule-title"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            className={errors.title ? "error-input" : ""}
-            required
-          />
-          {errors.title && <p className="error-message">{errors.title}</p>}
-
-          {/* Recipient Username */}
-          <label htmlFor="recipient-username">Recipient Username</label>
-          <input
-            type="text"
-            id="recipient-username"
-            value={recipientUsername}
-            onChange={(event) => setRecipientUsername(event.target.value)}
-            className={errors.recipientUsername ? "error-input" : ""}
-            placeholder="Enter the recipient's username"
-            required
-          />
-          {errors.recipientUsername && <p className="error-message">{errors.recipientUsername}</p>}
-
-          {/* Message input field */}
-          <label htmlFor="capsule-message">Message</label>
-          <textarea
-            id="capsule-message"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-            className={errors.message ? "error-input" : ""}
-            placeholder="Write your message"
-            required
-          />
-          {errors.message && <p className="error-message">{errors.message}</p>}
-
-          {/* Media uploading field */}
-          <label htmlFor="capsule-media">Upload Media (optional)</label>
-          <input type="file" ref={fileInput} />
-
-          {/* Set date field */}
-          <label htmlFor="capsule-unlock-date">Unlock Date and Time</label>
-          <input
-            type="datetime-local"
-            id="capsule-unlock-date"
-            value={unlockDate}
-            onChange={(event) => setUnlockDate(event.target.value)}
-            className={errors.unlockDate ? "error-input" : ""}
-            required
-          />
-          {errors.openAt && <p className="error-message">{errors.openAt}</p>}
-
-           {/* Submit button */}
-          <CreateCapsuleButton disabled={loading} className="create-capsule-button">
-            {loading ? "Creating..." : "Create Capsule"}
-          </CreateCapsuleButton>
-        </form>
-        <button className="close-button" onClick={onClose}>Cancel</button>
-      </div>
-    </div>
+    <CapsuleForm
+      handleSubmit={handleCreateCapsule}
+      title={title}
+      setTitle={setTitle}
+      unlockDate={unlockDate}
+      setUnlockDate={setUnlockDate}
+      recipientUsername={recipientUsername}
+      setRecipientUsername={setRecipientUsername}
+      message={message}
+      setMessage={setMessage}
+      fileInput={fileInput}
+      errors={errors}
+      loading={loading}
+      onClose={onClose}
+    />
   );
 };
