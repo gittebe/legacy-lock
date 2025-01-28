@@ -1,0 +1,40 @@
+.collections-section {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.collections-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.collections-title {
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  margin: 0;
+}
+
+.see-more-button {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: #7c7c7c;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.collections-images {
+  display: flex;
+  gap: 32px;
+}
+
+.collections-images .capsule-card-image-container {
+  width: 160px;
+  height: 160px;
+}

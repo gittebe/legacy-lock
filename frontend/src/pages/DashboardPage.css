@@ -1,4 +1,6 @@
-.gallery-swiper {
-    display: flex;
-    flex-direction: row;
+.collections-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 14%; 
+  margin: 45px 5%; 
 }

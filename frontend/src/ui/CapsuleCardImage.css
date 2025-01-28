@@ -1,11 +1,29 @@
 .capsule-card-image-container {
-    display: flex;
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
+  width: 140px;
+  height: 140px;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.capsule-card-image-container.tilted {
+  width: 120px;
+  height: 120px;
+}
+
+.capsule-card-image-container.tilted:nth-child(1) .capsule-card-image {
+  transform: rotate(-15deg);
+}
+
+.capsule-card-image-container.tilted:nth-child(2) .capsule-card-image {
+  transform: rotate(0deg);
+}
+
+.capsule-card-image-container.tilted:nth-child(3) .capsule-card-image {
+  transform: rotate(15deg);
+}
+
 .capsule-card-image,
 .capsule-card-video {
   width: 100%;

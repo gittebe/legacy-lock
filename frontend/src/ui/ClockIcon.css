@@ -1,0 +1,13 @@
+.clock-icon-latest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.clock-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

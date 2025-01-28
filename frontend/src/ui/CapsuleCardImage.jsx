@@ -1,9 +1,13 @@
 import "./CapsuleCardImage.css";
 
-export const CapsuleCardImage = ({ mediaUrls, isBlurred }) => {
+export const CapsuleCardImage = ({ mediaUrls, isBlurred, variant }) => {
+  const containerClass = `capsule-card-image-container ${variant} ${
+    isBlurred ? "blurred" : ""
+  }`;
+
   if (!mediaUrls || mediaUrls.length === 0) {
     return (
-      <div className="capsule-card-image-container">
+      <div className={containerClass}>
         <img
           className={`capsule-card-image ${isBlurred ? "blurred" : ""}`}
           src="../../capsule-image.png"
@@ -14,12 +18,11 @@ export const CapsuleCardImage = ({ mediaUrls, isBlurred }) => {
   }
 
   const mediaUrl = mediaUrls[0];
-
   const isImage = mediaUrl.match(/\.(jpeg|jpg|gif|png|webp)$/i);
   const isVideo = mediaUrl.match(/\.(mp4|webm|ogg)$/i);
 
   return (
-    <div className={`capsule-card-image-container ${isBlurred ? "blurred" : ""}`}>
+    <div className={containerClass}>
       {isImage && (
         <img
           className={`capsule-card-image ${isBlurred ? "blurred" : ""}`}
