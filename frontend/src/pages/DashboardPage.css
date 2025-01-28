@@ -1,4 +1,9 @@
+
 .gallery-swiper {
     display: flex;
     flex-direction: row;
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }

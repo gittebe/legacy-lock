@@ -1,0 +1,17 @@
+.countdown-container {
+  background-color:  #88677b;
+  border-radius: 50px;
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-text{
+  color: white;
+  margin: 0;
+  padding: 8px;
+  padding-left: 24px;
+}
