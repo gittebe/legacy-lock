@@ -46,10 +46,14 @@ export const RoutesConfig = () => {
 
   return (
     <Routes>
-      {/* publiuc routes */}
-      {!isLoggedIn ? (
-        <Route path="/" element={<LandingPage />} />
-      ) : (
+      {/* Dynamic route `/` */}
+      <Route
+        path="/"
+        element={isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />}
+      />
+
+      {/* Authenticated routes */}
+      {isLoggedIn && (
         <>
           {/* authenticated routes */}
           <Route path="/dashboard" element={<DashboardPage />} />
