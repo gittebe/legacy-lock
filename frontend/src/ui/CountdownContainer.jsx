@@ -1,26 +1,16 @@
-// import "./CountdownContainer.css";
-
-// export const CountdownContainer = () => {
-//   return(
-//     <div className="countdown-container">
-//       <p>your latest locket is opening on</p>
-//     </div>
-//   )
-// }
-
 import { useState, useEffect } from "react";
-import useStore from "../store/store"; // assuming you are using this for your capsules state
+import useStore from "../store/store";
 import "./CountdownContainer.css";
 
 export const CountdownContainer = () => {
   const [timeLeft, setTimeLeft] = useState(null);
   const [nextCapsule, setNextCapsule] = useState(null);
 
-  const capsules = useStore((state) => state.capsules.created); // Get the created capsules from store
+  const capsules = useStore((state) => state.capsules.created);
 
   useEffect(() => {
     if (capsules.length === 0) {
-      return; // If no capsules exist, don't start the countdown
+      return;
     }
 
     // Find the next capsule that is not yet open
@@ -28,7 +18,7 @@ export const CountdownContainer = () => {
     const nextCapsule = sortedCapsules.find((capsule) => new Date(capsule.openAt) > new Date());
 
     if (!nextCapsule) {
-      return; // No upcoming capsules
+      return;
     }
 
     setNextCapsule(nextCapsule);
@@ -59,11 +49,12 @@ export const CountdownContainer = () => {
     <div className="countdown-container">
       {nextCapsule ? (
         <>
-          <p>Your latest locket is opening on {new Date(nextCapsule.openAt).toLocaleString()}</p>
-          <p>Time left: {timeLeft}</p>
+          <p className="countdown-text">Your latest locket is opening on</p> 
+          <p className="countdown-text">{new Date(nextCapsule.openAt).toLocaleString()}</p>
+          <p className="countdown-text">Time left: {timeLeft}</p>
         </>
       ) : (
-        <p>No upcoming capsules</p>
+        <p className="countdown-text">No upcoming capsules</p>
       )}
     </div>
   );
