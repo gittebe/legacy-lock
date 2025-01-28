@@ -5,7 +5,7 @@
  */
 
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
-import { MessageInput } from "../ui/MessageInput";
+import { MessageInput } from "./MessageInput";
 
 const CapsuleForm = ({
   handleSubmit,
