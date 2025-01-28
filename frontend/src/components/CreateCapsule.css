@@ -26,10 +26,19 @@
 
 .popup h3 {
   font-size: 28px;
+  font-family: Arial, sans-serif;
   font-weight: bold;
   margin-bottom: 40px;
   width: 90%;
   text-align: left;
+}
+
+.popup form label  {
+	width: 90%;
+	font-size: 18px;
+	font-family: Arial, sans-serif;
+	margin-bottom: 10px;
+	text-align: left;
 }
 
 .popup form input {
@@ -37,6 +46,7 @@
 	height: auto;
   margin-bottom: 10px; 
   padding: 10px; 
+  font-family: Arial, sans-serif;
   font-size: 16px; 
   border-radius: 6px; 
   background: #ffffff; 
@@ -44,10 +54,17 @@
   border: 1px solid #E3E3E3;
 }
 
+.popup form input:focus {
+  border-color: #e39de4; 
+  outline: none; 
+  box-shadow: 0 0 4px rgba(227, 157, 228, 0.8); 
+}
+
 .close-button {
   background: none;
   border: none;
   color: #e39de4; 
+  font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
