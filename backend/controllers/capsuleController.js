@@ -149,3 +149,43 @@ export const getReceivedCapsules = async (req, res) => {
     res.status(500).json({message: "Error retrieving user´s capsules", error})
   }
 }
+
+//get media Urls
+export const getMediaUrls = async (req, res) => {
+  const { userId } = req.params;
+
+  // Validate user ID
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: 'Invalid User ID' });
+  }
+
+  try {
+    const capsules = await Capsule.find({ userId }).select('mediaUrls createdAt');
+
+    if (capsules.length === 0) {
+      return res.status(404).json({ message: 'No capsules found for this user' });
+    }
+
+    const mediaWithDates = capsules
+      .flatMap(capsule => 
+        capsule.mediaUrls.map(mediaUrl => ({
+          mediaUrl,
+          createdAt: capsule.createdAt
+        }))
+      );
+
+    if (mediaWithDates.length === 0) {
+      return res.status(404).json({ message: 'No media found for this user' });
+    }
+
+    const recentMedia = mediaWithDates
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 3);
+
+    const recentMediaUrls = recentMedia.map(media => media.mediaUrl);
+
+    res.status(200).json(recentMediaUrls);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching media URLs', error: error.message });
+  }
+};
