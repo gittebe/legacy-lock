@@ -23,6 +23,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
         const url = await uploadProfilePicture(file);
         console.log("Uploaded image URL:", url);
         setProfileImage(url);
+        useStore.setState({ user: { ...user, profileImage: url } })
       } catch (error) {
         console.error("Error uploading profile picture:", error);
         alert("Failed to upload profile picture.");
@@ -30,20 +31,52 @@ export const ProfileSettingsModal = ({ onClose }) => {
     }
   };
 
-  const handleDeletePicture = () => {
-    setProfileImage("");
+  const handleDeletePicture = async () => {
+    try {
+      await useStore.setState({ user: { ...user, profileImage: "" } });
+      setProfileImage("");
+  
+      console.log("ProfileImage has been deleted.");
+    } catch (error) {
+      console.error("error deleting image:", error);
+      alert("Error deleting the profile picture.");
+    }
   };
+  
 
+  // const handleSave = async () => {
+  //   try {
+  //     console.log("Changes saved:", { username, email, profileImage });
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Error saving profile data:", error);
+  //     alert("Failed to save changes.");
+  //   }
+  // };
   const handleSave = async () => {
     try {
+      // Update the global store with the new values
+      await useStore.setState({
+        user: { 
+          ...user, 
+          username: username, 
+          email: email, 
+          profileImage: profileImage 
+        }
+      });
+  
       console.log("Changes saved:", { username, email, profileImage });
+  
+      // Optionally, if you're saving the data to a backend, make an API call here
+  
+      // Close the modal after saving
       onClose();
     } catch (error) {
       console.error("Error saving profile data:", error);
       alert("Failed to save changes.");
     }
   };
-
+  
   return (
     <div className="modal-overlay">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
