@@ -1,0 +1,10 @@
+.clip-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.clip-icon-container {
+  display: flex;
+  align-items: center;
+}
