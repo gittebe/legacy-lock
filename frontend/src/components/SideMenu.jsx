@@ -2,9 +2,19 @@ import "./SideMenu.css";
 import useStore from "../store/store";
 import { useNavigate } from "react-router-dom";
 
-export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, onLogoutClick, isLoggedIn }) => {
+export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, isLoggedIn }) => {
   const navigate = useNavigate();
-  const handleProfileClick = () => { navigate("/profile") }
+  const { setIsLoggedIn } = useStore();
+
+  const handleProfileClick = () => {
+    navigate("/profile")
+  }
+
+  const onLogoutClick = () => {
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
 
   return (
       <aside className={`side-menu ${showMenu ? 'open' : ""}`} onClick={toggleMenu}>
