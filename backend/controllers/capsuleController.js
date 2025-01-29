@@ -166,7 +166,6 @@ export const getMediaUrls = async (req, res) => {
       return res.status(404).json({ message: 'No capsules found for this user' });
     }
 
-    // Alle Medien extrahieren und mit ihren zugehörigen createdAt-Daten versehen
     const mediaWithDates = capsules
       .flatMap(capsule => 
         capsule.mediaUrls.map(mediaUrl => ({
