@@ -6,6 +6,11 @@
   justify-content: center;
   align-items: center;
 }
+.capsule-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .capsule-card-image-container.tilted {
   width: 120px;

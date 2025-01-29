@@ -10,6 +10,7 @@ import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { CreateCapsule } from "../components/CreateCapsule";
+import { HeaderMobileCapsules } from "../components/HeaderMobileCapsules";
 
 export const CapsulesPage = () => {
   console.log("DashboardPage rendered");
@@ -35,17 +36,9 @@ export const CapsulesPage = () => {
 
   return (
     <>
-      <Header toggleMenu={() => setShowMenu(!showMenu)} />
-      <SideMenu
-        showMenu={showMenu}
-        toggleMenu={() => setShowMenu(false)}
-        onLogoutClick={handleLogout}
-        isLoggedIn={!!user} 
-      />
-      
+      <HeaderMobileCapsules/>
       <div>
-        <h1>Welcome, {user.username}!</h1>
-        <h2>Your Capsules</h2>
+     
         <CapsuleList />
       </div>
       <div>
