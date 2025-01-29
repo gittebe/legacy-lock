@@ -13,7 +13,7 @@ export const WarningPopup = ({ onClose }) => {
           <br />
           before its release date.</p>
         <br />
-        <OkButton/>
+        <OkButton onClick={onClose} />
       </div>
     </div>
   );
