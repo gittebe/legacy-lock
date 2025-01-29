@@ -3,17 +3,17 @@ import useStore from "../store/store";
 import { GalleryImage } from "../ui/GalleryImage";
 import { useNavigate } from "react-router-dom";
 import { formatDateTime } from "../utils/date";
-import "./GallerySwiper.css"
+import "./GallerySwiper.css";
 
 export const GallerySwiper = () => {
   const capsules = useStore((state) => state.capsules);
   const loading = useStore((state) => state.loading);
   const error = useStore((state) => state.error);
   const fetchCapsules = useStore((state) => state.fetchCapsules);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("CapsuleList useEffect: fetching capsules...");
     fetchCapsules();
   }, [fetchCapsules]);
 
@@ -25,67 +25,54 @@ export const GallerySwiper = () => {
     return <p style={{ color: "red" }}>Error: {error}</p>;
   }
 
-  // No capsules available
-  if (
-    (!capsules?.created?.length) &&
-    (!capsules?.received?.length)
-  ) {
+  if (!capsules?.created?.length && !capsules?.received?.length) {
     return <p>No capsules available.</p>;
   }
 
-  // Render capsules
   return (
-    <div className="gallery">
-    <h2>Created Collection</h2>
-    <div className="gallery-container">
-      {capsules.created.slice(0, 3).map((capsule) => {
-        console.log("Capsule data:", capsule);
-        if (!capsule || !capsule._id) {
-          console.error("Invalid capsule data:", capsule);
-          return null;
-        }
+    <div className="collections-container">
 
-        // Check if the capsule is open
-        const isCapsuleOpen = capsule.openAt ? new Date() >= new Date(capsule.openAt) : false;
-        const formattedOpenAt = capsule.openAt
-          ? formatDateTime(new Date(capsule.openAt), "yyyy-MM-dd HH:mm")
-          : "Invalid date";
-
-        // Pass handleViewCapsule and capsule data to GalleryImage
-        return (
-          <div
-            key={capsule._id}
+      <div className="collections-section">
+        <div className="collections-header">
+          <h2 className="collections-title">Created Collections</h2>
+          <button
+            className="see-more-button"
+            onClick={() => navigate("/created")}
           >
-            <GalleryImage  mediaUrls={capsule.mediaUrls} isBlurred={!isCapsuleOpen} />
-          </div>
-        );
-      })}
-    </div>
-    <div>
-      <h2>Received Collection</h2>
-      <div className="gallery-container">
-      {capsules.received.slice(0, 3).map((capsule) => {
-        if (!capsule || !capsule._id) {
-          console.warn("Capsule missing _id:", capsule);
-          return null;
-        }
+            See all
+          </button>
+        </div>
+        <div className="collections-images">
+          {capsules.created.slice(0, 3).map((capsule) => (
+            <GalleryImage
+              key={capsule._id}
+              mediaUrls={capsule.mediaUrls}
+              isBlurred={new Date() < new Date(capsule.openAt)}
+            />
+          ))}
+        </div>
+      </div>
 
-        // Check if the capsule is open
-        const isCapsuleOpen = capsule.openAt ? new Date() >= new Date(capsule.openAt) : false;
-        const formattedOpenAt = capsule.openAt
-          ? formatDateTime(new Date(capsule.openAt), "yyyy-MM-dd HH:mm")
-          : "Invalid date";
-
-        return (
-          <div
-            key={capsule._id}
+      <div className="collections-section">
+        <div className="collections-header">
+          <h2 className="collections-title">Received Collections</h2>
+          <button
+            className="see-more-button"
+            onClick={() => navigate("/received")}
           >
-            <GalleryImage mediaUrls={capsule.mediaUrls} isBlurred={!isCapsuleOpen} />
-          </div>
-        );
-      })}
-    </div>
-    </div>
+            See all
+          </button>
+        </div>
+        <div className="collections-images">
+          {capsules.received.slice(0, 3).map((capsule) => (
+            <GalleryImage
+              key={capsule._id}
+              mediaUrls={capsule.mediaUrls}
+              isBlurred={new Date() < new Date(capsule.openAt)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

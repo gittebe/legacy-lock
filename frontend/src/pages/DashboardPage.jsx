@@ -6,8 +6,7 @@ import { SideMenu } from "../components/SideMenu";
 import { FooterMobile } from "../components/FooterMobile";
 import { DashboardWelcome } from "../components/DashboardWelcome";
 import { LatestLocket } from "../components/LatestLocket";
-import { DashboardCreatedList } from "../components/DashboardCreatedList";
-import { DashboardReceivedList } from "../components/DashboardReceivedList";
+import { GallerySwiper } from "../components/GallerySwiper";
 import { FAB } from "../ui/FAB";
 import { CreateCapsule } from "../components/CreateCapsule";
 import "./DashboardPage.css";
@@ -34,14 +33,9 @@ export const DashboardPage = () => {
       />
       <DashboardWelcome username={user.username} />
       <LatestLocket />
-      <div className="collections-container">
-        <DashboardCreatedList />
-        <DashboardReceivedList />
-      </div>
+      <GallerySwiper />
       <FooterMobile />
-      
-      <FAB onClick={() => setIsPopupOpen(true)} /> 
-      
+      <FAB onClick={() => setIsPopupOpen(true)} />
       <CreateCapsule isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
     </>
   );
