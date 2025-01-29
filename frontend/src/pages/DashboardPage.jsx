@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useStore from "../store/store";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
@@ -14,7 +14,6 @@ import "./DashboardPage.css";
 export const DashboardPage = () => {
   const user = useStore((state) => state.user);
   const logout = useStore((state) => state.logout);
-  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
