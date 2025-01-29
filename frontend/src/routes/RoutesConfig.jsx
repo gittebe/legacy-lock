@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { LandingPage } from "../pages/LandingPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { CapsulesPage } from "../pages/CapsulesPage";
@@ -65,6 +65,9 @@ export const RoutesConfig = () => {
 
       {/* Fallback-Route */}
       <Route path="*" element={<NotFoundPage />} />
+
+      {/* Logout, please see SideMenu component */}
+      
     </Routes>
   );
 };
