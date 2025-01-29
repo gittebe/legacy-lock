@@ -34,7 +34,7 @@ export const CapsuleList = () => {
   return (
     <div>
     <div className="created-capsule-container">
-      <h2>Created Capsules</h2>
+      <h2 className="header-capsules">Created Capsules</h2>
       <div className="capsule-grid">
       {capsules.created.map((capsule) => {
         // Check if the capsule is valid and has a _id
@@ -48,7 +48,7 @@ export const CapsuleList = () => {
     </div>
     
     <div>
-      <h2>Received Capsules</h2>
+      <h2 className="header-capsules">Received Capsules</h2>
       <div className="capsule-grid"></div>
       {capsules.received.map((capsule) => {
         // Check if the capsule is valid and has a _id
