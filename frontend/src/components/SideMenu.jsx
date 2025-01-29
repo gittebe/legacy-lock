@@ -13,7 +13,7 @@ export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, is
   const onLogoutClick = () => {
     localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    navigate("/landingpage");
+    navigate("/");
   }
 
   return (
