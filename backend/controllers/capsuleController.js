@@ -150,35 +150,45 @@ export const getReceivedCapsules = async (req, res) => {
   }
 }
 
-
-// Route to fetch only the mediaUrls
-
-
 export const getMediaUrls = async (req, res) => {
-  const { userId } = req.params;  // Oder req.body.userId, je nachdem, wie der User-Id übergeben wird
+  const { userId } = req.params;
 
-  // Validierung des User-IDs
+  // Validate user ID
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).json({ message: 'Invalid User ID' });
   }
 
   try {
-    // Alle Kapseln des Users finden und nur die mediaUrls zurückgeben
-    const capsules = await Capsule.find({ userId }).select('mediaUrls');
+    // Alle Kapseln des Users finden und nur die mediaUrls und createdAt der Medien zurückgeben
+    const capsules = await Capsule.find({ userId }).select('mediaUrls createdAt');
 
-    // Wenn keine Kapseln für den User gefunden wurden
     if (capsules.length === 0) {
       return res.status(404).json({ message: 'No capsules found for this user' });
     }
 
-    // Alle mediaUrls der gefundenen Kapseln zurückgeben
-    const allMediaUrls = capsules.map(capsule => capsule.mediaUrls).flat();
+    // Alle Medien extrahieren und mit ihren zugehörigen createdAt-Daten versehen
+    const mediaWithDates = capsules
+      .flatMap(capsule => 
+        capsule.mediaUrls.map(mediaUrl => ({
+          mediaUrl,
+          createdAt: capsule.createdAt  // Hier kannst du auch anpassen, wenn Medien eigene `createdAt`-Daten haben
+        }))
+      );
 
-    // Erfolgreiche Antwort
-    res.status(200).json(allMediaUrls);
+    if (mediaWithDates.length === 0) {
+      return res.status(404).json({ message: 'No media found for this user' });
+    }
+
+    // Nach dem Erstellungsdatum der Medien sortieren und die neuesten 3 auswählen
+    const recentMedia = mediaWithDates
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 3);
+
+    // Nur die URLs der neuesten Medien zurückgeben
+    const recentMediaUrls = recentMedia.map(media => media.mediaUrl);
+
+    res.status(200).json(recentMediaUrls);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching media URLs', error: error.message });
   }
 };
-
-
