@@ -150,6 +150,7 @@ export const getReceivedCapsules = async (req, res) => {
   }
 }
 
+//get media Urls
 export const getMediaUrls = async (req, res) => {
   const { userId } = req.params;
 
@@ -159,7 +160,6 @@ export const getMediaUrls = async (req, res) => {
   }
 
   try {
-    // Alle Kapseln des Users finden und nur die mediaUrls und createdAt der Medien zurückgeben
     const capsules = await Capsule.find({ userId }).select('mediaUrls createdAt');
 
     if (capsules.length === 0) {
@@ -171,7 +171,7 @@ export const getMediaUrls = async (req, res) => {
       .flatMap(capsule => 
         capsule.mediaUrls.map(mediaUrl => ({
           mediaUrl,
-          createdAt: capsule.createdAt  // Hier kannst du auch anpassen, wenn Medien eigene `createdAt`-Daten haben
+          createdAt: capsule.createdAt
         }))
       );
 
@@ -179,12 +179,10 @@ export const getMediaUrls = async (req, res) => {
       return res.status(404).json({ message: 'No media found for this user' });
     }
 
-    // Nach dem Erstellungsdatum der Medien sortieren und die neuesten 3 auswählen
     const recentMedia = mediaWithDates
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .slice(0, 3);
 
-    // Nur die URLs der neuesten Medien zurückgeben
     const recentMediaUrls = recentMedia.map(media => media.mediaUrl);
 
     res.status(200).json(recentMediaUrls);
