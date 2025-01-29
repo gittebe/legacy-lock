@@ -66,7 +66,7 @@ export const RoutesConfig = () => {
       {/* Fallback-Route */}
       <Route path="*" element={<NotFoundPage />} />
 
-      {/* Logout, please see SideMenu component */}
+      {/* Logout - please see SideMenu component */}
       
     </Routes>
   );
