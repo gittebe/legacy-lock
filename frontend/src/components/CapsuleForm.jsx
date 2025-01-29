@@ -52,7 +52,7 @@ const CapsuleForm = ({
           {/* Set date field */}
           <label htmlFor="capsule-unlock-date">
             Choose the release date
-            <Tooltip text="Release date means when the locket will be automatically opened - before the release date the locket can not be opened" />
+            <Tooltip text={"Release date means when the locket will be automatically opened\n- before the release date the locket can not be opened"} />
           </label>
           <input
             type="datetime-local"
