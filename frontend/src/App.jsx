@@ -5,12 +5,7 @@ import { useEffect } from "react";
 
 const App = () => {
   const isLoggedIn = useStore((state) => state.isLoggedIn) ?? false; 
-  const initializeUser = useStore((state) => state.initializeUser);
-
-  useEffect(() => {
-    initializeUser();
-  }, [initializeUser]);
-
+  
   return (
     <Router>
       {/* Pass the isLoggedIn state to RoutesConfig component */}

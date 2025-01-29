@@ -4,14 +4,15 @@ import "./ProfileForm.css";
 
 export const ProfileSettingsModal = ({ onClose }) => {
   const user = useStore((state) => state.user);
-  const updateProfilePicture = useStore((state) => state.updateProfilePicture);
+  const uploadProfilePicture = useStore((state) => state.uploadProfileImage);
+
   const [username, setUsername] = useState(user?.username || "");
   const [email, setEmail] = useState(user?.email || "");
   const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
-    if (user?.profilePicture) {
-      setProfileImage(user.profilePicture);
+    if (user?.profileImage) {
+      setProfileImage(user.profileImage);
     }
   }, [user]);
 
@@ -19,8 +20,9 @@ export const ProfileSettingsModal = ({ onClose }) => {
     const file = event.target.files[0];
     if (file) {
       try {
-        const url = await updateProfilePicture(file); // Upload and update profile picture
-        setProfileImage(url); // Update local preview
+        const url = await uploadProfilePicture(file);
+        console.log("Uploaded image URL:", url);
+        setProfileImage(url);
       } catch (error) {
         console.error("Error uploading profile picture:", error);
         alert("Failed to upload profile picture.");
@@ -32,9 +34,14 @@ export const ProfileSettingsModal = ({ onClose }) => {
     setProfileImage("");
   };
 
-  const handleSave = () => {
-    console.log("Changes saved:", { username, email, profileImage });
-    onClose();
+  const handleSave = async () => {
+    try {
+      console.log("Changes saved:", { username, email, profileImage });
+      onClose();
+    } catch (error) {
+      console.error("Error saving profile data:", error);
+      alert("Failed to save changes.");
+    }
   };
 
   return (
@@ -87,7 +94,11 @@ export const ProfileSettingsModal = ({ onClose }) => {
               placeholder="Enter your email"
             />
           </div>
-          <button className="save-button" onClick={handleSave}>
+          <button
+            type="button"
+            className="save-button"
+            onClick={handleSave}
+          >
             Save changes
           </button>
         </form>

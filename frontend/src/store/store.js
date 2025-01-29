@@ -24,8 +24,196 @@
  *  - error: Error state for handling failures.
  */
 
+// import { create } from "zustand";
+// import { uploadProfilePicture } from "../utils/uploadProfilePicture";
+
+// const useStore = create((set, get) => ({
+//   // *** Login state ***
+//   isLoggedIn: false,
+//   user: null,
+
+//   // *** Capsules state ***
+//   capsules: { created: [], received: [] },
+//   loading: false,
+//   error: null,
+
+//   // *** Login actions ***
+//   login: (user) => {
+//     // Save the user and profile picture to localStorage
+//     localStorage.setItem("user", JSON.stringify(user));
+//     localStorage.setItem("profilePicture", user.profilePicture || ""); // Save the profile picture if it exists
+//     set({
+//       isLoggedIn: true,
+//       user: { ...user, profilePicture: user.profilePicture || "" },
+//     });
+//   },
+
+//   logout: async () => {
+//     set({ loading: true });
+//     try {
+//       const accessToken = localStorage.getItem("accessToken");
+//       if (!accessToken) {
+//         console.error("No token found for logout.");
+//         set({ loading: false, error: "No token found for logout." });
+//         return;
+//       }
+
+//       const response = await fetch("http://localhost:5001/users/logout", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//         body: JSON.stringify({ accessToken }),
+//       });
+
+//       if (!response.ok) {
+//         const data = await response.json();
+//         throw new Error(data.message || "Logout failed");
+//       }
+
+//       localStorage.removeItem("accessToken");
+//       localStorage.removeItem("user");
+//       localStorage.removeItem("profilePicture"); // Remove profile picture from storage
+//       set({
+//         isLoggedIn: false,
+//         user: null,
+//         capsules: { created: [], received: [] },
+//         loading: false,
+//       });
+//     } catch (error) {
+//       console.error("Error logging out:", error);
+//       set({ loading: false, error: error.message });
+//     }
+//   },
+
+//   setIsLoggedIn: (isLoggedIn, user = null) => {
+//     if (isLoggedIn) {
+//       localStorage.setItem("user", JSON.stringify(user));
+//       localStorage.setItem("profilePicture", user.profilePicture || ""); // Save profile picture
+//       set({ isLoggedIn: true, user: { ...user, profilePicture: user.profilePicture || "" } });
+//     } else {
+//       localStorage.removeItem("user");
+//       localStorage.removeItem("profilePicture"); // Remove profile picture
+//       set({ isLoggedIn: false, user: null });
+//     }
+//   },
+
+//   initializeUser: () => {
+//     const user = JSON.parse(localStorage.getItem("user"));
+//     const profilePicture = localStorage.getItem("profilePicture");
+//     if (user) {
+//       set({
+//         isLoggedIn: true,
+//         user: { ...user, profilePicture: profilePicture || "" },
+//       });
+//     }
+//   },
+
+//   updateProfilePicture: async (file) => {
+//     try {
+//       // Upload to backend
+//       const url = await uploadProfilePicture(file);
+
+//       // Update user state with new profile picture URL
+//       const { user } = get();
+//       const updatedUser = { ...user, profilePicture: url };
+
+//       // Save to localStorage
+//       localStorage.setItem("profilePicture", url);
+//       localStorage.setItem("user", JSON.stringify(updatedUser));
+
+//       // Update Zustand state
+//       set({
+//         user: updatedUser,
+//       });
+//     } catch (error) {
+//       console.error("Failed to update profile picture:", error);
+//     }
+//   },
+
+//   // *** Capsules actions ***
+//   fetchCapsules: async () => {
+//     if (get().loading) return;
+
+//     set({ loading: true, error: null });
+
+//     try {
+//       const token = localStorage.getItem("accessToken");
+//       if (!token) {
+//         console.error("No access token found");
+//         set({ error: "No access token found", loading: false });
+//         return;
+//       }
+
+//       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
+//         fetch("http://localhost:5001/capsule/getUserCapsules", {
+//           headers: { Authorization: `Bearer ${token}` },
+//         }),
+//         fetch("http://localhost:5001/capsule/getReceivedCapsules", {
+//           headers: { Authorization: `Bearer ${token}` },
+//         }),
+//       ]);
+
+//       if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
+//         console.error("Failed to fetch capsules");
+//         set({ error: "Failed to fetch capsules", loading: false });
+//         return;
+//       }
+
+//       const userCapsules = await userCapsulesResponse.json();
+//       const receivedCapsules = await receivedCapsulesResponse.json();
+
+//       set({
+//         capsules: {
+//           created: userCapsules.data || [],
+//           received: receivedCapsules.data || [],
+//         },
+//         loading: false,
+//       });
+//     } catch (error) {
+//       console.error("Error fetching capsules:", error);
+//       set({ loading: false, error: error.message });
+//     }
+//   },
+
+//   addCapsule: (newCapsule) =>
+//     set((state) => ({
+//       capsules: {
+//         ...state.capsules,
+//         created: [...state.capsules.created, newCapsule],
+//       },
+//     })),
+
+//   getCapsuleById: async (id) => {
+//     const { capsules, fetchCapsules } = get();
+
+//     try {
+//       if (!id) {
+//         throw new Error("No ID provided");
+//       }
+//       const token = localStorage.getItem("accessToken");
+//       const response = await fetch(`http://localhost:5001/capsule/getCapsule/${id}`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+
+//       if (!response.ok) {
+//         const data = await response.json();
+//         throw new Error(data.message || "Failed to fetch capsule");
+//       }
+
+//       return await response.json();
+//     } catch (error) {
+//       console.error("Store: Error fetching capsule:", error);
+//       return null;
+//     }
+//   },
+// }));
+
+// export default useStore;
+
+// export default useStore;
 import { create } from "zustand";
-import { uploadProfilePicture } from "../utils/uploadProfilePicture";
 
 const useStore = create((set, get) => ({
   // *** Login state ***
@@ -38,31 +226,28 @@ const useStore = create((set, get) => ({
   error: null,
 
   // *** Login actions ***
-  login: (user) => {
-    // Save the user and profile picture to localStorage
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("profilePicture", user.profilePicture || ""); // Save the profile picture if it exists
-    set({
-      isLoggedIn: true,
-      user: { ...user, profilePicture: user.profilePicture || "" },
-    });
-  },
+  login: (user) => set({
+    isLoggedIn: true,
+    user: user,
+  }),
 
   logout: async () => {
     set({ loading: true });
     try {
       const accessToken = localStorage.getItem("accessToken");
+      console.log("Access Token:", accessToken);
       if (!accessToken) {
         console.error("No token found for logout.");
         set({ loading: false, error: "No token found for logout." });
         return;
       }
 
-      const response = await fetch("http://localhost:5001/users/logout", {
+      // API-request to logout
+      const response = await fetch("http://localhost:5000/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          "Authorization": `Bearer ${accessToken}`,
         },
         body: JSON.stringify({ accessToken }),
       });
@@ -73,8 +258,6 @@ const useStore = create((set, get) => ({
       }
 
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
-      localStorage.removeItem("profilePicture"); // Remove profile picture from storage
       set({
         isLoggedIn: false,
         user: null,
@@ -87,54 +270,14 @@ const useStore = create((set, get) => ({
     }
   },
 
-  setIsLoggedIn: (isLoggedIn, user = null) => {
-    if (isLoggedIn) {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("profilePicture", user.profilePicture || ""); // Save profile picture
-      set({ isLoggedIn: true, user: { ...user, profilePicture: user.profilePicture || "" } });
-    } else {
-      localStorage.removeItem("user");
-      localStorage.removeItem("profilePicture"); // Remove profile picture
-      set({ isLoggedIn: false, user: null });
-    }
-  },
-
-  initializeUser: () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const profilePicture = localStorage.getItem("profilePicture");
-    if (user) {
-      set({
-        isLoggedIn: true,
-        user: { ...user, profilePicture: profilePicture || "" },
-      });
-    }
-  },
-
-  updateProfilePicture: async (file) => {
-    try {
-      // Upload to backend
-      const url = await uploadProfilePicture(file);
-
-      // Update user state with new profile picture URL
-      const { user } = get();
-      const updatedUser = { ...user, profilePicture: url };
-
-      // Save to localStorage
-      localStorage.setItem("profilePicture", url);
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-
-      // Update Zustand state
-      set({
-        user: updatedUser,
-      });
-    } catch (error) {
-      console.error("Failed to update profile picture:", error);
-    }
-  },
+  setIsLoggedIn: (isLoggedIn, user = null) => set({
+    isLoggedIn: isLoggedIn,
+    user: user,
+  }),
 
   // *** Capsules actions ***
   fetchCapsules: async () => {
-    if (get().loading) return;
+    if (get().loading) return; // Prevent multiple requests
 
     set({ loading: true, error: null });
 
@@ -147,10 +290,10 @@ const useStore = create((set, get) => ({
       }
 
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
-        fetch("http://localhost:5001/capsule/getUserCapsules", {
+        fetch("http://localhost:5000/capsule/getUserCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5001/capsule/getReceivedCapsules", {
+        fetch("http://localhost:5000/capsule/getReceivedCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -177,6 +320,7 @@ const useStore = create((set, get) => ({
     }
   },
 
+  // Add a new capsule to the store
   addCapsule: (newCapsule) =>
     set((state) => ({
       capsules: {
@@ -185,6 +329,7 @@ const useStore = create((set, get) => ({
       },
     })),
 
+  // Get a single capsule by ID
   getCapsuleById: async (id) => {
     const { capsules, fetchCapsules } = get();
 
@@ -193,7 +338,16 @@ const useStore = create((set, get) => ({
         throw new Error("No ID provided");
       }
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`http://localhost:5001/capsule/getCapsule/${id}`, {
+      console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
+      const url = `http://localhost:5000/capsule/getCapsule/${id}`;
+      console.log("URL being fetched:", url);
+      
+      if (!token) {
+        console.error("No access token found");
+        return null;
+      }
+
+      const response = await fetch(`http://localhost:5000/capsule/getCapsule/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -202,10 +356,37 @@ const useStore = create((set, get) => ({
         throw new Error(data.message || "Failed to fetch capsule");
       }
 
-      return await response.json();
+      const capsule = await response.json();
+      return capsule;
     } catch (error) {
       console.error("Store: Error fetching capsule:", error);
       return null;
+    }
+  },
+
+  // *** Profile Picture Upload Action ***
+  uploadProfileImage: async (file) => {
+    const token = localStorage.getItem("accessToken");
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:5000/users/upload-profile-image", {
+        method: "POST",
+        body: formData,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to upload profile picture");
+      }
+
+      const data = await response.json();
+      return data.profileImageUrl;
+    } catch (error) {
+      console.error("Error uploading profile picture:", error.message);
+      throw error;
     }
   },
 }));

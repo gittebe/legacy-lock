@@ -26,7 +26,7 @@ const userSchema = new Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex"),
   },
-  profilePicture: {
+  profileImage: {
     type: String,
     default: "", // Default to an empty string if no profile picture is uploaded
   },

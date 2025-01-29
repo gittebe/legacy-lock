@@ -17,18 +17,13 @@ export const RoutesConfig = () => {
     const verifyToken = async () => {
       if (token) {
         try {
-          const response = await fetch("http://localhost:5001/dashboard", {
+          const response = await fetch("http://localhost:5000/dashboard", {
             headers: { Authorization: `Bearer ${token}` },
           });
 
           if (response.ok) {
             const data = await response.json();
             setIsLoggedIn(true, data.user);
-
-            // If user data contains a profile picture, save it
-            if (data.user?.profilePicture) {
-              updateProfilePicture(data.user.profilePicture);
-            }
           } else {
             setIsLoggedIn(false);
           }
@@ -43,7 +38,7 @@ export const RoutesConfig = () => {
     };
 
     verifyToken();
-  }, [token, setIsLoggedIn, updateProfilePicture]);
+  }, [token, setIsLoggedIn]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -51,29 +46,22 @@ export const RoutesConfig = () => {
 
   return (
     <Routes>
-      {!isLoggedIn ? (
+      {/* Dynamic route `/` */}
+      <Route
+        path="/"
+        element={isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />}
+      />
+      {/* Authenticated routes */}
+      {isLoggedIn && (
         <>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </>
-      ) : (
-        <>
+          {/* authenticated routes */}
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/profile" element={<ProfileSettingsModal />} />
           <Route path="/capsules" element={<CapsulesPage />} />
           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
-          <Route
-            path="/profile"
-            element={
-              <ProfileSettingsModal
-                onClose={() => console.log("Profile modal closed")}
-              />
-            }
-          />
-          <Route path="*" element={<Navigate to="/dashboard" />} />
         </>
       )}
 
-      {/* Fallback Route */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

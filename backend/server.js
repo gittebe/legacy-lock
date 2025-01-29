@@ -11,12 +11,11 @@ import userRoutes from "./routes/users.js";
 import capsuleRoutes from "./routes/capsule.js";
 import mediaRoutes from "./routes/media.js";
 import dashboardRoutes from "./routes/dashboard.js";
-import profileRoutes from "./routes/profile.js"; // Import profile routes
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 8080;
 
 // Configure multer for handling file uploads
 const upload = multer({ dest: "uploads/" });
@@ -36,8 +35,6 @@ checkConnection();
 app.use(cors());
 app.use(express.json());
 
-// Use the profile routes
-app.use("/api/profile", profileRoutes);
 
 // Use the imported routes
 app.use("/", documentationRoutes);
