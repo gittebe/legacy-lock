@@ -29,7 +29,9 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  white-space: nowrap;
+  white-space: normal;  
+  word-wrap: break-word; 
+  max-width: 250px; 
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
