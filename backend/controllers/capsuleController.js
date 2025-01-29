@@ -149,3 +149,36 @@ export const getReceivedCapsules = async (req, res) => {
     res.status(500).json({message: "Error retrieving user´s capsules", error})
   }
 }
+
+
+// Route to fetch only the mediaUrls
+
+
+export const getMediaUrls = async (req, res) => {
+  const { userId } = req.params;  // Oder req.body.userId, je nachdem, wie der User-Id übergeben wird
+
+  // Validierung des User-IDs
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: 'Invalid User ID' });
+  }
+
+  try {
+    // Alle Kapseln des Users finden und nur die mediaUrls zurückgeben
+    const capsules = await Capsule.find({ userId }).select('mediaUrls');
+
+    // Wenn keine Kapseln für den User gefunden wurden
+    if (capsules.length === 0) {
+      return res.status(404).json({ message: 'No capsules found for this user' });
+    }
+
+    // Alle mediaUrls der gefundenen Kapseln zurückgeben
+    const allMediaUrls = capsules.map(capsule => capsule.mediaUrls).flat();
+
+    // Erfolgreiche Antwort
+    res.status(200).json(allMediaUrls);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching media URLs', error: error.message });
+  }
+};
+
+
