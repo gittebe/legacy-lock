@@ -1,0 +1,32 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+  background: rgba(0, 0, 0, 0.8); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.warning-icon {
+  width: 90px; 
+  height: auto;
+}
+
+.warning-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.warning-text {
+  font-size: 18px;
+}
