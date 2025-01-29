@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, isLoggedIn }) => {
   const navigate = useNavigate();
-  const handleProfileClick = () => { navigate("/profile") }
+  const { setIsLoggedIn } = useStore();
+
+  const handleProfileClick = () => {
+    navigate("/profile")
+  }
 
   const onLogoutClick = () => {
     localStorage.removeItem("accessToken");
