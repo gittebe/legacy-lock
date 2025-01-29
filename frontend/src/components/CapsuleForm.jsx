@@ -4,8 +4,8 @@
  * 
  */
 
-import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import { MessageInput } from "./MessageInput";
+import { Tooltip } from "../ui/Tooltip";
 
 const CapsuleForm = ({
   handleSubmit,
@@ -50,7 +50,10 @@ const CapsuleForm = ({
           {errors.title && <p className="error-message">{errors.title}</p>}
 
           {/* Set date field */}
-          <label htmlFor="capsule-unlock-date">Choose the release date and time</label>
+          <label htmlFor="capsule-unlock-date">
+            Choose the release date
+            <Tooltip text={"Release date means when the locket will be automatically opened\n- before the release date the locket can not be opened"} />
+          </label>
           <input
             type="datetime-local"
             id="capsule-unlock-date"
