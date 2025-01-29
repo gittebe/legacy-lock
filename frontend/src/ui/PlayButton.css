@@ -1,0 +1,21 @@
+.play-button-wrapper {
+  position: absolute;
+  bottom: -28px;
+  left: 30%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.play-icon {
+  width: 72px;
+  height: 72px;
+}
+
+.play-button-wrapper:hover .play-icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
