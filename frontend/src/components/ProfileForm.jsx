@@ -43,16 +43,6 @@ export const ProfileSettingsModal = ({ onClose }) => {
     }
   };
   
-
-  // const handleSave = async () => {
-  //   try {
-  //     console.log("Changes saved:", { username, email, profileImage });
-  //     onClose();
-  //   } catch (error) {
-  //     console.error("Error saving profile data:", error);
-  //     alert("Failed to save changes.");
-  //   }
-  // };
   const handleSave = async () => {
     try {
       // Update the global store with the new values
@@ -66,10 +56,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
       });
   
       console.log("Changes saved:", { username, email, profileImage });
-  
-      // Optionally, if you're saving the data to a backend, make an API call here
-  
-      // Close the modal after saving
+
       onClose();
     } catch (error) {
       console.error("Error saving profile data:", error);
