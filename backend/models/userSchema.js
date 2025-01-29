@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
-const {Schema, model} = mongoose;
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
   email: {
@@ -10,40 +10,44 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     lowercase: true,
-    match: [/\S+@\S+\.\S+/, "Please use a valid email address"]
+    match: [/\S+@\S+\.\S+/, "Please use a valid email address"],
   },
   password: {
     type: String,
     required: true,
-    minlength: 6
+    minlength: 6,
   },
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   accessToken: {
     type: String,
-    default: ()=> crypto.randomBytes(128).toString("hex")
-  }
-})
+    default: () => crypto.randomBytes(128).toString("hex"),
+  },
+  profilePicture: {
+    type: String,
+    default: "", // Default to an empty string if no profile picture is uploaded
+  },
+});
 
-//hash password before it is saved
+// Hash password before it is saved
 userSchema.pre("save", async function (next) {
-  if(this.isModified("password")){
+  if (this.isModified("password")) {
     try {
       this.password = await bcrypt.hash(this.password, 10);
     } catch (error) {
       return next(error);
-    } 
+    }
   }
   next();
 });
 
-//Compare password
+// Compare password
 userSchema.methods.comparePassword = async function (userPassword) {
   try {
-     return await bcrypt.compare(userPassword, this.password);
+    return await bcrypt.compare(userPassword, this.password);
   } catch {
     throw new Error("Password comparison failed");
   }

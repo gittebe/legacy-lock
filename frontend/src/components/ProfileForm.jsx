@@ -1,15 +1,40 @@
 import useStore from "../store/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ProfileForm.css";
 
 export const ProfileSettingsModal = ({ onClose }) => {
   const user = useStore((state) => state.user);
+  const updateProfilePicture = useStore((state) => state.updateProfilePicture);
   const [username, setUsername] = useState(user?.username || "");
   const [email, setEmail] = useState(user?.email || "");
+  const [profileImage, setProfileImage] = useState("");
+
+  useEffect(() => {
+    if (user?.profilePicture) {
+      setProfileImage(user.profilePicture);
+    }
+  }, [user]);
+
+  const handleChangePicture = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const url = await updateProfilePicture(file); // Upload and update profile picture
+        setProfileImage(url); // Update local preview
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+        alert("Failed to upload profile picture.");
+      }
+    }
+  };
+
+  const handleDeletePicture = () => {
+    setProfileImage("");
+  };
 
   const handleSave = () => {
-    console.log("Changes saved:", { username, email });
-    onClose(); // Close the modal after saving
+    console.log("Changes saved:", { username, email, profileImage });
+    onClose();
   };
 
   return (
@@ -18,12 +43,28 @@ export const ProfileSettingsModal = ({ onClose }) => {
         <h2>Profile Settings</h2>
         <form className="profile-form" onSubmit={(e) => e.preventDefault()}>
           <div className="profile-picture-container">
-            <div className="profile-picture"></div>
+            <div
+              className="profile-picture"
+              style={{
+                backgroundImage: profileImage ? `url(${profileImage})` : "none",
+                backgroundColor: profileImage ? "transparent" : "#000",
+              }}
+            ></div>
             <div className="profile-picture-buttons">
-              <button className="change-button" type="button">
+              <label className="change-button">
                 Change picture
-              </button>
-              <button className="delete-button" type="button">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChangePicture}
+                  style={{ display: "none" }}
+                />
+              </label>
+              <button
+                type="button"
+                className="delete-button"
+                onClick={handleDeletePicture}
+              >
                 Delete picture
               </button>
             </div>

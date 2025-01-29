@@ -4,11 +4,12 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { CapsulesPage } from "../pages/CapsulesPage";
 import { CapsuleDetailsPage } from "../pages/CapsuleDetailsPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { ProfileSettingsModal } from "../components/ProfileForm";
 import useStore from "../store/store";
 import { useEffect, useState } from "react";
 
 export const RoutesConfig = () => {
-  const { isLoggedIn, setIsLoggedIn } = useStore();
+  const { isLoggedIn, setIsLoggedIn, updateProfilePicture } = useStore();
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("accessToken");
 
@@ -23,6 +24,11 @@ export const RoutesConfig = () => {
           if (response.ok) {
             const data = await response.json();
             setIsLoggedIn(true, data.user);
+
+            // If user data contains a profile picture, save it
+            if (data.user?.profilePicture) {
+              updateProfilePicture(data.user.profilePicture);
+            }
           } else {
             setIsLoggedIn(false);
           }
@@ -37,7 +43,7 @@ export const RoutesConfig = () => {
     };
 
     verifyToken();
-  }, [token, setIsLoggedIn]);
+  }, [token, setIsLoggedIn, updateProfilePicture]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -55,6 +61,14 @@ export const RoutesConfig = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/capsules" element={<CapsulesPage />} />
           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProfileSettingsModal
+                onClose={() => console.log("Profile modal closed")}
+              />
+            }
+          />
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </>
       )}
