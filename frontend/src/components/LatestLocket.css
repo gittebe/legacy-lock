@@ -10,6 +10,7 @@
   justify-content: space-between;
   position: relative;
   overflow: visible;
+  min-height: 150px; 
 }
 
 .locket-content {
@@ -68,12 +69,21 @@
     gap: 10px;
     padding-left: 3%;
   }
-
   
-.locket-images {
+  .locket-images {
   display: flex;
   gap: 10px;
   position: relative;
   left: -20%;
+}
+
+@media (max-width: 768px) {
+  .latest-locket {
+    position: absolute; /* Eller fixed om den ska vara fast vid scroll */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 200px; /* Ger mer höjd på mobil */
+  }
 }
 }
