@@ -8,4 +8,6 @@ body {
   font-family: Arial, sans-serif;
   color: #000000;
   background: #ffffff;
+  overflow-x: hidden;
+  width: 100%;
 }
