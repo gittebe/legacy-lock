@@ -26,7 +26,7 @@ export const LatestLocket = () => {
       .sort((a, b) => new Date(a.openAt) - new Date(b.openAt)); 
   }, [capsules]);
 
-  // Pick the next capsule to be opened (only if we are not in the 10-minute waiting)
+  // Pick the next capsule to be opened (only if it  not in the 10-minute waiting)
   useEffect(() => {
     if (isWaiting || !futureCapsules.length) {
       return;
