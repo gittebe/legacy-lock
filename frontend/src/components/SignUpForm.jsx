@@ -22,7 +22,7 @@ export const SignUpForm = ({ onClose }) => {
     const signupData = { email, username, password };
 
     try {
-      const response = await fetch('http://localhost:5000/users/register', {
+      const response = await fetch('https://legacy-lock-2.onrender.com/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signupData),

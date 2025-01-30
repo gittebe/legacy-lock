@@ -17,7 +17,7 @@ export const RoutesConfig = () => {
     const verifyToken = async () => {
       if (token) {
         try {
-          const response = await fetch("http://localhost:5000/dashboard", {
+          const response = await fetch("https://legacy-lock-2.onrender.com/dashboard", {
             headers: { Authorization: `Bearer ${token}` },
           });
 

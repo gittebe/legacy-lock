@@ -55,7 +55,7 @@ const useStore = create((set, get) => ({
       }
 
       // API-request to logout
-      const response = await fetch("http://localhost:5000/users/logout", {
+      const response = await fetch("https://legacy-lock-2.onrender.com/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,10 +102,10 @@ const useStore = create((set, get) => ({
       }
 
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
-        fetch("http://localhost:5000/capsule/getUserCapsules", {
+        fetch("https://legacy-lock-2.onrender.com/capsule/getUserCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/capsule/getReceivedCapsules", {
+        fetch("https://legacy-lock-2.onrender.com/capsule/getReceivedCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -151,7 +151,7 @@ const useStore = create((set, get) => ({
       }
       const token = localStorage.getItem("accessToken");
       console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
-      const url = `http://localhost:5000/capsule/getCapsule/${id}`;
+      const url = `https://legacy-lock-2.onrender.com/capsule/getCapsule/${id}`;
       console.log("URL being fetched:", url);
       
       if (!token) {
@@ -159,7 +159,7 @@ const useStore = create((set, get) => ({
         return null;
       }
 
-      const response = await fetch(`http://localhost:5000/capsule/getCapsule/${id}`, {
+      const response = await fetch(`https://legacy-lock-2.onrender.com/capsule/getCapsule/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -184,7 +184,7 @@ const useStore = create((set, get) => ({
     }
   
       try {
-        const response = await fetch("http://localhost:5000/users/delete-profile-image", {
+        const response = await fetch("https://legacy-lock-2.onrender.com/users/delete-profile-image", {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -216,7 +216,7 @@ const useStore = create((set, get) => ({
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:5000/users/upload-profile-image", {
+      const response = await fetch("https://legacy-lock-2.onrender.com/users/upload-profile-image", {
         method: "POST",
         body: formData,
         headers: { Authorization: `Bearer ${token}` },
@@ -242,7 +242,7 @@ updateUserProfile: async (userData) => {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/users/update-profile", {
+    const response = await fetch("https://legacy-lock-2.onrender.com/users/update-profile", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

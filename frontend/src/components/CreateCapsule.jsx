@@ -58,7 +58,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
 
     try {
       // Send the formData to the server:
-      const response = await fetch("http://localhost:5000/capsule/create", {
+      const response = await fetch("https://legacy-lock-2.onrender.com/capsule/create", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`, 
