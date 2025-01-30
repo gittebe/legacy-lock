@@ -65,7 +65,7 @@ export const LatestLocket = () => {
     <>
       <div className="latest-locket">
         
-        <LocketCountdown nextLocket={nextLocket} timeLeft={timeLeft} />
+      <LocketCountdown nextLocket={nextCapsule} timeLeft={timeLeft} />
 
         <PlayButton onClick={handlePlayButtonClick} />
 
