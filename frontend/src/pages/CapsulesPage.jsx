@@ -49,10 +49,6 @@ export const CapsulesPage = () => {
      
         <CapsuleList />
       </div>
-      <div>
-        <button onClick={openPopup}>Create Capsule</button>
-        <CreateCapsule isOpen={isPopupOpen} onClose={closePopup} />
-      </div>
     </>
   );
 };

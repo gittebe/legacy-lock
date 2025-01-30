@@ -6,29 +6,23 @@
   width: 150px;
 }
 
-.capsule-card-title {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  margin: 0;
-  font-weight: 200;
-}
 .title{
   font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
 .release-date {
   font-family: Arial, sans-serif;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 300;
   margin: 0;
 }
 
 .date {
   font-family: Arial, sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 600;
   margin: 0;
 }

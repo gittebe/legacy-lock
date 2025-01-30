@@ -1,28 +1,53 @@
 .capsule-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-  }
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 20px;
+}
 
-  .header-capsules {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-  }
-  
-@media (min-width: 600px) {
-  .capsule-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.header-capsules {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
 }
-  
-@media (min-width: 900px) {
-  .capsule-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+
+.created-capsule-container,
+.received-capsule-container {
+  margin-bottom: 60px;
+  padding: 0 40px;
 }
-  
-@media (min-width: 1200px) {
-  .capsule-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+
+.capsule-card {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.01s ease;
+}
+
+.capsule-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.capsule-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 0; 
+  margin: 0;
+}
+
+.capsule-card .capsule-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 16px 20px 8px;
+}
+
+.capsule-card .capsule-release-date {
+  font-size: 16px;
+  color: #555;
+  margin: 0 20px 16px;
 }
