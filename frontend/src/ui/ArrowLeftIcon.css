@@ -1,0 +1,29 @@
+.arrow-icon-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: none;
+  border: none; 
+  padding-top: 100px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .arrow-icon-container {
+    padding-left: 10px;
+    padding-top: 20px;
+  }
+
+  .header-mobile-capsule .arrow-icon-container {
+    display: none; 
+  }
+}

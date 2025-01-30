@@ -1,9 +1,28 @@
-p {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+.capsule-card-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+  width: 150px;
 }
 
-h4 {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+.title{
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.release-date {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.date {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
 }

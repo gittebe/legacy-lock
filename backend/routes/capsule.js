@@ -1,5 +1,5 @@
 import express from "express";
-import {createCapsule, getCapsule, getUserCapsules, getReceivedCapsules, getCreateCapsulePage} from "../controllers/capsuleController.js";
+import {createCapsule, getCapsule, getUserCapsules, getReceivedCapsules, getCreateCapsulePage, getMediaUrls} from "../controllers/capsuleController.js";
 import { authenticateUser } from "../middleware/authenticateUser.js";
 import upload from "../middleware/multer.js";
 
@@ -19,5 +19,8 @@ router.get("/getUserCapsules", authenticateUser, getUserCapsules)
 
 // GET to receive all the capsules the user has received by other users
 router.get("/getReceivedCapsules", authenticateUser, getReceivedCapsules)
+
+// GET latest three media URLs
+router.get("/media-urls/:userId", authenticateUser, getMediaUrls)
 
 export default router;

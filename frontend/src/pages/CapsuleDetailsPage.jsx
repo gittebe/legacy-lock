@@ -1,91 +1,69 @@
-/**
- * This page is for view an individual capsule.
- */
-import useStore from "../store/store";
 import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
-import { SideMenu } from "../components/SideMenu";
+import useStore from "../store/store";
 import { Header } from "../components/Header";
-import { formatDateTime } from "../utils/date";
+import { SideMenu } from "../components/SideMenu";
+import { ArrowLeftIcon } from "../ui/ArrowLeftIcon";
 import { CapsuleDetailCard } from "../components/CapsuleDetailCard";
+import "./CapsuleDetailsPage.css";
 
 export const CapsuleDetailsPage = () => {
   const user = useStore((state) => state.user);
-  const logout = useStore((state) => state.logout);
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
-  const { id } = useParams(); // Get the capsule ID from the URL
-  console.log("Capsule ID from URL:", id);
+  const { id } = useParams();
 
-  const getCapsuleById = useStore((state) => state.getCapsuleById); // Get the method to fetch a capsule by ID
-  const [capsuleDetails, setCapsuleDetails] = useState(null); // Store the capsule in the local state
-  const [loading, setLoading] = useState(true); // Track loading state
+  const getCapsuleById = useStore((state) => state.getCapsuleById);
+  const [capsuleDetails, setCapsuleDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the capsule details when the component mounts
-    console.log("Frontend: Fetching capsule for ID:", id);
-
     const fetchCapsule = async () => {
       try {
         const capsule = await getCapsuleById(id);
-        console.log("Frontend: Fetched capsule:", capsule);
         setCapsuleDetails(capsule);
       } catch (error) {
-        console.error("Frontend: Error fetching capsule details:", error);
+        console.error("Error fetching capsule details:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
-      fetchCapsule();
-    } else {
-      console.log("Frontend: No ID provided for fetching capsule.");
-      setLoading(false);
-    }
+    if (id) fetchCapsule();
+    else setLoading(false);
   }, [id, getCapsuleById]);
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  const handleLogout = () => {
-    logout(); // Call the logout method from your store
-    navigate("/"); // Redirect to home or login page
-  };
-
-  // Handle loading state
   if (loading) {
     return <p>Loading capsule details...</p>;
   }
 
-  // Handle capsule not found
   if (!capsuleDetails) {
     return <p>Capsule not found.</p>;
   }
 
-  // Check if the capsule is locked
-  const isLocked = new Date() < new Date(capsuleDetails.openAt);
+  const { title, openAt } = capsuleDetails.data;
 
   return (
     <>
-      <Header toggleMenu={() => setShowMenu(!showMenu)} />
-      <SideMenu
-        showMenu={showMenu}
-        toggleMenu={() => setShowMenu(false)}
-        isLoggedIn={!!user}
-        onLogoutClick={handleLogout}
-      />
-      <div>
-        <h1>Capsule Details Page</h1>
-        {isLocked ? (
-          <p>
-           This capsule is locked until{" "}
-           {formatDateTime(new Date(capsuleDetails.openAt))}.
-          </p>
-        ) : (
-          <CapsuleDetailCard capsule={capsuleDetails} />
-          )}
+      <Header />
+      <SideMenu />
+      <div className="capsule-details-page">
+        {/* Back Button */}
+        <div className="back-button" onClick={() => navigate(-1)}>
+          <ArrowLeftIcon />
+        </div>
+
+        {/* Title and Unlock Date */}
+        <div className="title-container">
+          <h1 className="capsule-title">{title || "Untitled Capsule"}</h1>
+          <p className="capsule-unlock-date">Unlocked {new Date(openAt).toLocaleDateString()}</p>
+        </div>
+
+        {/* Capsule Detail Card */}
+        <CapsuleDetailCard capsule={capsuleDetails} />
       </div>
     </>
   );

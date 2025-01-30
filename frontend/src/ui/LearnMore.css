@@ -1,5 +1,6 @@
 .learn-more-button {
   position: fixed;
+  font-family: "Share Tech", serif;
   bottom: 0;
   right: 0;
   width: 250px;
@@ -29,6 +30,7 @@
 
 .learn-more-container {
   background-color: #000000;
+  font-family: "Share Tech", serif;
   color: #ffffff;
   width: 40%;
   height: 38%;

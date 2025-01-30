@@ -5,7 +5,7 @@
   width: 90px;
   height: 90px;
   background-color: #84607d;
-  border: 3px solid #5a3e57; /* Darker purple border */
+  border: 3px solid #5a3e57; 
   border-radius: 50%;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -24,4 +24,20 @@
   font-size: 38px;
   color: #ffffff;
   line-height: 1;
+}
+
+@media (max-width: 667px) {
+  .fab {
+    bottom: 20px; 
+    left: 50%;
+    right: auto; 
+    transform: translateX(-50%); 
+    width: 80px; 
+    height: 80px;
+    z-index: 10;
+  }
+
+  .fab-icon {
+    font-size: 36px; 
+  }
 }

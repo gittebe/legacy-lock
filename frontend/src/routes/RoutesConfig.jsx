@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { LandingPage } from "../pages/LandingPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { CapsulesPage } from "../pages/CapsulesPage";
@@ -51,6 +51,7 @@ export const RoutesConfig = () => {
         path="/"
         element={isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />}
       />
+      {/* Authenticated routes */}
       {isLoggedIn && (
         <>
           <Route path="/dashboard" element={<DashboardPage />} />
@@ -61,6 +62,9 @@ export const RoutesConfig = () => {
       )}
 
       <Route path="*" element={<NotFoundPage />} />
+
+      {/* Logout - please see SideMenu component */}
+      
     </Routes>
   );
 };

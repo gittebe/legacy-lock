@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   position: relative;
+  font-family: "Share Tech", serif;
 }
 
 .logo {

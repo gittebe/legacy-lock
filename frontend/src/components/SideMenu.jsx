@@ -3,8 +3,20 @@ import useStore from "../store/store";
 import { useState } from "react";
 import { ProfileSettingsModal } from "../components/ProfileForm";
 
-export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, onLogoutClick, isLoggedIn }) => {
+export const SideMenu = ({ showMenu, toggleMenu, onLoginClick, onSignUpClick, isLoggedIn }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false); // Manage profile modal state
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useStore();
+
+  const handleProfileClick = () => {
+    navigate("/profile")
+  }
+
+  const onLogoutClick = () => {
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
 
   return (
     <>
