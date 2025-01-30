@@ -8,17 +8,33 @@ import "./LatestLocket.css";
 import { useNavigate } from "react-router-dom";
 import { useCapsuleStatus } from "../hooks/useCapsuleStatus";
 
+
 export const LatestLocket = () => {
   const [showWarning, setShowWarning] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   const capsules = useStore((state) => state.capsules.created) || [];
   const navigateToCapsule = useNavigate();
-  
-  const nextCapsule = capsules
-    .filter((capsule) => capsule?.openAt)
-    .sort((a, b) => new Date(a.openAt).getTime() - new Date(b.openAt).getTime())
-    .find((capsule) => new Date(capsule.openAt) > new Date()) || null;
+
+  const nextCapsule = !isRevealed
+    ? capsules
+        .filter((capsule) => capsule?.openAt)
+        .sort((a, b) => new Date(a.openAt).getTime() - new Date(b.openAt).getTime())
+        .find((capsule) => new Date(capsule.openAt) > new Date()) || null
+    : null;
 
   const { capsuleId, isCapsuleOpen, timeLeft } = useCapsuleStatus(nextCapsule);
+
+  useEffect(() => {
+    if (!isCapsuleOpen || isRevealed) return;
+
+    // Stopps nextCapsule for 10 minutes
+    setIsRevealed(true);
+    const revealTimer = setTimeout(() => {
+      setIsRevealed(false);
+    }, 600000); // 10 minutes 
+
+    return () => clearTimeout(revealTimer);
+  }, [isCapsuleOpen, isRevealed]);
 
   const handlePlayButtonClick = () => {
     if (!capsuleId) return;
@@ -28,7 +44,7 @@ export const LatestLocket = () => {
     } else {
       setShowWarning(true);
     }
-  }
+  };
 
   return (
     <>
