@@ -47,15 +47,14 @@ export const ProfileSettingsModal = ({ onClose }) => {
 
   const handleDeletePicture = async () => {
     try {
-      useStore.setState({ user: { ...user, profileImage: "" } });
-      setProfileImage("");
-  
-      console.log("ProfileImage has been deleted.");
+      await useStore.getState().deleteProfileImage();  // Aufruf der neuen Store-Aktion
+      setProfileImage("");  // Lösche das Bild im lokalen Zustand
     } catch (error) {
-      console.error("error deleting image:", error);
-      alert("Error deleting the profile picture.");
+      console.error("Fehler beim Löschen des Profilbildes:", error);
+      alert("Fehler beim Löschen des Profilbildes.");
     }
   };
+  
   
   const handleSave = async () => {
     try {

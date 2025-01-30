@@ -176,6 +176,37 @@ const useStore = create((set, get) => ({
     }
   },
 
+  // Profile Picture Deletion
+  deleteProfileImage: async () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      throw new Error("Access token is missing. Please log in again.");
+    }
+  
+      try {
+        const response = await fetch("http://localhost:5000/users/delete-profile-image", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to delete profile picture");
+        }
+  
+        // Successfully deleted the image, update the store
+        set({
+          user: { ...get().user, profileImage: "" },
+        });
+        console.log("Profile picture deleted successfully.");
+      } catch (error) {
+        console.error("Error deleting profile image:", error);
+        throw error;
+      }
+    },
+
   // *** Profile Picture Upload Action ***
   uploadProfileImage: async (file) => {
     const token = localStorage.getItem("accessToken");
