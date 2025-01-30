@@ -1,14 +1,12 @@
-.settings-icon-container {
-  width: 40px; /* Increase the container size */
-  height: 40px; /* Increase the container size */
-  display: flex;
-  justify-content: center; /* Center the icon */
-  align-items: center; /* Center the icon vertically */
-  overflow: hidden; /* Prevent any unexpected overflow */
-}
 
 .settings-icon {
-  width: 100%; /* Ensure the icon fits the container */
-  height: 100%; /* Ensure the icon fits the container */
-  object-fit: contain; /* Preserve aspect ratio without cutting off */
+  object-fit: cover;
+}
+
+.settings-icon-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  cursor: pointer;
+  padding: 20px;
 }
