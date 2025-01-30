@@ -41,11 +41,8 @@
   color: #ffffff;
 }
 
-.locket-images {
-  display: flex;
-  gap: 10px;
-  position: relative;
-  left: -20%;
+.locket-images{
+  display: none;
 }
 
 .countdown-text {
@@ -71,4 +68,12 @@
     gap: 10px;
     padding-left: 3%;
   }
+
+  
+.locket-images {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  left: -20%;
+}
 }
