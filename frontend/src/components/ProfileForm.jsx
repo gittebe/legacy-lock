@@ -47,32 +47,53 @@ export const ProfileSettingsModal = ({ onClose }) => {
 
   const handleDeletePicture = async () => {
     try {
-      await useStore.getState().deleteProfileImage();  // Aufruf der neuen Store-Aktion
-      setProfileImage("");  // Lösche das Bild im lokalen Zustand
+      await useStore.getState().deleteProfileImage();
+      setProfileImage("");
     } catch (error) {
       console.error("Fehler beim Löschen des Profilbildes:", error);
       alert("Fehler beim Löschen des Profilbildes.");
     }
   };
   
-  
+  // const handleSave = async () => {
+  //   try {
+  //     if (!profileImage) {
+  //       console.warn("No profile image set. Are you sure you want to save?");
+  //     }
+  //     // Update the global store with the new values
+  //     useStore.setState({
+  //       user: { 
+  //         ...user, 
+  //         username: username, 
+  //         email: email, 
+  //         profileImage: profileImage || ""
+  //       }
+  //     });
+  //     localStorage.setItem("profileImage", profileImage);
+  //     console.log("Changes saved:", { username, email, profileImage });
+
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Error saving profile data:", error);
+  //     alert("Failed to save changes.");
+  //   }
+  // };
   const handleSave = async () => {
     try {
       if (!profileImage) {
         console.warn("No profile image set. Are you sure you want to save?");
       }
-      // Update the global store with the new values
-      useStore.setState({
-        user: { 
-          ...user, 
-          username: username, 
-          email: email, 
-          profileImage: profileImage || ""
-        }
-      });
-      localStorage.setItem("profileImage", profileImage);
-      console.log("Changes saved:", { username, email, profileImage });
-
+  
+      const userData = {
+        username: username,
+        email: email,
+        profileImage: profileImage || "",
+      };
+  
+      const updatedUser = await useStore.getState().updateUserProfile(userData);
+  
+      console.log("User updated:", updatedUser);
+  
       onClose();
     } catch (error) {
       console.error("Error saving profile data:", error);

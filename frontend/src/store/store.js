@@ -235,6 +235,45 @@ const useStore = create((set, get) => ({
       throw error;
     }
   },
+
+updateUserProfile: async (userData) => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    throw new Error("Access token is missing. Please log in again.");
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/users/update-profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update profile");
+    }
+
+    const updatedUser = await response.json();
+    console.log("Profile updated successfully:", updatedUser);
+
+    set({
+      user: { ...updatedUser,
+        username: userData.username,
+        email: userData.email,
+       },
+    });
+
+    return updatedUser;
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    throw error;
+  }
+}
+
 }));
 
 export default useStore;
