@@ -1,13 +1,6 @@
 .gallery-image-container {
-    width: 150px;
-    height: 150px;
-}
-
-@media (min-width: 667px) {
-  .gallery-image-container {
-    width: 150px;
-    height: 150px;
-  }
+    width: 100px;
+    height: 100px;
 }
 
 .gallery-image,
@@ -28,4 +21,18 @@
 
 .gallery-image-container:not(.blurred) .gallery-video {
   pointer-events: auto;
+}
+
+@media (min-width: 667px) {
+  .gallery-image-container {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 667px) {
+  .gallery-image-container {
+    max-width: 300px;
+    max-height: 300px;
+  }
 }
