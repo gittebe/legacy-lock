@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 
 export const useCapsuleStatus = (capsule) => {
-  // Hooks måste alltid exekveras
+
   const [timeLeft, setTimeLeft] = useState(null);
 
-  // Säkerställ att capsuleId finns
   const capsuleId = capsule?._id || capsule?.id || null;
   const isCapsuleOpen = capsule ? new Date() >= new Date(capsule.openAt) : false;
 
@@ -18,7 +17,7 @@ export const useCapsuleStatus = (capsule) => {
 
       if (diff <= 0) {
         clearInterval(interval);
-        setTimeLeft("The capsule is now open!");
+        setTimeLeft("The locket is now open!");
       } else {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
