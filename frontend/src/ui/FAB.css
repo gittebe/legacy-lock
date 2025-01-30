@@ -29,7 +29,6 @@
 
 @media (max-width: 667px) {
   .fab {
-    /*bottom: 20px; */
     left: 50%;
     right: auto; 
     transform: translateX(-50%); 
@@ -45,7 +44,6 @@
   }
   @media (max-width: 420px) {
     .fab {
-      /*bottom: 20px; */
       left: 50%;
       right: auto; 
       transform: translateX(-50%); 
