@@ -19,3 +19,10 @@
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
+
+@media (max-width: 768px) { 
+  .play-button-wrapper {
+    left: 50%; 
+    transform: translateX(-50%);
+  }
+}
