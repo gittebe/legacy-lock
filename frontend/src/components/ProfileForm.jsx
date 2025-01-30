@@ -8,11 +8,18 @@ export const ProfileSettingsModal = ({ onClose }) => {
 
   const [username, setUsername] = useState(user?.username || "");
   const [email, setEmail] = useState(user?.email || "");
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(user?.profileImage  || "" );
 
   useEffect(() => {
+    console.log("useEffect running");
     if (user?.profileImage) {
+      console.log("Found profileImage in user:", user.profileImage);
       setProfileImage(user.profileImage);
+    } else {
+      const storedImage = localStorage.getItem("profileImage");
+      if (storedImage) {
+        setProfileImage(storedImage);
+      }
     }
   }, [user]);
 
@@ -20,10 +27,17 @@ export const ProfileSettingsModal = ({ onClose }) => {
     const file = event.target.files[0];
     if (file) {
       try {
+        if (profileImage) {
+          await handleDeletePicture()
+        }
+
         const url = await uploadProfilePicture(file);
         console.log("Uploaded image URL:", url);
+    
         setProfileImage(url);
-        useStore.setState({ user: { ...user, profileImage: url } })
+        useStore.setState({ user: { ...user, profileImage: url } }); 
+        localStorage.setItem("profileImage", url);
+
       } catch (error) {
         console.error("Error uploading profile picture:", error);
         alert("Failed to upload profile picture.");
@@ -33,7 +47,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
 
   const handleDeletePicture = async () => {
     try {
-      await useStore.setState({ user: { ...user, profileImage: "" } });
+      useStore.setState({ user: { ...user, profileImage: "" } });
       setProfileImage("");
   
       console.log("ProfileImage has been deleted.");
@@ -45,16 +59,19 @@ export const ProfileSettingsModal = ({ onClose }) => {
   
   const handleSave = async () => {
     try {
+      if (!profileImage) {
+        console.warn("No profile image set. Are you sure you want to save?");
+      }
       // Update the global store with the new values
-      await useStore.setState({
+      useStore.setState({
         user: { 
           ...user, 
           username: username, 
           email: email, 
-          profileImage: profileImage 
+          profileImage: profileImage || ""
         }
       });
-  
+      localStorage.setItem("profileImage", profileImage);
       console.log("Changes saved:", { username, email, profileImage });
 
       onClose();

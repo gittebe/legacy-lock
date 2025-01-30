@@ -179,6 +179,9 @@ const useStore = create((set, get) => ({
   // *** Profile Picture Upload Action ***
   uploadProfileImage: async (file) => {
     const token = localStorage.getItem("accessToken");
+    if (!token) {
+      throw new Error("Access token is missing. Please log in again.");
+    }
     const formData = new FormData();
     formData.append("file", file);
 
@@ -195,7 +198,7 @@ const useStore = create((set, get) => ({
       }
 
       const data = await response.json();
-      return data.profileImageUrl;
+      return data.imageUrl;
     } catch (error) {
       console.error("Error uploading profile picture:", error.message);
       throw error;

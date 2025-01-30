@@ -2,7 +2,6 @@ import { User } from "../models/userSchema.js";
 import { newMedia } from "./mediaController.js";
 import upload from "../middleware/multer.js";
 import cloudinary from "../config/cloudinaryConfig.js";
-import { v2 as cloudinaryV2 } from 'cloudinary'; // Falls nötig für die Cloudinary API
 
 //get all users
 export const getUsers = async (req, res) => {
@@ -43,7 +42,8 @@ export const getCurrentUser = async (req, res) => {
       user: {
         id: user._id,
         email: user.mail,
-        username: user.username
+        username: user.username,
+        profileImage: profileImage
       }
     });
   } catch (error) {
@@ -70,11 +70,6 @@ export const uploadProfileImage = async (req, res) => {
 
     const updateUser = await User.findOneAndUpdate({ _id: req.user.id }, { profileImage: imageUrl });
   
-  // if (updateResult.modifiedCount === 1) {
-  //   console.log("profileimage successfully uploaded.");
-  // } else {
-  //   console.log("no image uploaded");
-  // }
     // successfully uploaded message
     return res.status(200).json({ message: "profileimage successfully uploaded", imageUrl });
 
