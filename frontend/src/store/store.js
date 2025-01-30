@@ -49,7 +49,7 @@ const useStore = create((set, get) => ({
       }
 
       // API-request to logout
-      const response = await fetch("http://localhost:5000/users/logout", {
+      const response = await fetch("http://localhost:3000/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,10 +98,10 @@ const useStore = create((set, get) => ({
       }
 
       const [userCapsulesResponse, receivedCapsulesResponse] = await Promise.all([
-        fetch("http://localhost:5000/capsule/getUserCapsules", {
+        fetch("http://localhost:3000/capsule/getUserCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/capsule/getReceivedCapsules", {
+        fetch("http://localhost:3000/capsule/getReceivedCapsules", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -148,7 +148,7 @@ const useStore = create((set, get) => ({
       }
       const token = localStorage.getItem("accessToken");
       console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
-      const url = `http://localhost:5000/capsule/getCapsule/${id}`;
+      const url = `http://localhost:3000/capsule/getCapsule/${id}`;
       console.log("URL being fetched:", url);
       
       if (!token) {
@@ -156,7 +156,7 @@ const useStore = create((set, get) => ({
         return null;
       }
 
-      const response = await fetch(`http://localhost:5000/capsule/getCapsule/${id}`, {
+      const response = await fetch(`http://localhost:3000/capsule/getCapsule/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

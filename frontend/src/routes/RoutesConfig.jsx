@@ -17,7 +17,7 @@ export const RoutesConfig = () => {
     const verifyToken = async () => {
       if (token) {
         try {
-          const response = await fetch("http://localhost:5000/dashboard", {
+          const response = await fetch("http://localhost:3000/dashboard", {
             headers: { "Authorization": `Bearer ${token}` },
           });
 
