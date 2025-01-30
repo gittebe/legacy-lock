@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
 export const useCapsuleStatus = (capsule) => {
-  const [timeLeft, setTimeLeft] = useState<string | null>(null);
+  // Hooks måste alltid exekveras
+  const [timeLeft, setTimeLeft] = useState(null);
 
-  if (!capsule) return { capsuleId: null, isCapsuleOpen: false, timeLeft };
-
-  const capsuleId = capsule._id || capsule.id;
-  const isCapsuleOpen = new Date() >= new Date(capsule.openAt);
+  // Säkerställ att capsuleId finns
+  const capsuleId = capsule?._id || capsule?.id || null;
+  const isCapsuleOpen = capsule ? new Date() >= new Date(capsule.openAt) : false;
 
   useEffect(() => {
-    if (!capsule.openAt) return;
+    if (!capsule || !capsule.openAt) return;
 
     const interval = setInterval(() => {
       const currentTime = new Date();
       const targetTime = new Date(capsule.openAt);
-      const diff = targetTime.getTime() - currentTime.getTime();
+      const diff = targetTime - currentTime;
 
       if (diff <= 0) {
         clearInterval(interval);

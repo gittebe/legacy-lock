@@ -6,67 +6,29 @@ import { WarningPopup } from "./WarningPopup";
 import useStore from "../store/store";
 import "./LatestLocket.css";
 import { useNavigate } from "react-router-dom";
+import { useCapsuleStatus } from "../hooks/useCapsuleStatus";
 
 export const LatestLocket = () => {
-  const [timeLeft, setTimeLeft] = useState(null);
-  const [nextCapsule, setNextCapsule] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
-
-  const capsules = useStore((state) => state.capsules.created);
+  const capsules = useStore((state) => state.capsules.created) || [];
   const navigateToCapsule = useNavigate();
-
-  useEffect(() => {
-    if (!Array.isArray(capsules) || capsules.length === 0) return;
-
-    const sortedCapsules = capsules
-      .filter((capsule) => capsule?.openAt)
-      .sort((a, b) => new Date(a.openAt) - new Date(b.openAt));
-    
-    const upcomingCapsule = sortedCapsules.find(
-      (capsule) => new Date(capsule.openAt) > new Date()
-    );
-
-    if (upcomingCapsule) {
-      setNextCapsule(upcomingCapsule);
-    }
-  }, [capsules]);
-
-  // Get id and check if the capsule is open 
-  const capsuleId = nextCapsule?._id || nextCapsule.id;
-  const isCapsuleOpen = nextCapsule ? new Date() >= new Date(nextCapsule.openAt) : false;
   
-  useEffect(() => {
-   if (!nextCapsule) return;
+  const nextCapsule = capsules
+    .filter((capsule) => capsule?.openAt)
+    .sort((a, b) => new Date(a.openAt).getTime() - new Date(b.openAt).getTime())
+    .find((capsule) => new Date(capsule.openAt) > new Date()) || null;
 
-    const interval = setInterval(() => {
-      const currentTime = new Date();
-      const targetTime = new Date(nextCapsule.openAt);
-      const diff = targetTime - currentTime;
-
-      if (diff <= 0) {
-        clearInterval(interval);
-        setTimeLeft("The capsule is now open!");
-      } else {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [nextCapsule]);
+  const { capsuleId, isCapsuleOpen, timeLeft } = useCapsuleStatus(nextCapsule);
 
   const handlePlayButtonClick = () => {
-    if (!nextCapsule) return;
-    
+    if (!capsuleId) return;
+
     if (isCapsuleOpen) {
-      navigate(`/capsules/${nextCapsule.id}`);
+      navigateToCapsule(`/capsules/${capsuleId}`);
     } else {
       setShowWarning(true);
     }
-  };
+  }
 
   return (
     <>
