@@ -16,11 +16,7 @@ export const HeroSection = ({ isSmallScreen, onLoginClick, onSignUpClick }) => {
         </div>
       </div>
       <div className="image-container">
-        <img
-          src="/src/assets/landingimage.jpg"
-          alt="Landing image"
-          className="animated-image"
-        />
+        <img src="/public/landingimage.jpg" alt="Landing image" className="animated-image" />
       </div>
       <p className="subtext">
         Raise your memories from the archive and select the best ones.
