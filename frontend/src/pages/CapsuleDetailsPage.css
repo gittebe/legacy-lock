@@ -1,0 +1,31 @@
+.capsule-details-page {
+  padding: 20px;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.capsule-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.capsule-unlock-date {
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 5px;
+}

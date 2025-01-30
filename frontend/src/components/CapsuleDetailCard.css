@@ -1,0 +1,41 @@
+.capsule-detail-card {
+  margin-top: 20px;
+}
+
+.section-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.photos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px; 
+}
+
+.photo {
+  width: 100%;
+  height: 200px; 
+  width: 200px;
+  border-radius: 6px; 
+  object-fit: cover;
+}
+
+.messages-container {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+.capsule-message {
+    background-color: #a08394;
+    padding: 30px;
+    border-radius: 16px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #fff;
+    max-width: 400px; 
+    width: 140px; 
+}
