@@ -50,16 +50,3 @@
   pointer-events: auto;
 }
 
-@media (min-width: 667px) {
-  .capsule-card-image-container {
-    width: 200px;
-    height: 200px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .capsule-card-image-container {
-    width: 12vw;
-    height: 12vw;
-  }
-}
