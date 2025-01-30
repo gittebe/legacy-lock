@@ -207,7 +207,6 @@ const useStore = create((set, get) => ({
       }
     },
 
-  // *** Profile Picture Upload Action ***
   uploadProfileImage: async (file) => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -273,7 +272,5 @@ updateUserProfile: async (userData) => {
     throw error;
   }
 }
-
 }));
-
 export default useStore;

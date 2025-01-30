@@ -27,10 +27,6 @@ export const ProfileSettingsModal = ({ onClose }) => {
     const file = event.target.files[0];
     if (file) {
       try {
-        if (profileImage) {
-          await handleDeletePicture()
-        }
-
         const url = await uploadProfilePicture(file);
         console.log("Uploaded image URL:", url);
     
@@ -48,6 +44,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
   const handleDeletePicture = async () => {
     try {
       await useStore.getState().deleteProfileImage();
+      localStorage.removeItem("profileImage");
       setProfileImage("");
     } catch (error) {
       console.error("Fehler beim Löschen des Profilbildes:", error);
@@ -55,29 +52,6 @@ export const ProfileSettingsModal = ({ onClose }) => {
     }
   };
   
-  // const handleSave = async () => {
-  //   try {
-  //     if (!profileImage) {
-  //       console.warn("No profile image set. Are you sure you want to save?");
-  //     }
-  //     // Update the global store with the new values
-  //     useStore.setState({
-  //       user: { 
-  //         ...user, 
-  //         username: username, 
-  //         email: email, 
-  //         profileImage: profileImage || ""
-  //       }
-  //     });
-  //     localStorage.setItem("profileImage", profileImage);
-  //     console.log("Changes saved:", { username, email, profileImage });
-
-  //     onClose();
-  //   } catch (error) {
-  //     console.error("Error saving profile data:", error);
-  //     alert("Failed to save changes.");
-  //   }
-  // };
   const handleSave = async () => {
     try {
       if (!profileImage) {
