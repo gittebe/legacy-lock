@@ -14,9 +14,6 @@ export const HeaderMobileCapsules = () => {
       <div className="arrow-left" onClick={handleArrowClick}>
       <ArrowLeftIcon/>
       </div>
-      <div className="redirect-text">
-        <p className="text">Collections</p>
-      </div>
     </div>
   )
 }
