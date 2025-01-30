@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { ClockIcon } from "../ui/ClockIcon";
 import { PlayButton } from "../ui/PlayButton";
 import { CapsuleCardImage } from "../ui/CapsuleCardImage";
+import { WarningPopup } from "./WarningPopup";
 import useStore from "../store/store";
 import "./LatestLocket.css";
+import { useNavigate } from "react-router-dom";
 
 export const LatestLocket = () => {
   const [timeLeft, setTimeLeft] = useState(null);
   const [nextCapsule, setNextCapsule] = useState(null);
+  const [showWarning, setShowWarning] = useState(false);
 
   const capsules = useStore((state) => state.capsules.created);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (capsules.length === 0) {
@@ -17,8 +21,9 @@ export const LatestLocket = () => {
     }
 
     const sortedCapsules = capsules
-      .filter((capsule) => capsule.openAt)
+      .filter((capsule) => capsule?.openAt)
       .sort((a, b) => new Date(a.openAt) - new Date(b.openAt));
+    
     const nextCapsule = sortedCapsules.find(
       (capsule) => new Date(capsule.openAt) > new Date()
     );
@@ -49,7 +54,20 @@ export const LatestLocket = () => {
     return () => clearInterval(interval);
   }, [capsules]);
 
+  const isCapsuleOpen = nextCapsule && new Date(nextCapsule.openAt) <= new Date();
+
+  const handlePlayButtonClick = () => {
+    if (!nextCapsule) return;
+    
+    if (isCapsuleOpen) {
+      navigate(`/capsules/${nextCapsule.id}`);
+    } else {
+      setShowWarning(true);
+    }
+  };
+
   return (
+    <>
     <div className="latest-locket">
       <div className="locket-content">
         {nextCapsule ? (
@@ -65,7 +83,8 @@ export const LatestLocket = () => {
           <p className="countdown-text">No upcoming capsules</p>
         )}
       </div>
-      <PlayButton onClick={() => alert("Play Locket!")} />
+      <PlayButton onClick={handlePlayButtonClick} />
+
       <div className="locket-images">
         <CapsuleCardImage
           mediaUrls={["https://via.placeholder.com/150"]}
@@ -84,5 +103,7 @@ export const LatestLocket = () => {
         />
       </div>
     </div>
+    { showWarning && <WarningPopup onClose={() => setShowWarning(false)} /> }
+  </>
   );
 };
