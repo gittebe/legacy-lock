@@ -1,0 +1,23 @@
+.header-mobile-capsules {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+  }
+  
+  .arrow-left {
+    position: absolute;
+    left: 10px;
+  }
+  
+  .redirect-text {
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .text {
+    font-weight: bold;
+    font-family: Arial,  sans-serif;
+    font-size: 14px;
+  }

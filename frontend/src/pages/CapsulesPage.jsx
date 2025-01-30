@@ -1,8 +1,3 @@
-/**
- * 
- * Capsules page
- */
-
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import useStore from "../store/store";
@@ -10,6 +5,8 @@ import { CapsuleList } from "../components/CapsuleList";
 import { Header } from "../components/Header";
 import { SideMenu } from "../components/SideMenu";
 import { CreateCapsule } from "../components/CreateCapsule";
+import { HeaderMobileCapsules } from "../components/HeaderMobileCapsules";
+import "./CapsulePage.css"
 
 export const CapsulesPage = () => {
   console.log("DashboardPage rendered");
@@ -35,17 +32,21 @@ export const CapsulesPage = () => {
 
   return (
     <>
-      <Header toggleMenu={() => setShowMenu(!showMenu)} />
+   
+      <Header className="header" toggleMenu={() => setShowMenu(!showMenu)} />
+    
       <SideMenu
+      className="side-menu"
         showMenu={showMenu}
         toggleMenu={() => setShowMenu(false)}
-        onLogoutClick={handleLogout}
-        isLoggedIn={!!user} 
+        onLogoutClick={logout}
+        isLoggedIn={!!user}
       />
-      
+      <header className="header-mobile-capsule">
+      <HeaderMobileCapsules />
+      </header>
       <div>
-        <h1>Welcome, {user.username}!</h1>
-        <h2>Your Capsules</h2>
+     
         <CapsuleList />
       </div>
       <div>

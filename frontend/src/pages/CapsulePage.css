@@ -1,0 +1,19 @@
+.sideMenu {
+  display: none;
+}
+  
+@media (max-width: 667px) {
+  .header {
+    display: none;
+  }
+  
+  .sideMenu {
+    display: block;
+  }
+}
+
+@media (min-width: 667px) {
+  .header-mobile-capsule {
+    display: none; 
+  }
+}

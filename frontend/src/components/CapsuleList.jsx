@@ -1,10 +1,7 @@
-/**
- * CapsuleList Component
- * 
-**/
 import React, { useEffect } from "react";
 import useStore from "../store/store";
 import { CapsuleCard } from "./CapsuleCard";
+import "./CapsuleList.css";
 
 export const CapsuleList = () => {
   const capsules = useStore((state) => state.capsules);
@@ -36,26 +33,32 @@ export const CapsuleList = () => {
   // Render capsules
   return (
     <div>
-      {/* Created Capsules */}
-      <h2>Created Capsules</h2>
+    <div className="created-capsule-container">
+      <h2 className="header-capsules">Created Capsules</h2>
+      <div className="capsule-grid">
       {capsules.created.map((capsule) => {
-        console.log("Capsule data:", capsule)
+        // Check if the capsule is valid and has a _id
         if (!capsule || !capsule._id) {
-          console.error("Invalid capsule data:", capsule);
-          return null;
+          console.error("Invalid capsule data (created):", capsule);
+          return null; // Skip rendering invalid capsules
         }
         return <CapsuleCard key={capsule._id} capsule={capsule} />;
       })}
-
-      {/* Received Capsules */}
-      <h2>Received Capsules</h2>
+      </div>
+    </div>
+    
+    <div>
+      <h2 className="header-capsules">Received Capsules</h2>
+      <div className="capsule-grid"></div>
       {capsules.received.map((capsule) => {
+        // Check if the capsule is valid and has a _id
         if (!capsule || !capsule._id) {
-          console.warn("Capsule missing _id:", capsule);
-          return null;
+          console.warn("Invalid capsule data (received):", capsule);
+          return null; // Skip rendering invalid capsules
         }
         return <CapsuleCard key={capsule._id} capsule={capsule} />;
       })}
     </div>
+  </div>
   );
-};
+}

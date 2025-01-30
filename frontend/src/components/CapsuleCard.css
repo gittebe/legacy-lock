@@ -2,4 +2,5 @@
     display: flex;
     min-width: 200px;
     cursor: pointer;
+    padding: 12px;
 }

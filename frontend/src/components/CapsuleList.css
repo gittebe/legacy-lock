@@ -1,0 +1,28 @@
+.capsule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  }
+
+  .header-capsules {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+@media (min-width: 600px) {
+  .capsule-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+  
+@media (min-width: 900px) {
+  .capsule-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+  
+@media (min-width: 1200px) {
+  .capsule-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
