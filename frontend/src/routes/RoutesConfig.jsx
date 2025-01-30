@@ -51,10 +51,8 @@ export const RoutesConfig = () => {
         path="/"
         element={isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />}
       />
-      {/* Authenticated routes */}
       {isLoggedIn && (
         <>
-          {/* authenticated routes */}
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfileSettingsModal />} />
           <Route path="/capsules" element={<CapsulesPage />} />
