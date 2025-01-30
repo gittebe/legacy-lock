@@ -4,21 +4,21 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { CapsulesPage } from "../pages/CapsulesPage";
 import { CapsuleDetailsPage } from "../pages/CapsuleDetailsPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
-import { ProfileSettingsPage } from "../pages/ProfileSettingsPage";
+import { ProfileSettingsModal } from "../components/ProfileForm";
 import useStore from "../store/store";
 import { useEffect, useState } from "react";
 
 export const RoutesConfig = () => {
-  const { isLoggedIn, setIsLoggedIn } = useStore();
-  const [loading, setLoading] = useState(true); // Track loading state for authentication check
-  const token = localStorage.getItem("accessToken"); // get Token from the local Storage
+  const { isLoggedIn, setIsLoggedIn, updateProfilePicture } = useStore();
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     const verifyToken = async () => {
       if (token) {
         try {
           const response = await fetch("http://localhost:5000/dashboard", {
-            headers: { "Authorization": `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` },
           });
 
           if (response.ok) {
@@ -28,7 +28,7 @@ export const RoutesConfig = () => {
             setIsLoggedIn(false);
           }
         } catch (error) {
-          console.error('Error verifying token:', error);
+          console.error("Error verifying token:", error);
           setIsLoggedIn(false);
         }
       } else {
@@ -51,19 +51,16 @@ export const RoutesConfig = () => {
         path="/"
         element={isLoggedIn ? <Navigate to="/dashboard" /> : <LandingPage />}
       />
-
       {/* Authenticated routes */}
       {isLoggedIn && (
         <>
-          {/* authenticated routes */}
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfileSettingsPage />} />
+          <Route path="/profile" element={<ProfileSettingsModal />} />
           <Route path="/capsules" element={<CapsulesPage />} />
           <Route path="/capsules/:id" element={<CapsuleDetailsPage />} />
         </>
       )}
 
-      {/* Fallback-Route */}
       <Route path="*" element={<NotFoundPage />} />
 
       {/* Logout - please see SideMenu component */}

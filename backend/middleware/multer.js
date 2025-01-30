@@ -15,7 +15,7 @@ const upload = multer({
       "image/png", 
       "image/gif",
       "video/mp4",
-      "vidoe/webm",
+      "video/webm",
       "video/avi"
     ];
     if (allowedMimeTypes.includes(file.mimetype)) {
