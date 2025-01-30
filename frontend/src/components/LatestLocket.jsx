@@ -13,26 +13,30 @@ export const LatestLocket = () => {
   const [showWarning, setShowWarning] = useState(false);
 
   const capsules = useStore((state) => state.capsules.created);
-  const navigate = useNavigate();
+  const navigateToCapsule = useNavigate();
 
   useEffect(() => {
-    if (capsules.length === 0) {
-      return;
-    }
+    if (!Array.isArray(capsules) || capsules.length === 0) return;
 
     const sortedCapsules = capsules
       .filter((capsule) => capsule?.openAt)
       .sort((a, b) => new Date(a.openAt) - new Date(b.openAt));
     
-    const nextCapsule = sortedCapsules.find(
+    const upcomingCapsule = sortedCapsules.find(
       (capsule) => new Date(capsule.openAt) > new Date()
     );
 
-    if (!nextCapsule) {
-      return;
+    if (upcomingCapsule) {
+      setNextCapsule(upcomingCapsule);
     }
+  }, [capsules]);
 
-    setNextCapsule(nextCapsule);
+  // Get id and check if the capsule is open 
+  const capsuleId = nextCapsule?._id || nextCapsule.id;
+  const isCapsuleOpen = nextCapsule ? new Date() >= new Date(nextCapsule.openAt) : false;
+  
+  useEffect(() => {
+   if (!nextCapsule) return;
 
     const interval = setInterval(() => {
       const currentTime = new Date();
@@ -52,9 +56,7 @@ export const LatestLocket = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [capsules]);
-
-  const isCapsuleOpen = nextCapsule && new Date(nextCapsule.openAt) <= new Date();
+  }, [nextCapsule]);
 
   const handlePlayButtonClick = () => {
     if (!nextCapsule) return;
