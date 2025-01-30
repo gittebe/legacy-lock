@@ -1,5 +1,6 @@
 import "./SideMenu.css";
 import useStore from "../store/store";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ProfileSettingsModal } from "../components/ProfileForm";
 
