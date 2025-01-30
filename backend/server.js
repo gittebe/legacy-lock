@@ -35,7 +35,7 @@ checkConnection();
 app.use(cors({
   origin: "https://legacy-locket.netlify.app/",
   methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: ["*"]
+  allowedHeaders: ["Content-Type", "Authorization", "*"],
 }));
 
 app.use(express.json());
