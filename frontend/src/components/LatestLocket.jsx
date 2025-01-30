@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { ClockIcon } from "../ui/ClockIcon";
 import { PlayButton } from "../ui/PlayButton";
 import { CapsuleCardImage } from "../ui/CapsuleCardImage";
 import { WarningPopup } from "./WarningPopup"; 
@@ -7,6 +6,7 @@ import useStore from "../store/store";
 import "./LatestLocket.css";
 import { useNavigate } from "react-router-dom";
 import { useCapsuleStatus } from "../hooks/useCapsuleStatus";
+import { LocketCountdown } from "./LocketCountdown"; 
 
 export const LatestLocket = () => {
   const [nextCapsule, setNextCapsule] = useState(null);
@@ -64,22 +64,8 @@ export const LatestLocket = () => {
   return (
     <>
       <div className="latest-locket">
-        <div className="locket-content">
-          {/* If there is a capsule to open */}
-          {nextCapsule ? (
-            <>
-              <p>Your latest locket is opening on</p>
-              <div className="locket-date">
-                <ClockIcon />
-                <span>{new Date(nextCapsule.openAt).toLocaleString()}</span>
-              </div>
-              <p className="countdown-text">{timeLeft}</p>
-            </>
-          ) : (
-            // No more lockets
-            <p className="countdown-text">No upcoming lockets</p>
-          )}
-        </div>
+        
+        <LocketCountdown nextLocket={nextLocket} timeLeft={timeLeft} />
 
         <PlayButton onClick={handlePlayButtonClick} />
 
