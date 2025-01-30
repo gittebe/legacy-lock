@@ -76,3 +76,12 @@
 input.error-input::placeholder {
   color: #e39de4; 
 }
+
+@media (max-width: 768px) {
+  .message-textarea {
+    width: 90%; 
+    font-size: 16px; 
+    padding: 12px; 
+    height: 120px; 
+  }
+}
