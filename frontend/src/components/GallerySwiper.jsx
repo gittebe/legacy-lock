@@ -37,7 +37,7 @@ export const GallerySwiper = () => {
           <h2 className="collections-title">Created Collections</h2>
           <button
             className="see-more-button"
-            onClick={() => navigate("/created")}
+            onClick={() => navigate("/capsules")}
           >
             See all
           </button>
@@ -58,7 +58,7 @@ export const GallerySwiper = () => {
           <h2 className="collections-title">Received Collections</h2>
           <button
             className="see-more-button"
-            onClick={() => navigate("/received")}
+            onClick={() => navigate("/capsules")}
           >
             See all
           </button>
