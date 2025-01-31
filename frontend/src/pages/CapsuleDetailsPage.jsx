@@ -52,9 +52,7 @@ export const CapsuleDetailsPage = () => {
       <SideMenu />
       <div className="capsule-details-page">
         {/* Back Button */}
-        <div className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
-        </div>
 
         {/* Title and Unlock Date */}
         <div className="title-container">
