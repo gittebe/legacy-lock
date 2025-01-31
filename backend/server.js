@@ -32,12 +32,18 @@ const checkConnection = async () => {
 
 checkConnection();
 
-app.use(cors({
-  origin: "https://legacy-locket.netlify.app",
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Authorization", "*"],
-}));
+// app.use(cors({
+//   origin: "https://legacy-locket.netlify.app",
+//   methods: ["GET", "POST", "DELETE", "PUT"],
+//   allowedHeaders: ["Content-Type", "Authorization", "*"],
+// }));
 
+const cors = require('cors');
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://dein-front-end.netlify.app'],
+  methods: ["GET", "POST", "DELETE", "PUT"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.options("*", cors());
 app.use(express.json());
