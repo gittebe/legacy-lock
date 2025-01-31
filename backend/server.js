@@ -15,6 +15,10 @@ import dashboardRoutes from "./routes/dashboard.js";
 dotenv.config();
 
 const app = express();
+const allowOrigins = [
+  'http://localhost:5173',
+  'https://legacy-locket.netlify.app'
+]
 const port = process.env.PORT || 8080;
 
 // Configure multer for handling file uploads
@@ -32,10 +36,23 @@ const checkConnection = async () => {
 
 checkConnection();
 
+// app.use(cors({
+//   origin: "https://legacy-locket.netlify.app",
+//   methods: ["GET", "POST", "DELETE", "PUT"],
+//   allowedHeaders: ["Content-Type", "Authorization", "*"],
+// }));
+
 app.use(cors({
-  origin: "https://legacy-locket.netlify.app",
+  origin: function(origin, callback) {
+    // Wenn der Ursprung in der Liste ist oder kein Origin vorhanden ist (z.B. bei serverseitigen Anfragen)
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Nicht erlaubter Origin'));
+    }
+  },
   methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Authorization", "*"],
+  allowedHeaders: ["Content-Type", "Authorization", "*"]
 }));
 
 app.options("*", cors());
