@@ -2,5 +2,12 @@
   display: flex;
   justify-content: space-between;
   gap: 14%; 
-  margin: 45px 5%; 
+  margin: 45px 5%;
+  
+}
+
+@media (max-width: 667px){
+.collections-container {
+  padding-bottom: 100px;
+}
 }
