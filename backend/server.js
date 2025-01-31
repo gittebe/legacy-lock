@@ -32,11 +32,29 @@ const checkConnection = async () => {
 
 checkConnection();
 
+// app.use(cors({
+//   origin: "https://legacy-locket.netlify.app",
+//   methods: ["GET", "POST", "DELETE", "PUT"],
+//   allowedHeaders: ["Content-Type", "Authorization", "*"],
+// }));
+
+const allowedOrigins = [
+  "https://legacy-locket.netlify.app",
+  "http://localhost:5173"
+];
+
 app.use(cors({
-  origin: "https://legacy-locket.netlify.app",
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization", "*"],
 }));
+
 
 app.options("*", cors());
 app.use(express.json());
