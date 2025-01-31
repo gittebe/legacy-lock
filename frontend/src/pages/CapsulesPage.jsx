@@ -37,7 +37,7 @@ export const CapsulesPage = () => {
       <header className="header-mobile-capsule">
         <HeaderMobileCapsules /> 
       </header>
-      <div>
+      <div className="capsule-list-container">
         <CapsuleList />
       </div>
       <FooterMobile />

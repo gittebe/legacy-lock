@@ -10,6 +10,10 @@
   .sideMenu {
     display: block;
   }
+
+  .capsule-list-container {
+    padding-bottom: 120px;
+  }
 }
 
 @media (min-width: 667px) {
