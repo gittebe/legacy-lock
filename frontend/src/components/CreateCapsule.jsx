@@ -9,7 +9,7 @@
 import { useState, useRef } from "react";
 import useStore from "../store/store";
 import "./CreateCapsule.css";
-import { useValidation } from "../utils/useValidation";
+import { useValidation } from "../hooks/useValidation";
 import CapsuleForm from "./CapsuleForm";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
