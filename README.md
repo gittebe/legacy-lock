@@ -1,4 +1,4 @@
-# Legacy Lock 
+# 🔒 Legacy Lock 
 
 Legacy Lock is a Virtual Time Capsule app that allows users to create and store messages or media (photos, videos, text) that are to be unlocked at a future date. 
 
@@ -42,36 +42,41 @@ Authentication ensures that only authorized people can access the content, provi
     ```bash
     npm install react-use
     ```
-  [Read more about `useWindowSize`](https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md)
+    [Read more about `useWindowSize`](https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md)
+
+---
 
 ## 📚 External Libraries
 
-### - **Date Handling:** 
-  - **`date-fns`** for date formatting and calculations. 
-  ```bash
-  npm install date-fns
-  ```
-  [Read more about `date-fns`](https://www.npmjs.com/package/date-fns)
-### - **File Upload Handling:** 
-  - **`multer`** for handling file uploads (media files like photos and videos).
-  ```bash
-  npm install multer
-  ```
-  [Read more about `multer`](https://www.npmjs.com/package/multer)
-### - **Animations and effects:** 
-  - **`framer-motion`**  for animations, like the shake effect used in WarningPopup.
-  ```bash
-  npm install framer-motion
-  ```
-  [Read more about `framer-motion`](https://motion.dev/docs/react-quick-start)
-  - **`react-confetti`** is a confetti effect that is triggered when the latest locket opens. 
-  ```bash
-  npm install react-confetti
-  ```
-  [Read more about `react-confetti`](https://www.npmjs.com/package/react-confetti)
 
-## **Cloud storage:** 
-  ### - **Cloudinary** is used for Media handling: 
+### **Date Handling:** 
+  - **`date-fns`** for date formatting and calculations. 
+    ```bash
+    npm install date-fns
+    ```
+    [Read more about `date-fns`](https://www.npmjs.com/package/date-fns)
+### **File Upload Handling:** 
+  - **`multer`** for handling file uploads (media files like photos and videos).
+    ```bash
+    npm install multer
+    ```
+    [Read more about `multer`](https://www.npmjs.com/package/multer)
+### **Animations and effects:** 
+  - **`framer-motion`**  for animations, like the shake effect used in WarningPopup.
+    ```bash
+    npm install framer-motion
+    ```
+    [Read more about `framer-motion`](https://motion.dev/docs/react-quick-start)  
+
+  - **`react-confetti`** is a confetti effect that is triggered when the latest locket opens. 
+    ```bash
+    npm install react-confetti
+    ```
+    [Read more about `react-confetti`](https://www.npmjs.com/package/react-confetti)
+
+## **☁️ Cloud storage** 
+   Cloudinary is used for Media handling.
+
   [Read more about `Cloudinary`](https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349)
 
 ## View it live
