@@ -37,6 +37,7 @@ Authentication ensures that only authorized people can access the content, provi
 ### **External Hooks (from installed libraries):**
   - **`useNavigate`**– Comes from react-router-dom (for navigation)
   - **`useStore`** – Comes from zustand (global state management)
+  - **`useRef`** - For file uploading using Cloud storage. 
   - **`useWindowSize`** – Comes from react-use. It dynamically gets the window width and height, ensuring that Confetti fills the entire screen.
     ```bash
     npm install react-use
@@ -74,4 +75,4 @@ Authentication ensures that only authorized people can access the content, provi
 
 ## View it live
 
-[Legacy Locket App](https://legacy-locket.netlify.app/)
+[Legacy Lock App](https://legacy-locket.netlify.app/)
