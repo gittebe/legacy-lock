@@ -6,6 +6,36 @@ Authentication ensures that only authorized people can access the content, provi
 
 ---
 
+## 📦 Dependencies to Install
+
+### **Backend** 
+- **Express** – Web server framework
+  ```bash
+  npm install express
+  ```
+- **Mongoose** – MongoDB Object Data Modeling
+  ```bash
+  npm install mongoose
+  ```
+- **Nodemon**
+  ```bash
+  npm install
+  ```
+- **dotenv** – Manages environment variables securely
+  ```bash
+  npm install dotenv
+  ```
+
+
+### **Frontend**
+- **React Router** – Enables navigation in React
+  ```bash
+  npm install react-router-dom
+  ```
+
+---
+
+
 ## 🛠 Technology Stack  
 
 ### **Frontend:**  
@@ -19,7 +49,10 @@ Authentication ensures that only authorized people can access the content, provi
 
 ### **Libraries & Tools:**  
 - **React Router** for navigation.  
-- **Zustand** for global state management.  
+- **Zustand** for global state management.
+  ```bash
+  npm install zustand
+  ```
 
 ---
 
