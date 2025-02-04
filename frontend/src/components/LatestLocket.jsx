@@ -47,7 +47,7 @@ export const LatestLocket = () => {
     setIsWaiting(true);
     const timer = setTimeout(() => {
       setIsWaiting(false);
-    }, 600000); // 10 minutes
+    }, 120000); // 2 minutes
 
     return () => clearTimeout(timer);
   }, [nextCapsule, isCapsuleOpen]);
