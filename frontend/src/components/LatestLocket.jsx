@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useCapsuleStatus } from "../hooks/useCapsuleStatus";
 import { LocketCountdown } from "./LocketCountdown"; 
 import { useConfetti } from "../hooks/useConfetti"; 
+import Confetti from "react-confetti"; 
 
 export const LatestLocket = () => {
   const [nextCapsule, setNextCapsule] = useState(null);
