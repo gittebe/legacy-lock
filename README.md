@@ -4,55 +4,73 @@ Legacy Lock is a Virtual Time Capsule app that allows users to create and store 
 
 Authentication ensures that only authorized people can access the content, providing a secure and personal experience for users to preserve memories or send time-locked messages.
 
-## Technology Stack 
+---
 
-Frontend: React
-Backend: Node.js with Express
-Database: MongoDB.
-Libraries: 
-  - React Router for navigation
-  - Zustand for global state management.
-React Hooks: useState, useEffect, useContext, and custom hooks to manage and validate user data and content.
-  ### 🧠 useMemo (in LatestLocket.jsx)
-  `useMemo` is a built-in React hook. 
-    * - useMemo stores the filtered and sorted capsule list to avoid recalculations on every render.
-    * - Filters out only future capsules (openAt > now)
-    * - Sorts capsules in ascending order (soonest first)
+## 🛠 Technology Stack  
 
-External Libraries:
-date-fns for date handling and formatting
-multer for handling file uploads (for media files like photos and videos)
+### **Frontend:**  
+- **React** for UI.  
 
-### 🧠 useMemo (in LatestLocket.jsx)
-`useMemo` is a built-in React hook. 
-  * - useMemo stores the filtered and sorted capsule list to avoid recalculations on every render.
-  * - Filters out only future capsules (openAt > now)
-  * - Sorts capsules in ascending order (soonest first)
+### **Backend:**  
+- **Node.js** with **Express** for API.  
 
-### Shake effect (used in WarningPopup)
+### **Database:**  
+- **MongoDB** for data storage.  
+
+### **Libraries & Tools:**  
+- **React Router** for navigation.  
+- **Zustand** for global state management.  
+
+---
+
+## 🪝 Hooks  
+
+### **Internal Hooks (Built-in React or Custom):**  
+- **`useState`** – Built-in React hook for state management.  
+- **`useEffect`** – Built-in React hook for handling side effects.  
+- **`useMemo`** – Built-in React hook that stores the filtered and sorted capsule list to avoid recalculations on every render. 
+- It filters out only future capsules (openAt > now), and sorts capsules in ascending order (soonest first).  
+- **`useCapsuleStatus`** – Custom hook to calculate the time left on locked capsules.  
+- **`useConfetti`** – Custom hook for handling the confetti effect.  
+- **`useValidation`** – Custom hook to validate form fields in `CreateCapsule` form.  
+ 
+### **External Hooks (from installed libraries):**
+  - **`useNavigate`**– Comes from react-router-dom (for navigation)
+  - **`useStore`** – Comes from zustand (global state management)
+  - **`useWindowSize`** – Comes from react-use. It dynamically gets the window width and height, ensuring that Confetti fills the entire screen.
+    ```bash
+    npm install react-use
+    ```
+  [Read more about useWindowSize](https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md)
+
+**External Libraries:** 
+- **Date Handling:** 
+  - **`date-fns`** for date formatting and calculations. 
+  ```bash
+  npm install date-fns
+  ```
+  [Read more about `date-fns`](https://www.npmjs.com/package/date-fns)
+- **File Upload Handling:** 
+  - **`multer`** for handling file uploads (media files like photos and videos).
+  ```bash
+  npm install multer
+  ```
+  [Read more about `multer`](https://www.npmjs.com/package/multer)
+- **Animations and effects:** 
+  - **`framer-motion`**  for animations, like the shake effect used in WarningPopup.
   ```bash
   npm install framer-motion
   ```
-  
-  The WarningPopup uses a shake effect to visually indicate that the capsule is not yet available.
-  
-  Read more: https://motion.dev/docs/react-quick-start
-
-### Confetti (in useConfetti hook)
+  [Read more about `framer-motion`](https://motion.dev/docs/react-quick-start)
+  - **`react-confetti`** is a confetti effect that is triggered when the latest locket opens. 
   ```bash
   npm install react-confetti
   ```
-  Triggered when the latest locket opens and runs for 6 seconds before stopping.
+  [Read more about `react-confetti`](https://www.npmjs.com/package/react-confetti)
 
-  Read more: https://www.npmjs.com/package/react-confetti
-
-### useWindowSize
-  ```bash
-  import { useWindowSize } from "react-use";
-  ```
-  This hook dynamically gets the window width and height, ensuring that Confetti fills the entire screen.
-
-  Read more: https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md
+**Cloud storage:** 
+  - **Cloudinary** is used for Media handling: 
+  [Read more about `Cloudinary`](https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349)
 
 ## View it live
 
