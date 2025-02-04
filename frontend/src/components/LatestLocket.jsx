@@ -7,6 +7,7 @@ import "./LatestLocket.css";
 import { useNavigate } from "react-router-dom";
 import { useCapsuleStatus } from "../hooks/useCapsuleStatus";
 import { LocketCountdown } from "./LocketCountdown"; 
+import { useConfetti } from "../hooks/useConfetti"; 
 
 export const LatestLocket = () => {
   const [nextCapsule, setNextCapsule] = useState(null);
@@ -15,18 +16,13 @@ export const LatestLocket = () => {
   const capsules = useStore((state) => state.capsules?.created) || [];
   const navigateToCapsule = useNavigate();
 
-  /**
-   * useMemo stores the filtered and sorted capsule list to avoid recalculations on every render.
-   * - Filters out only future capsules (openAt > now)
-   * - Sorts capsules in ascending order (soonest first)
-   */
+  // **🧠 useMemo**
   const futureCapsules = useMemo(() => {
     return capsules
       .filter((locket) => locket?.openAt && new Date(locket.openAt) > new Date()) 
       .sort((a, b) => new Date(a.openAt) - new Date(b.openAt)); 
   }, [capsules]);
 
-  // Pick the next capsule to be opened (only if it  not in the 10-minute waiting)
   useEffect(() => {
     if (isWaiting || !futureCapsules.length) {
       return;
@@ -34,10 +30,16 @@ export const LatestLocket = () => {
     setNextCapsule(futureCapsules[0]);
   }, [futureCapsules, isWaiting]);
 
-  // Use countdown hook for timeLeft and isCapsuleOpen on nextCapsule
   const { capsuleId, isCapsuleOpen, timeLeft } = useCapsuleStatus(nextCapsule);
 
-  // When capsule is open, wait 10 minutes before showing the next one
+  // 🎉 Confetti hook
+  const { showConfetti, width, height, setHasPlayedConfetti } = useConfetti(isCapsuleOpen);
+
+  // Reset confetti before next capsule countdown starts
+  useEffect(() => {
+    setHasPlayedConfetti(false);
+  }, [nextCapsule]);
+
   useEffect(() => {
     if (!nextCapsule || !isCapsuleOpen) return;
 
@@ -49,12 +51,10 @@ export const LatestLocket = () => {
     return () => clearTimeout(timer);
   }, [nextCapsule, isCapsuleOpen]);
 
-  // Click Play button and verify that the capsule has an id and that there is a next capsule, otherwise nothing happens. 
   const handlePlayButtonClick = () => {
     if (!capsuleId || !nextCapsule) return;
 
     if (isCapsuleOpen) {
-      // Navigate to the capsule
       navigateToCapsule(`/capsules/${capsuleId}`);
     } else {
       setShowWarning(true);
@@ -63,32 +63,21 @@ export const LatestLocket = () => {
 
   return (
     <>
-      <div className="latest-locket">
-        
-      <LocketCountdown nextLocket={nextCapsule} timeLeft={timeLeft} />
+      {/* 🎉 CONFETTI */}
+      {showConfetti && <Confetti width={width} height={height} />}
 
+      <div className="latest-locket">
+        <LocketCountdown nextLocket={nextCapsule} timeLeft={timeLeft} />
         <PlayButton onClick={handlePlayButtonClick} />
 
         <div className="locket-images">
-          <CapsuleCardImage
-            mediaUrls={["https://via.placeholder.com/150"]}
-            isBlurred={false}
-            variant="tilted"
-          />
-          <CapsuleCardImage
-            mediaUrls={["https://via.placeholder.com/150"]}
-            isBlurred={false}
-            variant="tilted"
-          />
-          <CapsuleCardImage
-            mediaUrls={["https://via.placeholder.com/150"]}
-            isBlurred={false}
-            variant="tilted"
-          />
+          <CapsuleCardImage mediaUrls={["https://via.placeholder.com/150"]} isBlurred={false} variant="tilted" />
+          <CapsuleCardImage mediaUrls={["https://via.placeholder.com/150"]} isBlurred={false} variant="tilted" />
+          <CapsuleCardImage mediaUrls={["https://via.placeholder.com/150"]} isBlurred={false} variant="tilted" />
         </div>
       </div>
 
-      {/* Warning */}
+      {/* ⚠️ WarningPopup - Shows an alert if the capsule is not yet open */}
       {showWarning && (
         <WarningPopup onClose={() => setShowWarning(false)} />
       )}
