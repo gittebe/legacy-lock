@@ -41,9 +41,9 @@ Authentication ensures that only authorized people can access the content, provi
     ```bash
     npm install react-use
     ```
-  [Read more about useWindowSize](https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md)
+  [Read more about `useWindowSize`](https://github.com/streamich/react-use/blob/HEAD/docs/useWindowSize.md)
 
-**External Libraries:** 
+### **External Libraries:** 
 - **Date Handling:** 
   - **`date-fns`** for date formatting and calculations. 
   ```bash
@@ -68,7 +68,7 @@ Authentication ensures that only authorized people can access the content, provi
   ```
   [Read more about `react-confetti`](https://www.npmjs.com/package/react-confetti)
 
-**Cloud storage:** 
+### **Cloud storage:** 
   - **Cloudinary** is used for Media handling: 
   [Read more about `Cloudinary`](https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349)
 
