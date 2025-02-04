@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Confetti from "react-confetti";
 
 export const useConfetti = (isCapsuleOpen) => {
   const [showConfetti, setShowConfetti] = useState(false);
