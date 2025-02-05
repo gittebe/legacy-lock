@@ -1,5 +1,6 @@
 .capsule-details-page {
   padding: 20px;
+  padding-top: 0;
   position: relative;
 }
 
@@ -21,4 +22,31 @@
   font-size: 16px;
   font-weight: normal;
   margin-top: 5px;
+}
+
+.arrow-icon-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .arrow-icon-container {
+    top: 15px;
+    left: 15px;
+  }
 }

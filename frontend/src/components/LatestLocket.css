@@ -79,11 +79,11 @@
 
 @media (max-width: 768px) {
   .latest-locket {
-    position: absolute; /* Eller fixed om den ska vara fast vid scroll */
+    position: absolute; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-height: 200px; /* Ger mer höjd på mobil */
+    min-height: 200px; 
   }
 }
 }

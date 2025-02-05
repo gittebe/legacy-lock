@@ -1,15 +1,7 @@
-//**************************************************************************
-// CreateCapsule Component
-//
-// Documatation for Cloudinary: 
-// https://technigo.notion.site/Cloudinary-6e50a871c3844378ad235a5746298349
-//  
-//**************************************************************************
-
 import { useState, useRef } from "react";
 import useStore from "../store/store";
 import "./CreateCapsule.css";
-import { useValidation } from "../utils/useValidation";
+import { useValidation } from "../hooks/useValidation";
 import CapsuleForm from "./CapsuleForm";
 
 export const CreateCapsule = ({ isOpen, onClose }) => {
