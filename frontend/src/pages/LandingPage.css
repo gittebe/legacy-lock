@@ -136,6 +136,22 @@
 	width: 100%;
 }
 
+@media (max-width: 768px) {
+	.image-container {
+		transform: translate(-50%, -50%) scale(0.36) rotate(45deg);
+	}
+
+	@keyframes scale-up {
+		0% {
+			transform: translate(-50%, -50%) scale(0.06) rotate(25deg);
+		}
+
+		100% {
+			transform: translate(-50%, -50%) scale(0.6) rotate(25deg);
+		}
+	}
+}
+
 @media (max-width: 1024px) {
 	.landing-buttons {
 		display: flex;
