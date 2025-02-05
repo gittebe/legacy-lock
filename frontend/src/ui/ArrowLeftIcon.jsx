@@ -5,7 +5,11 @@ export const ArrowLeftIcon = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/dashboard");
+    if (window.history.length > 2) {
+      navigate(-1); // go back if there's a valid history
+    } else {
+      navigate("/dashboard"); // fallback if no history exists
+    }
   };
 
   return (

@@ -50,14 +50,17 @@ export const CapsuleDetailsPage = () => {
     <>
       <Header />
       <SideMenu />
-      <div className="capsule-details-page">
-        {/* Back Button */}
+      <div className="capsule-details-page" style={{ position: 'relative' }}>
+        <div className="arrow-icon-container" onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
+        </div>
 
         {/* Title and Unlock Date */}
         <div className="title-container">
           <h1 className="capsule-title">{title || "Untitled Capsule"}</h1>
-          <p className="capsule-unlock-date">Unlocked {new Date(openAt).toLocaleDateString()}</p>
+          <p className="capsule-unlock-date">
+            Unlocked {new Date(openAt).toLocaleDateString()}
+          </p>
         </div>
 
         {/* Capsule Detail Card */}
