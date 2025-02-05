@@ -1,0 +1,15 @@
+.custom-logout-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+  .custom-logout-button:hover {
+    background-color: #d32f2f;
+}

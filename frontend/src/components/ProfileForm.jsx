@@ -1,5 +1,6 @@
 import useStore from "../store/store";
 import { useState, useEffect } from "react";
+import { LogoutButton } from "../ui/LogoutButton";
 import "./ProfileForm.css";
 
 export const ProfileSettingsModal = ({ onClose }) => {
@@ -132,6 +133,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
           >
             Save changes
           </button>
+          <LogoutButton />
         </form>
       </div>
     </div>
