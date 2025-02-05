@@ -14,6 +14,11 @@ export const SignUpForm = ({ onClose }) => {
   const handleSignup = async (event) => {
     event.preventDefault();
 
+    if (password.length < 10) {
+      alert('Password must be at least 10 characters long.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert('Passwords do not match. Please try again.');
       return;
@@ -94,9 +99,9 @@ export const SignUpForm = ({ onClose }) => {
             placeholder="Confirm Password"
             required
           />
+          <p>Your password must contain 10 characters</p>
           <SignUpButton />
         </form>
-        <p>Your password must contain 10 characters</p>
       </div>
     </div>
   );
