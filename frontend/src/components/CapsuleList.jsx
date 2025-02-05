@@ -4,6 +4,7 @@ import { CapsuleCard } from "./CapsuleCard";
 import { ArrowLeftIcon } from "../ui/ArrowLeftIcon";
 import { CreateCapsule } from "./CreateCapsule";
 import { FAB } from "../ui/FAB";
+import { useNavigate } from "react-router-dom";
 import "./CapsuleList.css";
 
 export const CapsuleList = () => {
@@ -12,6 +13,7 @@ export const CapsuleList = () => {
   const error = useStore((state) => state.error);
   const fetchCapsules = useStore((state) => state.fetchCapsules);
   const [isCreateCapsuleOpen, setCreateCapsuleOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("CapsuleList useEffect: fetching capsules...");
@@ -29,10 +31,13 @@ export const CapsuleList = () => {
   if (!capsules?.created?.length && !capsules?.received?.length) {
     return <p>No capsules available.</p>;
   }
-
+  
   return (
-    <div className="scroll-container">
-      <ArrowLeftIcon />
+    <div className="scroll-container" style={{ position: 'relative' }}>
+      <div className="arrow-icon-container" onClick={() => navigate(-1)}>
+        <ArrowLeftIcon />
+      </div>
+
       <div className="created-capsule-container">
         <h2 className="header-capsules">Created Collections</h2>
         <div className="capsule-grid">
