@@ -77,7 +77,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
   };
   
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Profile Settings</h2>
         <form className="profile-form" onSubmit={(e) => e.preventDefault()}>
