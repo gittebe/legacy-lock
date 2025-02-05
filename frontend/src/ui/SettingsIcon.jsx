@@ -1,11 +1,9 @@
-
-import { useNavigate } from "react-router-dom";
 import "./SettingsIcon.css";
 
-export const SettingsIcon = () => {
-  const navigate = useNavigate();
+export const SettingsIcon = ({toggleMenu}) => {
+
   const handleClick = () => {
-    navigate("/dashboard");
+    toggleMenu();
   }
 
   return (

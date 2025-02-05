@@ -113,3 +113,13 @@
 .save-button:hover {
   background-color: #6c5068;
 }
+
+.custom-logout-button {
+  display: none; 
+}
+
+@media (max-width: 768px) {
+  .custom-logout-button {
+    display: block; 
+  }
+}

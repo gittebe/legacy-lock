@@ -17,6 +17,10 @@ export const DashboardPage = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
+  
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -33,7 +37,7 @@ export const DashboardPage = () => {
       <DashboardWelcome username={user.username} />
       <LatestLocket />
       <GallerySwiper />
-      <FooterMobile />
+      <FooterMobile toggleMenu={toggleMenu}/>
       <FAB onClick={() => setIsPopupOpen(true)} />
       <CreateCapsule isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
     </>

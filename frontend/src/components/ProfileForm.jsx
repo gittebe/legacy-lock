@@ -1,5 +1,6 @@
 import useStore from "../store/store";
 import { useState, useEffect } from "react";
+import { LogoutButton } from "../ui/LogoutButton";
 import "./ProfileForm.css";
 
 export const ProfileSettingsModal = ({ onClose }) => {
@@ -76,7 +77,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
   };
   
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Profile Settings</h2>
         <form className="profile-form" onSubmit={(e) => e.preventDefault()}>
@@ -132,6 +133,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
           >
             Save changes
           </button>
+          <LogoutButton />
         </form>
       </div>
     </div>

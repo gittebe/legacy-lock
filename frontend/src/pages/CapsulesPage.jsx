@@ -13,6 +13,9 @@ export const CapsulesPage = () => {
   const logout = useStore((state) => state.logout);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -40,7 +43,7 @@ export const CapsulesPage = () => {
       <div className="capsule-list-container">
         <CapsuleList />
       </div>
-      <FooterMobile />
+      <FooterMobile toggleMenu={toggleMenu}/>
     </>
   );
 };
