@@ -62,7 +62,9 @@ export const CapsuleList = () => {
           })}
         </div>
       </div>
-      <FAB onClick={() => setCreateCapsuleOpen(true)} />
+      <div className="create-capsule-button-container">
+      <FAB className="create-button" onClick={() => setCreateCapsuleOpen(true)} />
+      </div>
       <CreateCapsule
         isOpen={isCreateCapsuleOpen}
         onClose={() => setCreateCapsuleOpen(false)}
