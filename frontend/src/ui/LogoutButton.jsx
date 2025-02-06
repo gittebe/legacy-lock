@@ -13,7 +13,10 @@ export const LogoutButton = () => {
   };
 
   return (
-    <button type="button" className="custom-logout-button" onClick={handleLogout}>
+    <button 
+    type="button" 
+    className="custom-logout-button" 
+    onClick={handleLogout}>
       Log out
     </button>
   );
