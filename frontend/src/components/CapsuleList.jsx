@@ -61,14 +61,15 @@ export const CapsuleList = () => {
             return <CapsuleCard key={capsule._id} capsule={capsule} />;
           })}
         </div>
-      </div>
-      <div className="create-capsule-button-container">
-      <FAB className="create-button" onClick={() => setCreateCapsuleOpen(true)} />
-      </div>
-      <CreateCapsule
+       <CreateCapsule
         isOpen={isCreateCapsuleOpen}
         onClose={() => setCreateCapsuleOpen(false)}
-      />
+      /> 
+      </div>
+      <div className="add-button-container">
+      <FAB className="create-button" onClick={() => setCreateCapsuleOpen(true)} />
+      </div>
+      
     </div>
   );
 };

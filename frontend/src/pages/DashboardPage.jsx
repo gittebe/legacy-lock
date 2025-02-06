@@ -38,7 +38,7 @@ export const DashboardPage = () => {
       <LatestLocket />
       <GallerySwiper />
       <FooterMobile toggleMenu={toggleMenu}/>
-      <div className="capsule-create-button-container">
+      <div className="add-button-container">
         <FAB className="create-button" onClick={() => setIsPopupOpen(true)} />
       </div>
       <CreateCapsule isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />

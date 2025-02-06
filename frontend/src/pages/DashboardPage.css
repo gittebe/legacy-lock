@@ -6,7 +6,7 @@
   padding-bottom: 80px;
 }
 
-.capsule-create-button-container {
+.add-button-container {
   display: flex;
   justify-content:center;
   justify-items: center;
@@ -17,7 +17,7 @@
 }
 
 @media(min-width: 667px){
-  .capsule-create-button-container{
+  .add-button-container{
     justify-content: flex-end;
     right: 60px;
   }
