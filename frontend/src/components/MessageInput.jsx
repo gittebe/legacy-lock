@@ -35,9 +35,7 @@ export const MessageInput = ({
   };
 
   return (
-
     <div className="message-input-container">
-      {/* Textarea */}
       <textarea
         id="capsule-message"
         value={message}
@@ -45,19 +43,21 @@ export const MessageInput = ({
         className="message-textarea"
         required
       />
-      {/* ClipIcon, AttachmentIndicator and CreateCapsuleButton inside the textarea */}
       <div className="textarea-actions">
-        <div className="media-upload">
+        <div className={`media-upload ${selectedFile ? "file-uploaded" : ""}`}>
           <input 
             type="file"
-            ref={fileInput}
+            ref={fileInput} 
             style={{ display: "none" }} 
             onChange={handleFileChange}
           />
-          <div onClick={handleClipIconClick} style={{ cursor: "pointer" }}>
-          <ClipIcon />
+          <div 
+            className="clip-icon-wrapper" 
+            onClick={handleClipIconClick} 
+            style={{ cursor: "pointer" }}
+          >
+            <ClipIcon />
           </div>
-          {/* Show AttachmentIndicator */}
           {selectedFile && (
             <div className="attachment-container">
               <AttachmentIndicator />

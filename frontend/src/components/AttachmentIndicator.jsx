@@ -10,7 +10,7 @@ export const AttachmentIndicator = ({ fileName }) => {
   return (
     <div className="attachment-indicator">
       <span className="file-name">
-        <strong>Attachments:</strong> {shortenedFileName}
+        {shortenedFileName}
       </span>
     </div>
   );

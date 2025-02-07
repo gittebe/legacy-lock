@@ -1,6 +1,12 @@
 
 .file-name {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: #000000;
   font-family: Arial, sans-serif;
-  max-width: 20%;
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 30%;
 }
