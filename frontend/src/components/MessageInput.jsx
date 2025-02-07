@@ -26,20 +26,24 @@ export const MessageInput = ({
         className="message-textarea"
         required
       />
-      {/* ClipIcon and CreateCapsuleButton placed inside the textarea */}
+      {/* ClipIcon, AttachmentIndicator och CreateCapsuleButton placerade inuti textarea-actions */}
       <div className="textarea-actions">
-      <div className="media-upload">
-        <input 
-          type="file"
-          ref={fileInput}
-          style={{ display: "none" }} 
-          onChange={(event) => {
-            console.log("Selected file:", event.target.files[0]);
-          }}
-        />
-        <ClipIcon fileInputRef={fileInput} />
-        <AttachmentIndicator />
-      </div>
+        <div className="media-upload">
+          <input 
+            type="file"
+            ref={fileInput}
+            style={{ display: "none" }} // Håller input fältet dolt
+            onChange={handleFileChange}
+          />
+          {/* ClipIcon triggar filuppladdning */}
+          <div onClick={handleClipIconClick} style={{ cursor: "pointer" }}>
+            <ClipIcon fileInputRef={fileInput} />
+          </div>
+        </div>
+
+        {/* Visar AttachmentIndicator enbart när en fil är uppladdad */}
+        {fileUploaded && <AttachmentIndicator />}
+
         <CreateCapsuleButton
           onClick={handleSubmit}
           disabled={loading}
