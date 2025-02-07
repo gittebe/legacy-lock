@@ -10,7 +10,12 @@ export const LearnMoreButton = () => {
 
   return (
     <>
-      <button className="learn-more-button" onClick={toggleLearnMore}>
+      <button 
+      className="learn-more-button" 
+      onClick={toggleLearnMore}
+      aria-expanded={showLearnMore}
+      aria-controls="learn-more-content"
+      >
         + Learn more
       </button>
       {showLearnMore && (

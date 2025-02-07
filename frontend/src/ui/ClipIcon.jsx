@@ -1,4 +1,3 @@
-
 import clipIcon from "../assets/clipicon.png";
 
 export const ClipIcon = ({ fileInputRef }) => {
@@ -9,7 +8,13 @@ export const ClipIcon = ({ fileInputRef }) => {
   };
 
   return (
-    <div className="clip-icon-container" onClick={handleFileUpload}>
+    <div 
+    className="clip-icon-container" 
+    onClick={handleFileUpload}
+    role="button"
+    tabIndex="0"
+    aria-label="Attach media"
+    >
       <img src={clipIcon}
         alt="Attach media"
         className="clip-icon" />

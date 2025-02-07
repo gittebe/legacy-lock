@@ -51,10 +51,10 @@ export const CountdownContainer = () => {
         <>
           <p className="countdown-text">Your latest locket is opening on</p> 
           <p className="countdown-text">{new Date(nextCapsule.openAt).toLocaleString()}</p>
-          <p className="countdown-text">Time left: {timeLeft}</p>
+          <p className="countdown-text" aria-live="polite">Time left: {timeLeft}</p>
         </>
       ) : (
-        <p className="countdown-text">No upcoming capsules</p>
+        <p className="countdown-text" aria-live="polite">No upcoming capsules</p>
       )}
     </div>
   );
