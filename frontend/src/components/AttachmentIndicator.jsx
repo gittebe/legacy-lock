@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AttachmentIndicator.css";
 
-const AttachmentIndicator = () => {
+export const AttachmentIndicator = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
 
   const handleFileChange = (event) => {
@@ -17,6 +17,4 @@ const AttachmentIndicator = () => {
     </div>
   );
 };
-
-export default AttachmentIndicator;
 
