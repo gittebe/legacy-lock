@@ -1,5 +1,4 @@
 import "./CapsuleCardImage.css";
-import defaultImage from "../../public/default-image.png"; 
 
 export const CapsuleCardImage = ({ mediaUrls, isBlurred, variant }) => {
   const containerClass = `capsule-card-image-container ${variant} ${
@@ -7,7 +6,7 @@ export const CapsuleCardImage = ({ mediaUrls, isBlurred, variant }) => {
   }`;
 
   // Use the default image when mediaUrls is empty or undefined
-  const mediaUrl = mediaUrls && mediaUrls.length > 0 ? mediaUrls[0] : defaultImage;
+  const mediaUrl = mediaUrls && mediaUrls.length > 0 ? mediaUrls[0] : "/default-image.png";
   const isImage = mediaUrl.match(/\.(jpeg|jpg|gif|png|webp)$/i);
   const isVideo = mediaUrl.match(/\.(mp4|webm|ogg)$/i);
 
@@ -32,7 +31,7 @@ export const CapsuleCardImage = ({ mediaUrls, isBlurred, variant }) => {
       {!isImage && !isVideo && (
         <img
           className={`capsule-card-image ${isBlurred ? "blurred" : ""}`}
-          src={defaultImage}
+          src="/default-image.png"
           alt="Default Capsule"
         />
       )}
