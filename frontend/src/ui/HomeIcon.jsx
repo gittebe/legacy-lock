@@ -9,7 +9,7 @@ export const HomeIcon = () => {
 
   return (
     <div className="home-icon-container" onClick={handleClick}>
-      <img className="home-icon" src="../../home.png" alt="Got to Home"/>
+      <img className="home-icon" src="../../home.png" alt="Go to Home"/>
     </div>
   )
 }
