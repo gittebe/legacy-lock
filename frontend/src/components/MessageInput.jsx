@@ -8,15 +8,34 @@ import "./MessageInput.css";
 import { ClipIcon } from "../ui/ClipIcon";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
 import { AttachmentIndicator } from "./AttachmentIndicator"
+import { useState, useRef } from "react";
 
 export const MessageInput = ({
   message,
   setMessage,
-  fileInput,
   handleSubmit,
   loading,
 }) => {
+
+  const [selectedFile, setSelectedFile] = useState();
+  const fileInput = useRef(); 
+
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+    } else {
+      setSelectedFile();
+    }
+  };
+
+  const handleClipIconClick = () => {
+    if (fileInput.current) {
+      fileInput.current.click(); 
+    }
+  };
+
   return (
+
     <div className="message-input-container">
       {/* Textarea */}
       <textarea
@@ -26,24 +45,26 @@ export const MessageInput = ({
         className="message-textarea"
         required
       />
-      {/* ClipIcon, AttachmentIndicator och CreateCapsuleButton placerade inuti textarea-actions */}
+      {/* ClipIcon, AttachmentIndicator and CreateCapsuleButton inside the textarea */}
       <div className="textarea-actions">
         <div className="media-upload">
           <input 
             type="file"
             ref={fileInput}
-            style={{ display: "none" }} // Håller input fältet dolt
+            style={{ display: "none" }} 
             onChange={handleFileChange}
           />
-          {/* ClipIcon triggar filuppladdning */}
           <div onClick={handleClipIconClick} style={{ cursor: "pointer" }}>
-            <ClipIcon fileInputRef={fileInput} />
+          <ClipIcon />
           </div>
+          {/* Show AttachmentIndicator */}
+          {selectedFile && (
+            <div className="attachment-container">
+              <AttachmentIndicator />
+              <span className="file-name">{selectedFile.name}</span>
+            </div>
+          )}
         </div>
-
-        {/* Visar AttachmentIndicator enbart när en fil är uppladdad */}
-        {fileUploaded && <AttachmentIndicator />}
-
         <CreateCapsuleButton
           onClick={handleSubmit}
           disabled={loading}

@@ -1,8 +1,6 @@
-.attachment-indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #e39de4;
-  border-radius: 50%;
-  display: inline-block;
-  margin-left: 8px;
+
+.file-name {
+  color: #000000;
+  font-family: Arial, sans-serif;
+  max-width: 20%;
 }
