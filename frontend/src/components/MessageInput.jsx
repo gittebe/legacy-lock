@@ -7,6 +7,7 @@
 import "./MessageInput.css"; 
 import { ClipIcon } from "../ui/ClipIcon";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";
+import { AttachmentIndicator } from "./AttachmentIndicator"
 
 export const MessageInput = ({
   message,
