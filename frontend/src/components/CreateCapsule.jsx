@@ -16,7 +16,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   const fetchCapsules = useStore((state) => state.fetchCapsules);
   const { errors, validateFields, setErrors } = useValidation();
 
-  if (!isOpen) return null; // Return null if the popup is not open
+  if (!isOpen) return null; 
 
   const handleCreateCapsule = async (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       return;
     }
 
-    //Get token from local storage
+    // Get token from local storage
     const token = localStorage.getItem("accessToken");
     console.log("Token being sent:", token);
 
@@ -46,7 +46,18 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
     formData.append("title", title);
     formData.append("message", message);
     formData.append("recipientUsername", recipientUsername);
-    formData.append("openAt", unlockDate);
+    
+    // Process openAt to ensure it's sent as a local time string without 'Z'
+    let openAtString = unlockDate;
+    if (unlockDate) {
+      const date = new Date(unlockDate);
+      if (!isNaN(date)) {
+        openAtString = date.toISOString().slice(0, 19); 
+      }
+    }
+    formData.append("openAt", openAtString);
+
+    console.log("Sending openAt as:", openAtString); // Log the openAt being sent
 
     try {
       // Send the formData to the server:
@@ -82,7 +93,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
           setErrors({ recipientUsername: "Recipient not found." });
 
         } else {
-        alert(data.message || "The Capsule could not be created:");
+          alert(data.message || "The Capsule could not be created:");
         }
       }
     } catch (error) {
