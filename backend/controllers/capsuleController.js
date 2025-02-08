@@ -14,34 +14,33 @@ export const getCreateCapsulePage = (req, res) => {
 
 // create a new capsule
 export const createCapsule = async (req, res) => {
-  const {title, message, createdAt, openAt, recipientUsername} = req.body;
+  const { title, message, createdAt, openAt, recipientUsername } = req.body;
 
   try {
-    // find recipient by username
-    const recipient = await User.findOne({username: recipientUsername});
-
+    const recipient = await User.findOne({ username: recipientUsername });
     if (!recipient) {
-      return res.status(404).json({message: "Recipient not found"})
+      return res.status(404).json({ message: "Recipient not found" });
     }
 
-    // the sender ID (authenticated user)
     const userId = req.user.id;
-    // the recipients ID
     const recipientId = recipient._id;
 
-    // Array to store the media URLs if there is media uploaded
     let mediaUrls = [];
-    console.log("req.file", req.file)
-    // Check if there is a file upload
     if (req.file) {
-      // save media info to the database
       const savedMedia = await newMedia(req);
-
-      //add the media URL to the array
-      mediaUrls.push(savedMedia.url)
+      mediaUrls.push(savedMedia.url);
     }
     console.log("mediaUrls:", mediaUrls);
-    // create new capsule
+
+    const openAtDate = new Date(openAt); 
+    if (isNaN(openAtDate)) {
+      return res.status(400).json({ message: "Invalid openAt date" });
+    }
+    const openAtUTC = openAtDate.toISOString();
+
+    console.log("Received openAt (local):", openAt); 
+    console.log("Converted openAtUTC (UTC):", openAtUTC); 
+
     const newCapsule = new Capsule({
       userId,
       recipients: [recipientId],
@@ -49,20 +48,19 @@ export const createCapsule = async (req, res) => {
       message,
       mediaUrls,
       createdAt,
-      openAt: new Date(openAt),
-      });
+      openAt: openAtUTC, 
+    });
     await newCapsule.save();
 
     res.status(201).json({
-        message: "Capsule created successfully",
-        data: newCapsule
-      });
-
+      message: "Capsule created successfully",
+      data: newCapsule,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error creating Capsule", error });
-    }
-}
+  }
+};
 
 // get capsule
 export const getCapsule = async (req, res) => {
