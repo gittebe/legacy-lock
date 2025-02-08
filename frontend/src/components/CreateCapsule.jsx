@@ -10,13 +10,14 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
   const [recipientUsername, setRecipientUsername] = useState("");
   const [unlockDate, setUnlockDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null); 
   const fileInput = useRef();
 
   const addCapsule = useStore((state) => state.addCapsule);
   const fetchCapsules = useStore((state) => state.fetchCapsules);
   const { errors, validateFields, setErrors } = useValidation();
 
-  if (!isOpen) return null; // Return null if the popup is not open
+  if (!isOpen) return null; 
 
   const handleCreateCapsule = async (event) => {
     event.preventDefault();
@@ -28,7 +29,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       return;
     }
 
-    //Get token from local storage
+    // Get token from local storage
     const token = localStorage.getItem("accessToken");
     console.log("Token being sent:", token);
 
@@ -40,8 +41,8 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
     }
 
     const formData = new FormData();
-    if (fileInput.current?.files?.[0]) {
-      formData.append("file", fileInput.current.files[0]);
+    if (file) {
+      formData.append("file", file);
     }
     formData.append("title", title);
     formData.append("message", message);
@@ -53,7 +54,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       const response = await fetch("https://legacy-lock-2.onrender.com/capsule/create", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -61,7 +62,7 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       const data = await response.json();
       console.log("Created capsule response:", data);
 
-      if (response.ok) {  
+      if (response.ok) {
         alert("The Capsule was successfully created!");
         addCapsule(data.capsule);
 
@@ -73,16 +74,13 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
         setMessage("");
         setRecipientUsername("");
         setUnlockDate("");
-        fileInput.current.value = "";
-        onClose(); // Close popup
-
+        setFile(null); 
+        onClose(); 
       } else {
-        // Handle error response from the server
         if (data.message === "Recipient not found") {
           setErrors({ recipientUsername: "Recipient not found." });
-
         } else {
-        alert(data.message || "The Capsule could not be created:");
+          alert(data.message || "The Capsule could not be created.");
         }
       }
     } catch (error) {
@@ -104,7 +102,8 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       setRecipientUsername={setRecipientUsername}
       message={message}
       setMessage={setMessage}
-      fileInput={fileInput}
+      file={file} 
+      setFile={setFile} 
       errors={errors}
       loading={loading}
       onClose={onClose}

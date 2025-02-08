@@ -1,12 +1,42 @@
+.file-input-container {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.attachment-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
 .file-name {
-  display: inline-block;
-  white-space: nowrap;
+  flex-grow: 1;
+  font-size: 16px;
+  color: #000000;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-file-button {
+  background: none;
+  border: none;
   color: #000000;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 18px;
-  max-width: 30%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.remove-file-button:hover {
+  text-decoration: underline;
+}
+
+.hidden-file-input {
+  display: none;
 }
