@@ -12,7 +12,7 @@ export const ClipIcon = ({ fileInputRef }) => {
 
     <div 
     className="clip-icon-container" 
-    onClick={handleFileUpload}
+    onClick={handleFileUpload}>
       <img src={clipIcon}
         alt="Attach media"
         className="clip-icon"
