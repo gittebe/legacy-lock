@@ -46,6 +46,7 @@
 
 .capsule-card-image-container:not(.blurred) .capsule-card-video {
   pointer-events: auto;
+}
 
 @media (max-width: 768px) {
   .capsule-card-image-container {
@@ -53,7 +54,7 @@
   }
 
   .capsule-card-image-container:nth-child(1) {
-    transform: translate(-60px, -80px) rotate(-12deg); 
+    transform: translate(-80px, -80px) rotate(-12deg); 
     z-index: 1; 
   }
 
@@ -85,5 +86,4 @@
     min-width: 100px;
     min-height: 100px;
   }
-}
 }
