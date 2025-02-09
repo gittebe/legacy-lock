@@ -8,7 +8,7 @@ export const SettingsIcon = ({toggleMenu}) => {
 
   return (
     <div className="settings-icon-container" onClick={handleClick}>
-      <img className="settings-icon" src="../../settings-icon.png" />
+      <img className="settings-icon" src="../../settings-icon.png" alt="Settings" />
     </div>
   )
 }

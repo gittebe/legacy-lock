@@ -3,11 +3,32 @@
   justify-content: space-between;
   gap: 14%; 
   margin: 45px 5%;
-  
+  padding-bottom: 80px;
+}
+
+.add-button-container {
+  display: flex;
+  justify-content:center;
+  justify-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 60px;
+  z-index: 1000;
+}
+
+@media(min-width: 667px){
+  .add-button-container{
+    justify-content: flex-end;
+    right: 60px;
+  }
+}
+
+.create-button{
+  display: flex;
 }
 
 @media (max-width: 667px){
 .collections-container {
-  padding-bottom: 120px;
+  padding-bottom: 10px;
 }
 }

@@ -13,7 +13,11 @@ export const ArrowLeftIcon = () => {
   };
 
   return (
-    <button className="arrow-icon-container" onClick={handleBackClick} aria-label="Go back">
+    <button 
+      className="arrow-icon-container" 
+      onClick={handleBackClick} 
+      aria-label="Go back"
+      >
       <img className="arrow-icon" src="../../arrow-left.png" alt="Back" />
     </button>
   );
