@@ -93,3 +93,9 @@
   }
 }
 }
+
+@media (max-width: 375px) {
+  .locket-content p {
+    font-size: 14px;
+  }
+}
