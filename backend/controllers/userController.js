@@ -54,7 +54,6 @@ export const getCurrentUser = async (req, res) => {
 // upload profile image
 export const uploadProfileImage = async (req, res) => {
   try {
-    console.log("File uploaded:", req.file);
     
     if (!req.file) {
       return res.status(400).json({ message: "no image uploaded" });
@@ -131,7 +130,6 @@ export const updateUserProfile = async (req, res) => {
       user: updatedUser
     });
   } catch (error) {
-    console.error("Error updating user profile:", error);
     return res.status(500).json({ message: "Server error", error });
   }
 };
