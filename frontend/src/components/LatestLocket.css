@@ -49,7 +49,6 @@
   display: flex;
   gap: 10px;
   position: relative;
-  left: -20%;
 }
 
 @media(min-width: 1024px){
@@ -84,5 +83,19 @@
     transform: translate(-50%, -50%);
     min-height: 200px; 
   }
+
+  .locket-images {
+    display: flex;
+    flex-direction: column; 
+    position: relative; 
+    gap: -50px; 
+    align-items: center; 
+  }
 }
+}
+
+@media (max-width: 375px) {
+  .locket-content p {
+    font-size: 14px;
+  }
 }
