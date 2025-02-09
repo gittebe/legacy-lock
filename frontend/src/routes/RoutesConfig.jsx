@@ -28,7 +28,6 @@ export const RoutesConfig = () => {
             setIsLoggedIn(false);
           }
         } catch (error) {
-          console.error("Error verifying token:", error);
           setIsLoggedIn(false);
         }
       } else {
@@ -62,9 +61,7 @@ export const RoutesConfig = () => {
       )}
 
       <Route path="*" element={<NotFoundPage />} />
-
       {/* Logout - please see SideMenu component */}
-      
     </Routes>
   );
 };

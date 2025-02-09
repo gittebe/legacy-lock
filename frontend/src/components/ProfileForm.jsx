@@ -12,9 +12,7 @@ export const ProfileSettingsModal = ({ onClose }) => {
   const [profileImage, setProfileImage] = useState(user?.profileImage  || "" );
 
   useEffect(() => {
-    console.log("useEffect running");
     if (user?.profileImage) {
-      console.log("Found profileImage in user:", user.profileImage);
       setProfileImage(user.profileImage);
     } else {
       const storedImage = localStorage.getItem("profileImage");
@@ -29,14 +27,12 @@ export const ProfileSettingsModal = ({ onClose }) => {
     if (file) {
       try {
         const url = await uploadProfilePicture(file);
-        console.log("Uploaded image URL:", url);
     
         setProfileImage(url);
         useStore.setState({ user: { ...user, profileImage: url } }); 
         localStorage.setItem("profileImage", url);
 
       } catch (error) {
-        console.error("Error uploading profile picture:", error);
         alert("Failed to upload profile picture.");
       }
     }
@@ -48,15 +44,13 @@ export const ProfileSettingsModal = ({ onClose }) => {
       localStorage.removeItem("profileImage");
       setProfileImage("");
     } catch (error) {
-      console.error("Fehler beim Löschen des Profilbildes:", error);
-      alert("Fehler beim Löschen des Profilbildes.");
+      alert("Error deleting the profile image.");
     }
   };
   
   const handleSave = async () => {
     try {
       if (!profileImage) {
-        console.warn("No profile image set. Are you sure you want to save?");
       }
   
       const userData = {
@@ -67,11 +61,8 @@ export const ProfileSettingsModal = ({ onClose }) => {
   
       const updatedUser = await useStore.getState().updateUserProfile(userData);
   
-      console.log("User updated:", updatedUser);
-  
       onClose();
     } catch (error) {
-      console.error("Error saving profile data:", error);
       alert("Failed to save changes.");
     }
   };
