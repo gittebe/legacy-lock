@@ -28,16 +28,13 @@
 import { create } from "zustand";
 
 const useStore = create((set, get) => ({
-  // *** Login state ***
   isLoggedIn: false,
   user: null,
 
-  // *** Capsules state ***
   capsules: { created: [], received: [] },
   loading: false,
   error: null,
 
-  // *** Login actions ***
   login: (user) => set({
     isLoggedIn: true,
     user: user,
@@ -47,9 +44,7 @@ const useStore = create((set, get) => ({
     set({ loading: true });
     try {
       const accessToken = localStorage.getItem("accessToken");
-      console.log("Access Token:", accessToken);
       if (!accessToken) {
-        console.error("No token found for logout.");
         set({ loading: false, error: "No token found for logout." });
         return;
       }
@@ -77,7 +72,6 @@ const useStore = create((set, get) => ({
         loading: false,
       });
     } catch (error) {
-      console.error("Error logging out:", error);
       set({ loading: false, error: error.message });
     }
   },
@@ -96,7 +90,6 @@ const useStore = create((set, get) => ({
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
-        console.error("No access token found");
         set({ error: "No access token found", loading: false });
         return;
       }
@@ -111,7 +104,6 @@ const useStore = create((set, get) => ({
       ]);
 
       if (!userCapsulesResponse.ok || !receivedCapsulesResponse.ok) {
-        console.error("Failed to fetch capsules");
         set({ error: "Failed to fetch capsules", loading: false });
         return;
       }
@@ -127,7 +119,6 @@ const useStore = create((set, get) => ({
         loading: false,
       });
     } catch (error) {
-      console.error("Error fetching capsules:", error);
       set({ loading: false, error: error.message });
     }
   },
@@ -150,12 +141,9 @@ const useStore = create((set, get) => ({
         throw new Error("No ID provided");
       }
       const token = localStorage.getItem("accessToken");
-      console.log("Store: Fetching capsule by ID:", id, "Access Token:", token);
       const url = `https://legacy-lock-2.onrender.com/capsule/getCapsule/${id}`;
-      console.log("URL being fetched:", url);
       
       if (!token) {
-        console.error("No access token found");
         return null;
       }
 
@@ -171,7 +159,6 @@ const useStore = create((set, get) => ({
       const capsule = await response.json();
       return capsule;
     } catch (error) {
-      console.error("Store: Error fetching capsule:", error);
       return null;
     }
   },
@@ -200,9 +187,7 @@ const useStore = create((set, get) => ({
         set({
           user: { ...get().user, profileImage: "" },
         });
-        console.log("Profile picture deleted successfully.");
       } catch (error) {
-        console.error("Error deleting profile image:", error);
         throw error;
       }
     },
@@ -230,7 +215,6 @@ const useStore = create((set, get) => ({
       const data = await response.json();
       return data.imageUrl;
     } catch (error) {
-      console.error("Error uploading profile picture:", error.message);
       throw error;
     }
   },
@@ -257,7 +241,6 @@ updateUserProfile: async (userData) => {
     }
 
     const updatedUser = await response.json();
-    console.log("Profile updated successfully:", updatedUser);
 
     set({
       user: { ...updatedUser,
@@ -268,7 +251,6 @@ updateUserProfile: async (userData) => {
 
     return updatedUser;
   } catch (error) {
-    console.error("Error updating profile:", error);
     throw error;
   }
 }

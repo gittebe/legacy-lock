@@ -1,4 +1,3 @@
-
 import "./Tooltip.css";
 
 export const Tooltip = ({ text }) => {

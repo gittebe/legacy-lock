@@ -31,10 +31,8 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
 
     // Get token from local storage
     const token = localStorage.getItem("accessToken");
-    console.log("Token being sent:", token);
 
     if (!token) {
-      console.error("No token found for creating Capsule.");
       alert("You need to be logged in to create a Capsule.");
       setLoading(false);
       return;
@@ -58,8 +56,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
     }
     formData.append("openAt", openAtString);
 
-    console.log("Sending openAt as:", openAtString); // Log the openAt being sent
-
     try {
       // Send the formData to the server:
       const response = await fetch("https://legacy-lock-2.onrender.com/capsule/create", {
@@ -71,7 +67,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
       });
 
       const data = await response.json();
-      console.log("Created capsule response:", data);
 
       if (response.ok) {
         alert("The Capsule was successfully created!");
@@ -96,7 +91,6 @@ export const CreateCapsule = ({ isOpen, onClose }) => {
         }
       }
     } catch (error) {
-      console.error("Error during creation of Capsule:", error);
       alert("An error occurred. Please try again later");
     } finally {
       setLoading(false);

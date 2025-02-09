@@ -1,9 +1,4 @@
-//**************************************************************************
-// 
 // Component used for the message input field in the CapsuleForm component
-//  
-//**************************************************************************
-
 import "./MessageInput.css"; 
 import { ClipIcon } from "../ui/ClipIcon";
 import { CreateCapsuleButton } from "../ui/CreateCapsuleButton";

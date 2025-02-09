@@ -25,10 +25,8 @@ const CapsuleForm = ({
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
       const selectedFile = event.target.files[0];
-      console.log("Selected file:", selectedFile); 
       setFile(selectedFile); 
     } else {
-      console.log("No file selected");
       setFile(null);
     }
   };

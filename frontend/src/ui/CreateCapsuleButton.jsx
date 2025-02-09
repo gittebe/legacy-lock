@@ -1,8 +1,4 @@
-//**************************************************************************
-// 
 // Component used for the create capsule button in the CapsuleForm component
-//  
-//**************************************************************************
 import "./CreateCapsuleButton.css";
 
 export const CreateCapsuleButton = ({ onClick, children }) => {

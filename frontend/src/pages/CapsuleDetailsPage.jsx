@@ -22,7 +22,6 @@ export const CapsuleDetailsPage = () => {
         const capsule = await getCapsuleById(id);
         setCapsuleDetails(capsule);
       } catch (error) {
-        console.error("Error fetching capsule details:", error);
       } finally {
         setLoading(false);
       }

@@ -9,7 +9,6 @@ export const ClipIcon = ({ fileInputRef }) => {
   };
 
   return (
-
     <div 
     className="clip-icon-container" 
     onClick={handleFileUpload}>

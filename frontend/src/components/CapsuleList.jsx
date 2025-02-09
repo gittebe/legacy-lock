@@ -16,7 +16,6 @@ export const CapsuleList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("CapsuleList useEffect: fetching capsules...");
     fetchCapsules();
   }, [fetchCapsules]);
 
@@ -43,7 +42,6 @@ export const CapsuleList = () => {
         <div className="capsule-grid">
           {capsules.created.map((capsule) => {
             if (!capsule || !capsule._id) {
-              console.error("Invalid capsule data (created):", capsule);
               return null;
             }
             return <CapsuleCard key={capsule._id} capsule={capsule} />;
@@ -55,7 +53,6 @@ export const CapsuleList = () => {
         <div className="capsule-grid">
           {capsules.received.map((capsule) => {
             if (!capsule || !capsule._id) {
-              console.warn("Invalid capsule data (received):", capsule);
               return null;
             }
             return <CapsuleCard key={capsule._id} capsule={capsule} />;
@@ -67,9 +64,8 @@ export const CapsuleList = () => {
       /> 
       </div>
       <div className="add-button-container">
-      <FAB className="create-button" onClick={() => setCreateCapsuleOpen(true)} />
+        <FAB className="create-button" onClick={() => setCreateCapsuleOpen(true)} />
       </div>
-      
     </div>
   );
 };
