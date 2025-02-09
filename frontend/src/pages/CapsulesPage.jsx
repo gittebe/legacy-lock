@@ -22,7 +22,6 @@ export const CapsulesPage = () => {
   }
 
     const handleLogout = () => {
-      console.log("Logout button clicked");
       logout(); // Call the logout method from your store
       navigate("/"); // Redirect to home or login page
     };

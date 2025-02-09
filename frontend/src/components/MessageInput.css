@@ -37,6 +37,17 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+.clip-icon-wrapper {
+  display: flex;
+  justify-content: left;
+  margin-top: 16px;
+  margin-left: 380px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
 .create-capsule-button {
   width: 100%; 
   height: 30px;

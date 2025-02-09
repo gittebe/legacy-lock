@@ -1,4 +1,3 @@
-
 .popup form h3 {
   font-size: 28px;
   font-family: Arial, sans-serif;
@@ -8,41 +7,157 @@
   text-align: left;
 }
 
-.popup form label  {
-	width: 90%;
-	font-size: 20px;
-	font-family: Arial, sans-serif;
-	margin-bottom: 10px;
-	text-align: left;
-}
-
-.popup form input {
-  width: 90%;  
-	height: auto;
-  margin-bottom: 10px; 
-  padding: 10px; 
+.popup form label {
+  width: 90%;
+  font-size: 20px;
   font-family: Arial, sans-serif;
-  font-size: 16px; 
-  border-radius: 6px; 
-  background: #ffffff; 
-  color: #000000; 
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.popup form input,
+.popup form textarea,
+.popup form .file-input-container input[type="file"] {
+  width: 90%;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #000000;
   border: 1px solid #E3E3E3;
+  box-sizing: border-box; /* Ensures consistent sizing */
 }
 
-.popup form input:focus {
-  border-color: #e39de4; 
-  outline: none; 
-  box-shadow: 0 0 4px rgba(227, 157, 228, 0.8); 
+.popup form textarea {
+  height: 90px;
+  resize: none; /* Prevent resizing */
 }
 
-input::placeholder {
-  color: #000000; 
+.popup form input:focus,
+.popup form textarea:focus,
+.popup form .file-input-container input[type="file"]:focus {
+  border-color: #e39de4;
+  outline: none;
+  box-shadow: 0 0 4px rgba(227, 157, 228, 0.8);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #000000;
 }
 
 .error-message {
-  color: #e39de4; 
-	font-family: Arial, sans-serif;
+  color: #e39de4;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   margin-top: 5px;
   height: 18px;
+}
+
+/* Styles for the file input container (Image of the locket) */
+.popup form .file-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.popup form .file-input-container .file-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000000;
+}
+
+.popup form .file-input-container .file-preview .file-name {
+  font-size: 14px;
+  color: #000000;
+}
+
+.popup form .file-input-container .file-preview .remove-file-button {
+  background: none;
+  border: none;
+  color: #e63946;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.popup form .file-input-container .file-preview .remove-file-button:hover {
+  text-decoration: underline;
+}
+
+/* Submit and Cancel button alignment */
+.popup form .submit-button,
+.popup form .close-button {
+  width: 90%;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #e39de4;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.popup form .close-button {
+  background: none;
+  color: #e39de4;
+  text-align: center;
+}
+
+.popup form .close-button:hover {
+  text-decoration: underline;
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.file-display {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.file-display.file-selected {
+  border: 1px solid #e39de4;
+}
+
+.placeholder-text {
+  color: #999999;
+}
+
+.file-name {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-file-button {
+  background: none;
+  border: none;
+  color: #e63946;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.remove-file-button:hover {
+  text-decoration: underline;
 }

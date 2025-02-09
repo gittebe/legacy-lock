@@ -1,7 +1,4 @@
-/**
- * This hook is used to validate the fields of the CreateCapsule form.
- */
-
+// This hook is used to validate the fields of the CreateCapsule form.
 import { useState } from "react";
 
 export const useValidation = () => {

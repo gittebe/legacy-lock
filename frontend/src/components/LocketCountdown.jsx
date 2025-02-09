@@ -1,4 +1,3 @@
-
 import { ClockIcon } from "../ui/ClockIcon";
 
 export const LocketCountdown = ({ nextLocket, timeLeft }) => {
@@ -19,4 +18,3 @@ export const LocketCountdown = ({ nextLocket, timeLeft }) => {
     </div>
   );
 };
-

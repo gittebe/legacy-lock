@@ -10,7 +10,6 @@ export const LoginForm = ({ onClose, openSignup }) => {
   const login = useStore((state) => state.login);
   const navigate = useNavigate();
 
-
   const handleLogin = async(e) => {
     e.preventDefault();
 
@@ -36,7 +35,6 @@ export const LoginForm = ({ onClose, openSignup }) => {
         login(data.user);
         setEmailOrUsername(""); // Clear email or username input
         setPassword(""); // Clear password input
-        console.log("Login successful:", data);
         onClose(); // Close the login popup
 
         navigate("/dashboard")
@@ -45,9 +43,7 @@ export const LoginForm = ({ onClose, openSignup }) => {
         alert(data.message || "Login failed");
       }
     } catch (error) {
-
       console.error("Error logging in:", error);
-
     }
   };
 

@@ -1,9 +1,11 @@
 import { format } from "date-fns";
 
-/**
- * Format a date to "YYYY-MM-DD HH:mm"
-
- */
 export const formatDateTime = (date) => {
-  return format(new Date(date), "yyyy-MM-dd HH:mm");
+  const parsedDate = new Date(date);
+  
+  if (isNaN(parsedDate)) {
+    return "Invalid date";
+  }
+
+  return format(parsedDate, "yyyy-MM-dd HH:mm");
 };

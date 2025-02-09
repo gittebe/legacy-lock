@@ -28,7 +28,6 @@ export const HeroSection = ({ isSmallScreen, onLoginClick, onSignUpClick }) => {
           <SignUpButton onClick={onSignUpClick} />
         </div>
       )}
-
       <LearnMoreButton />
     </main>
   );

@@ -40,7 +40,6 @@ export const SignUpForm = ({ onClose }) => {
         localStorage.setItem('accessToken', data.accessToken);
         login(data.user); // login into Zustand
         onClose(); // close Popup
-        console.log('Signup successful:', data);
 
         // redirect user to the dashboard
         navigate('/dashboard');
@@ -48,7 +47,6 @@ export const SignUpForm = ({ onClose }) => {
         alert(data.message || 'Signup failed');
       }
     } catch (error) {
-      console.error('Error during signup:', error);
     }
   };
 

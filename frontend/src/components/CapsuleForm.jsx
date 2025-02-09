@@ -1,10 +1,7 @@
-/** 
- * 
- * Component used to create a new Capsule
- * 
- */
-
-import { MessageInput } from "./MessageInput";
+import { useRef } from "react";
+import "./CapsuleForm.css";
+import { ClipIcon } from "../ui/ClipIcon";
+import { AttachmentIndicator } from "./AttachmentIndicator";
 import { Tooltip } from "../ui/Tooltip";
 
 const CapsuleForm = ({
@@ -17,12 +14,29 @@ const CapsuleForm = ({
   setRecipientUsername,
   message,
   setMessage,
-  fileInput,
+  file,
+  setFile,
   errors,
   loading,
   onClose,
-
 }) => {
+  const fileInputRef = useRef();
+
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      const selectedFile = event.target.files[0];
+      setFile(selectedFile); 
+    } else {
+      setFile(null);
+    }
+  };
+
+  const handleClipIconClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); 
+    }
+  };
+
   return (
     <div
       className="popup-overlay"
@@ -45,14 +59,14 @@ const CapsuleForm = ({
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             className={`capsule-title ${errors.title ? "error-input" : ""}`}
-            required 
+            required
           />
           {errors.title && <p className="error-message">{errors.title}</p>}
 
           {/* Set date field */}
           <label htmlFor="capsule-unlock-date">
             Choose the release date
-            <Tooltip text={"Release date means when the locket will be automatically opened\n- before the release date the locket can not be opened"} />
+            <Tooltip text="Release date means when the locket will be automatically opened. Before the release date, the locket cannot be opened." />
           </label>
           <input
             type="datetime-local"
@@ -79,15 +93,42 @@ const CapsuleForm = ({
             <p className="error-message">{errors.recipientUsername}</p>
           )}
 
-          {/* Message input field */}
-          <label htmlFor="capsule-message">Content of the locket</label>
-          <MessageInput
-            message={message}
-            setMessage={setMessage}
-            fileInput={fileInput}
-            handleSubmit={handleSubmit}
-            loading={loading}
+          {/* Message container */}
+          <label htmlFor="capsule-message">Message of the locket</label>
+          <textarea
+            id="create-capsule-message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            className="create-capsule-message"
+            placeholder="Write your message here..."
+            required
           />
+
+          {/* File Input */}
+          <label htmlFor="capsule-file">Image of the locket</label>
+          <div className="file-input-container">
+            {file ? (
+              <AttachmentIndicator
+                fileName={file.name}
+                onRemove={() => setFile(null)}
+              />
+            ) : (
+              <div className="clip-icon-wrapper" onClick={handleClipIconClick}>
+                <ClipIcon />
+              </div>
+            )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden-file-input"
+              onChange={handleFileChange}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? "Saving..." : "Save"}
+          </button>
         </form>
         <button className="close-button" onClick={onClose}>
           Cancel

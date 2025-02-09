@@ -7,16 +7,12 @@ import { WarningPopup } from "./WarningPopup";
 import "./CapsuleCard.css";
 
 export const CapsuleCard = ({ capsule }) => {
-  const { title, _id:id, openAt, mediaUrls } = capsule;
-  console.log("Capsule ID:", capsule._id || capsule.id);
+  const { title, _id: id, openAt, mediaUrls } = capsule;
   const navigateToCapsule = useNavigate();
   const [showWarning, setShowWarning] = useState(false);
+  const isCapsuleOpen = openAt ? new Date().getTime() >= new Date(openAt).getTime() : false;
+  const formattedOpenAt = openAt ? formatDateTime(openAt) : "Invalid date";
 
-  const isCapsuleOpen = openAt ? new Date() >= new Date(openAt) : false;
-  const formattedOpenAt = openAt
-    ? formatDateTime(new Date(openAt), "yyyy-MM-dd HH:mm")
-    : "Invalid date";
-  
   const handleViewCapsule = () => {
     if (isCapsuleOpen) {
       navigateToCapsule(`/capsules/${id}`);

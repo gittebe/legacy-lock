@@ -46,7 +46,6 @@
 
 .capsule-card-image-container:not(.blurred) .capsule-card-video {
   pointer-events: auto;
-}
 
 @media (max-width: 768px) {
   .capsule-card-image-container {
@@ -87,4 +86,3 @@
     min-height: 100px;
   }
 }
-
