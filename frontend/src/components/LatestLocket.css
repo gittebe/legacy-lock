@@ -83,5 +83,13 @@
     transform: translate(-50%, -50%);
     min-height: 200px; 
   }
+
+  .locket-images {
+    display: flex;
+    flex-direction: column; 
+    position: relative; 
+    gap: -50px; 
+    align-items: center; 
+  }
 }
 }
