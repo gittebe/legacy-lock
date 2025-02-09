@@ -32,12 +32,6 @@ const checkConnection = async () => {
 
 checkConnection();
 
-// app.use(cors({
-//   origin: "https://legacy-locket.netlify.app",
-//   methods: ["GET", "POST", "DELETE", "PUT"],
-//   allowedHeaders: ["Content-Type", "Authorization", "*"],
-// }));
-
 const allowedOrigins = [
   "https://legacy-locket.netlify.app",
   "http://localhost:5173"
@@ -55,10 +49,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization", "*"],
 }));
 
-
 app.options("*", cors());
 app.use(express.json());
-
 
 // Use the imported routes
 app.use("/", documentationRoutes);

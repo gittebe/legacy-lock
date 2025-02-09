@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { v4 as uuidv4 } from 'uuid';
 
 const {Schema, model} = mongoose;
 
@@ -39,13 +38,6 @@ const capsuleSchema = new Schema({
   recipients: [{
     type: mongoose.Schema.Types.ObjectId, 
     ref: "User"}],
-  // password: {
-  //   type: String
-  // },
-  // link: {
-  //   type: String,
-  //   default: () => uuidv4(),
-  // }
 });
 
 export const Capsule = model("Capsule", capsuleSchema);
