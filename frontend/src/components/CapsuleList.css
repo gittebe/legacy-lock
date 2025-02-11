@@ -20,7 +20,7 @@
   width: 100%;
   position: fixed;
   bottom: 60px;
-  z-index: 1000;
+  z-index: 500;
 }
 
 @media(min-width: 667px){
