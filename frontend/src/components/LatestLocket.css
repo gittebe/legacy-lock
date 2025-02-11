@@ -47,10 +47,16 @@
 
 .locket-images {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   position: relative;
 }
 
+@media(min-width: 667px){
+  .locket-images{
+    flex-direction: row;
+  }
+}
 @media(min-width: 1024px){
   .latest-locket {
    height: 300px;
