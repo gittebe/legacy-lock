@@ -13,12 +13,14 @@
 }
 
 .capsule-title {
+  font-family: Arial, sans-serif;
   font-size: 24px;
   font-weight: bold;
   margin: 0;
 }
 
 .capsule-unlock-date {
+  font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: normal;
   margin-top: 5px;
