@@ -41,6 +41,7 @@
   box-sizing: border-box; /* Ensures consistent sizing */
 }
 
+
 .popup form textarea {
   height: 90px;
   resize: none; /* Prevent resizing */
