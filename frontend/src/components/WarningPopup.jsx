@@ -2,8 +2,14 @@ import "./WarningPopup.css";
 import warningIcon from "../assets/warningicon.png"; 
 import { OkButton } from "../ui/OkButton";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export const WarningPopup = ({ onClose }) => {
+  useEffect(() => {
+    const img = new Image();
+    img.src = warningIcon;
+  }, []); 
+
   return (
     <div className="popup-overlay" role="alert">
       <motion.div 
@@ -17,6 +23,7 @@ export const WarningPopup = ({ onClose }) => {
         <p className="warning-text">
           Can’t open a locket <br /> before its release date.
         </p>
+        <p> TEST</p>
         <OkButton onClick={onClose} />
       </motion.div>
     </div>
