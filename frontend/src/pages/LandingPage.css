@@ -136,6 +136,8 @@
 	width: 100%;
 }
 
+
+
 @media (max-width: 768px) {
 	.image-container {
 		transform: translate(-50%, -50%) scale(0.36) rotate(45deg);
@@ -149,6 +151,10 @@
 		100% {
 			transform: translate(-50%, -50%) scale(0.6) rotate(25deg);
 		}
+	}
+	.landing-buttons {
+		gap: 10px;
+		bottom: 10px;
 	}
 }
 
