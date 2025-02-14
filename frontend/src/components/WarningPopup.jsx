@@ -23,7 +23,6 @@ export const WarningPopup = ({ onClose }) => {
         <p className="warning-text">
           Can’t open a locket <br /> before its release date.
         </p>
-        <p> TEST</p>
         <OkButton onClick={onClose} />
       </motion.div>
     </div>
