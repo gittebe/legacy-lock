@@ -41,6 +41,13 @@
   box-sizing: border-box; /* Ensures consistent sizing */
 }
 
+/* Prevent device behavior */
+.popup form input[type="datetime-local"].capsule-date {
+  width: 90% !important; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 .popup form textarea {
   height: 90px;
