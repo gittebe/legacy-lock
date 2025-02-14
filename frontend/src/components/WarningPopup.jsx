@@ -2,8 +2,14 @@ import "./WarningPopup.css";
 import warningIcon from "../assets/warningicon.png"; 
 import { OkButton } from "../ui/OkButton";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export const WarningPopup = ({ onClose }) => {
+  useEffect(() => {
+    const img = new Image();
+    img.src = warningIcon;
+  }, []); 
+
   return (
     <div className="popup-overlay" role="alert">
       <motion.div 

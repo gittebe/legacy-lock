@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { PlayButton } from "../ui/PlayButton";
 import { CapsuleCardImage } from "../ui/CapsuleCardImage";
 import { WarningPopup } from "./WarningPopup"; 
@@ -58,9 +58,11 @@ export const LatestLocket = () => {
     if (isCapsuleOpen) {
       navigateToCapsule(`/capsules/${capsuleId}`);
     } else {
+      if (!showWarning) {
       setShowWarning(true);
     }
-  };
+  }
+};
 
   return (
     <>
